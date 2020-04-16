@@ -1,0 +1,357 @@
+/* Declare the Menlo font family */
+@font-face {
+    font-family: 'Menlo Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Menlo Regular'), url('Font/Menlo-Regular.woff') format('woff');
+}
+
+:root {
+    --fontSizeDesktop : 25px; 
+    --fontSizeDesktopModalTitle: 20px; 
+    --fontSizeDesktopModal: 18px; 
+    --fontSizeMobile : 15px; 
+    --fontSizeMobileTiny : 13px; 
+    --fontSizeIpad: 20px; 
+    --fontColor: white; 
+    --fontFamily: 'Menlo-Regular';
+    --paddingHorizontal: 50px; 
+    --paddingHorizontalMobile: 23px; 
+    --paddingVertical: 80px;
+    --bgColor: black; 
+    --pureGreen: #00FF00; 
+    --topHeight: 6vh; 
+    /* Any changes here must be changed in main.js canvasHeightFactor as well. */
+    --outputHeight: 65vh; 
+    --bottomPosition: 75vh; 
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color:black;
+    box-sizing: border-box;
+    font-size: var(--fontSizeDesktop);
+    font-family: var(--fontFamily);
+    color: var(--fontColor);
+    width: 100%;
+    height: 100%; 
+}
+
+.container {
+    overflow: hidden;
+}
+
+a {
+    color:var(--pureGreen); 
+}
+
+a:hover {
+    color: red; 
+}
+
+/* Title Styles */
+#top {
+    display: flex; 
+    flex-direction: row;
+    background-color: black; 
+    font-size: inherit;
+    box-sizing: border-box; 
+    width: 100vw;
+    height: var(--topHeight);
+    padding: 0 var(--paddingHorizontal) 0 var(--paddingHorizontal);
+}
+
+.title {
+    width: 75%; 
+    display: flex; 
+    align-items: center; 
+}
+
+.aboutCollection {
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-end; 
+    width: 25%;
+    box-sizing: border-box;
+}
+
+
+/* Output styles */
+#middle {
+    top: 10vh;
+    height: 74vh; 
+    background-color:white;
+    box-sizing: border-box;
+}
+
+/* Bottom styles. */
+#bottom {
+    position: absolute; 
+    top: 80vh;
+    width: 100%; 
+    height: 20vh;
+    font-family: 'Menlo-Regular';
+    font-size: inherit;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+#infocontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--paddingHorizontal) 0 var(--paddingHorizontal);
+    height: 5vh;
+    color: white;
+    box-sizing: border-box;
+}
+
+#keycontainer {
+    width: 70%; 
+    font-size: inherit;
+}
+
+#datetimecontainer {
+    text-align: right;
+    width: 30%;
+}
+
+#inputcontainer {
+    width: 100%; 
+    box-sizing: border-box;
+    display: flex;
+    position: relative;
+    height: 15vh;
+}
+
+.textinput {
+    width: 75%; 
+    font-size: inherit;
+    font-family: inherit;
+    padding: var(--paddingHorizontal);
+}
+
+.inputbutton {
+    width: 25%;
+    font-size: inherit;
+    font-family: inherit;
+    background-color: grey; 
+    border-color: black;
+    transition: background-color 1s ease-in-out 0s;
+    color: black; 
+}
+
+.animate {
+    background-color: var(--pureGreen);
+}
+
+.inputbutton:disabled {
+    color: gray;
+}
+
+textarea::placeholder {
+    text-align: left; 
+}
+
+.bar {
+    display : inline;
+}
+
+/* Modal Styles */
+.modal {
+    color: white; 
+    display: none;
+}
+
+.modalContainer {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+    font-size: var(--fontSizeDesktopModal)
+}
+
+.modalTitle {
+    font-size: var(--fontSizeDesktopModalTitle);
+    color: var(--pureGreen); 
+    padding: 20px; 
+}
+
+.profile {
+    display: flex; 
+    flex-direction: row; 
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.profileContent {
+    padding-left: 20px; 
+    text-align: left;
+}
+
+.modalimg {
+    -webkit-clip-path: circle(45% at center);
+    clip-path: circle(45% at center);
+    width: 20%; 
+    height: 20%; 
+}
+
+@media only screen and (max-width: 1024px) {
+    .title {
+        width: 50%;
+    }
+
+    body {
+        font-size: var(--fontSizeIpad);
+    }
+
+    .aboutCollection {
+        width: 50%; 
+    }
+
+    #keycontainer {
+        width: 60%; 
+    }
+    
+    #datetimecontainer {
+        width: 40%;
+    }
+
+    .modalContainer {
+        font-size: var(--fontSizeIpad)
+    }
+    
+    .modalTitle {
+        font-size: var(--fontSizeIpad);
+    }
+
+    .profile {
+        flex-direction: column; 
+    }
+
+    .profileContent {
+        padding-left: 0px;
+        text-align: center;
+    }
+
+    .modalimg {
+        clip-path: circle(45% at center);
+        width: 30%; 
+        height: 30%; 
+    }
+
+}
+
+@media only screen and (max-width: 768px) {
+    .title {
+        width: 50%;
+    }
+
+    .aboutCollection {
+        width: 50%; 
+    }
+
+    #infocontainer {
+        height: 8vh;
+    }
+
+    #inputcontainer {
+        height: 12vh;
+    }
+
+    .bar {
+        display: none;
+    }
+
+    .datetime {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #keycontainer {
+        width: 60%; 
+        display: flex;
+        align-items: center;
+    }
+    
+    #datetimecontainer {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modalimg {
+        clip-path: circle(45% at center);
+        width: 40%; 
+        height: 40%; 
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    body {
+        font-size: var(--fontSizeMobile);
+    }
+
+    #top {
+        padding: 0 var(--paddingHorizontalMobile) 0 var(--paddingHorizontalMobile);
+    }
+
+    .title {
+        width: 45%;
+    }
+
+    .aboutCollection {
+        width: 55%; 
+    }
+
+    #infocontainer {
+        height: 8vh;
+        padding: 0 var(--paddingHorizontalMobile) 0 var(--paddingHorizontalMobile);
+    }
+
+    #inputcontainer {
+        height: 12vh;
+    }
+
+    .bar {
+        display: none;
+    }
+
+    #keycontainer {
+        width: 60%; 
+        display: flex;
+        align-items: center;
+    }
+    
+    #datetimecontainer {
+        width: 40%;
+    }
+
+    .textinput {
+        padding: var(--paddingHorizontalMobile);
+    }
+
+    .modalContainer {
+        font-size: var(--fontSizeMobile)
+    }
+    
+    .modalTitle {
+        font-size: var(--fontSizeMobile);
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    body {
+        font-size: var(--fontSizeMobileTiny);
+    }
+
+    .modalContainer {
+        font-size: var(--fontSizeMobileTiny)
+    }
+    
+    .modalTitle {
+        font-size: var(--fontSizeMobileTiny);
+    }
+}
