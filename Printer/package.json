@@ -1,8 +1,8 @@
 {
   "name": "receipt-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "receipt.js",
+  "description": "This is the nodejs server that gets connected to the printer",
+  "main": "printer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

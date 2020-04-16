@@ -2,11 +2,10 @@
 //[ Text Input                                              Button   ]
 class Input {
     constructor(onEncrypt) {
-        // Private key
-        this.key = select('.key'); 
         // Date / Time
         this.date = select('.date');
         this.time = select('.time');
+        
         this.updateClock(); 
         setInterval(this.updateClock.bind(this), 1000); // Call this method every 1000 second. 
         
@@ -15,8 +14,8 @@ class Input {
         this.textInput.input(this.onInput.bind(this)); 
 
         // Encryption button.
-        this.encrypt = select('.inputbutton'); 
-        this.encrypt.mousePressed(this.onClick.bind(this, onEncrypt)); 
+        this.submit = select('.inputbutton'); 
+        this.submit.mousePressed(this.onClick.bind(this, onEncrypt)); 
         this.disableButton(); 
     }
 
@@ -28,10 +27,6 @@ class Input {
         // time = time[0] + time[1];
         this.date.html(date);
         this.time.html(time); 
-    }
-
-    setPrivateKey(key) {
-        this.key.html(key); 
     }
 
     onClick(onEncrypt) {  
@@ -51,22 +46,21 @@ class Input {
         var inputText = this.textInput.value(); 
         if (inputText.length > 0) {
             this.enableButton(); 
-            this.key.html('');
         } else {
             this.disableButton();
         }
     }
 
     disableButton() {
-        this.encrypt.style('color', '#cfcfcf');
-        this.encrypt.attribute('disabled', true); 
-        this.encrypt.removeClass('animate');
+        this.submit.style('color', '#cfcfcf');
+        this.submit.attribute('disabled', true); 
+        this.submit.removeClass('animate');
     }
 
     enableButton() {
         // Enable color
-        this.encrypt.style('color', 'black');
-        this.encrypt.removeAttribute('disabled'); 
-        this.encrypt.addClass('animate');
+        this.submit.style('color', 'black');
+        this.submit.removeAttribute('disabled'); 
+        this.submit.addClass('animate');
     }
 }
