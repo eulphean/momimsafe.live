@@ -58,7 +58,12 @@ DELETE FROM entries;
 https://www.postgresql.org/docs/9.1/tutorial-select.html
 Creating a new local database using psql (assuming it's installed on the computer)
 createdb <tablename>; createdb mumimsafe
+CREATE TABLE entries 
+(follow the same steps to create the table on Heroku)
 
 Local database for this project
 psql mumimsafe_dev
 export DATABASE_URL=postgres://localhost/mumimsafe_dev
+Table name is entries (date, time, message)
+SELECT * FROM entries;  (to see all the entries)
+DELETE FROM entries; (to delete all the entries)
