@@ -48,9 +48,15 @@ function onConnected() {
   // This is an incoming socket event to ensure the upkeep of the 
   // connection between central server and the web client. 
   socket.on('time', logTime); 
+  socket.on('image', handleImg); 
   socket.on('disconnect', () =>  console.log('Socket Server Disconnected.'));
 }
 
 function logTime(time) {
   console.log('Socket Connection Alive: ' + time); 
+}
+
+function handleImg(data) {
+  var img = document.getElementById('frame'); 
+  img.src = 'data:image/jpeg;base64,' + data; 
 }
