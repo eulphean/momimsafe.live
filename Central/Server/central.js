@@ -1,6 +1,6 @@
 // Author: Amay Kataria
 // Date: 04/16/2020
-// File: store.js
+// File: central.js
 // Description: Core Central server implementation for mumimsafe.live. It serves 2 routes primarily. 
 // Route 1 = client -> central -> printer
 // Route 2 = streamer -> central -> client

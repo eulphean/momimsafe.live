@@ -35,5 +35,3 @@ socket.once('connect', () => {
 function logTime(time) {
     console.log('Socket Connection Alive: ' + time); 
 }
-
-// Read each image of the webcam and send it as base64 data on the websocket to the webserver. 

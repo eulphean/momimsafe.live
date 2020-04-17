@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/No%20page%20right%20now/static/css/main.542ab513.chunk.css",
+    "main.js": "/No%20page%20right%20now/static/js/main.ce0d12b4.chunk.js",
+    "main.js.map": "/No%20page%20right%20now/static/js/main.ce0d12b4.chunk.js.map",
+    "runtime-main.js": "/No%20page%20right%20now/static/js/runtime-main.f74fba08.js",
+    "runtime-main.js.map": "/No%20page%20right%20now/static/js/runtime-main.f74fba08.js.map",
+    "static/js/2.7b18cfb8.chunk.js": "/No%20page%20right%20now/static/js/2.7b18cfb8.chunk.js",
+    "static/js/2.7b18cfb8.chunk.js.map": "/No%20page%20right%20now/static/js/2.7b18cfb8.chunk.js.map",
+    "index.html": "/No%20page%20right%20now/index.html",
+    "precache-manifest.7ef184f771c2ad00d2c6b8e5ba7cea34.js": "/No%20page%20right%20now/precache-manifest.7ef184f771c2ad00d2c6b8e5ba7cea34.js",
+    "service-worker.js": "/No%20page%20right%20now/service-worker.js",
+    "static/css/main.542ab513.chunk.css.map": "/No%20page%20right%20now/static/css/main.542ab513.chunk.css.map",
+    "static/js/2.7b18cfb8.chunk.js.LICENSE.txt": "/No%20page%20right%20now/static/js/2.7b18cfb8.chunk.js.LICENSE.txt",
+    "static/media/stylesheet.css": "/No%20page%20right%20now/static/media/din-webfont.e6a361ef.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f74fba08.js",
+    "static/js/2.7b18cfb8.chunk.js",
+    "static/css/main.542ab513.chunk.css",
+    "static/js/main.ce0d12b4.chunk.js"
+  ]
+}
