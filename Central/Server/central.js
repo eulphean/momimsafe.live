@@ -22,13 +22,13 @@ var app = express();
 var server = app.listen(process.env.PORT || 5000, function() {
     console.log('Central server successfully started'); 
 });
-app.use(express.static('Public')); 
+app.use(express.static('../Client')); 
 
 // ------------------ Websocket ------------------------ //
 var io = socket(server); 
 var appSocket = io.of('/app').on('connection', onWebClient); // Connects all web instance to this. 
 var receiptSocket = io.of('/receipt').on('connection', onReceiptClient); // Connects receipt server to this. 
-var storeSocket = io.of('/central').on('connection', onCentralClient); // Connects the web instance of central server to read data. 
+var centralClientSocket = io.of('/central').on('connection', onCentralClient); // Connects the web instance of central server to read data. 
 var streamerSocker = io.of('/streamer').on('connection', onStreamerClient); // Connects video streamer client to this. 
 
 // Send an event to all connected clients to keep the Socket Connection Alive. 
@@ -39,7 +39,7 @@ function alive() {
     var t = new Date().toTimeString(); 
     appSocket.emit('time', t); 
     receiptSocket.emit('time', t);
-    storeSocket.emit('time', t); 
+    centralClientSocket.emit('time', t); 
     streamerSocker.emit('time', t); 
 }
 
@@ -68,11 +68,11 @@ function onStreamerClient(socket) {
     socket.on('disconnect', () => console.log('Streamer client ' + socket.id + ' diconnected'));
 }
 
-function handleImage(img) {
-    console.log('New image received'); 
-
+function handleImage(data) {
+    // Forward the data to the central client. 
+    centralClientSocket.emit('image', data); 
     // Forward this over to the main web client. 
-    appSocket.emit('image', img); 
+    appSocket.emit('image', data); 
 }
 
 // ------------------ Handle incoming text payload ------------------------ //
@@ -141,6 +141,6 @@ function showEntriesCallback(error, results) {
     if (error) {
         throw error; 
     }
-    storeSocket.emit('showEntries', results.rows); 
+    centralClientSocket.emit('showEntries', results.rows); 
 }
 
