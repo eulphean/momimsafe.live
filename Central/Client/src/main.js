@@ -3,7 +3,7 @@
 var socket; 
 var table;
 
-var localhostURL = "http://localhost:5000/store"
+var localhostURL = "http://localhost:5000/central"
 var herokuURL = "https://mysterious-shore-86207.herokuapp.com/store";
 
 function setup(){
@@ -11,7 +11,7 @@ function setup(){
   table.width = displayWidth; // Change
   setupTableTitle(); 
 
-  socket = io(herokuURL, { 
+  socket = io(localhostURL, { 
     reconnection: true,
     reconnectionDelay: 500, 
     reconnectionAttempts: Infinity 
@@ -28,13 +28,6 @@ function onEntries() {
   // Clear the table first. 
   clearTable(); 
   var data = getData('show'); 
-  socket.emit('readEntries', data);
-}
-
-function onDownload() {
-  // Get all the entries from the database. 
-  clearTable();
-  var data = getData('download'); 
   socket.emit('readEntries', data);
 }
 
@@ -60,9 +53,14 @@ function onConnected() {
 
   // Subsribe to other events. 
   socket.on('showEntries', showEntries); 
-  socket.on('imageData', downloadImage); 
+  socket.on('image', updateStream); 
   socket.on('time', logTime); 
   socket.on('disconnect', () => console.log('Socket Server Disconnected')); 
+}
+
+function updateStream(data) {
+  var img = document.getElementById('frame'); 
+  img.src = 'data:image/jpeg;base64,' + data; 
 }
 
 function showEntries(entries) {
@@ -91,22 +89,6 @@ function showEntries(entries) {
   }
 }
 
-function downloadImage(imageData) {
-  console.log('Download Image');
-  var weave = document.getElementById('weave');
-  // Convert the imageData to a blob because the length of this
-  // string can be really really long. 
-  weave.href = URL.createObjectURL(dataURItoBlob(imageData));
-  console.log(weave);
-  var date = new Date(); 
-  var dateString = date.toDateString();
-  var timeString = date.getHours() + '.' + date.getMinutes() + '.' + date.getSeconds(); 
-  var name = "Weave " + dateString + ' ' + timeString + '.png'; 
-  weave.download = name;
-  weave.click();
-}
-
-
 function clearTable() {
   var rowCount = table.rows.length;
   for (var x=rowCount-1; x>0; x--) {
@@ -125,31 +107,7 @@ function setupTableTitle() {
   timeCell.innerHTML = 'TIME';
   timeCell.width = '8%';
 
-  var keyCell = row.insertCell(2);
-  keyCell.innerHTML = 'KEY';
-  keyCell.width = '14%';
-
-  var binaryCell = row.insertCell(3);
-  binaryCell.innerHTML = 'BINARY STRING';
+  var binaryCell = row.insertCell(2);
+  binaryCell.innerHTML = 'Message';
   binaryCell.width = '70%';
-}
-
-function dataURItoBlob(dataURI) {
-  // convert base64 to raw binary data held in a string
-  // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
-  var byteString = atob(dataURI.split(',')[1]);
-
-  // separate out the mime component
-  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
-
-  // write the bytes of the string to an ArrayBuffer
-  var ab = new ArrayBuffer(byteString.length);
-  var ia = new Uint8Array(ab);
-  for (var i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-  }
-
-  // write the ArrayBuffer to a blob, and you're done
-  var bb = new Blob([ab]);
-  return bb;
 }

@@ -77,11 +77,11 @@
   <body>
     <div class=container>
         <div class='input'>
-            <h2>Encryption Archive Weaver</h2>
+            <h2>mumimsafe.live</h2>
+            <img id="frame" />
             <div class="form">
                 <div class='item'><label class='datelabel' for=start>Start Date</label><input type="date" id="start" /></div>
                 <div class='item'><label class='datelabel' for=end>End Date</label><input type="date" id="end"/></div>
-                <div class='item'><label for="externalbuffer">External Buffer (#rows)</label><input type="text" id="externalbuffer" value=50 /></div>
             </div>
             <br />
             <div>
@@ -89,7 +89,6 @@
             </div>
             <div class='buttons'>
               <button onclick="onEntries()">SHOW ENTRIES</button>
-              <button onclick="onDownload()">WEAVE</button>
             </div>
         </div>
         <table id="entries"></table>
