@@ -2,6 +2,7 @@ import React from 'react'
 import Radium from 'radium'
 import HalfCircleButton, { CircleType } from './HalfCircleButton.js'
 import LiveInfo from './LiveInfo.js'
+import Popup from './Popup.js'
 import VideoStream from './VideoStream.js'
 import TextInput from './TextInput.js'
 import Websocket from './Websocket.js'
@@ -48,8 +49,11 @@ class App extends React.Component {
     return (
       <div style={styles.container}>
         <LiveInfo />
-          <HalfCircleButton shape={CircleType.Bottom} style={styles.topButton}>About</HalfCircleButton>
-          <HalfCircleButton shape={CircleType.Top} style={styles.bottomButton}>Send</HalfCircleButton>
+        <HalfCircleButton shape={CircleType.Bottom} style={styles.topButton}>About</HalfCircleButton>
+        <HalfCircleButton shape={CircleType.Top} style={styles.bottomButton}>Send</HalfCircleButton>
+        <Popup>
+            Give the content here
+        </Popup>
       </div>
     );
   }

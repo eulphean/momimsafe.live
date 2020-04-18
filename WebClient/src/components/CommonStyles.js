@@ -1,7 +1,8 @@
 const color = {
     pureTeal: '#055A85',
     liveRed: '#D0011B',
-    sunLight: '#FCF0E1' 
+    sunLight: '#FCF0E1',
+    deepSky: '#02293C'
 };
 
 const fontSize = {
