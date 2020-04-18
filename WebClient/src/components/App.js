@@ -48,12 +48,8 @@ class App extends React.Component {
     return (
       <div style={styles.container}>
         <LiveInfo />
-          <HalfCircleButton shape={CircleType.Bottom} style={styles.topButton}>
-              About
-          </HalfCircleButton>
-          <HalfCircleButton shape={CircleType.Top} style={styles.bottomButton}>
-              Send
-          </HalfCircleButton>
+          <HalfCircleButton shape={CircleType.Bottom} style={styles.topButton}>About</HalfCircleButton>
+          <HalfCircleButton shape={CircleType.Top} style={styles.bottomButton}>Send</HalfCircleButton>
       </div>
     );
   }
