@@ -6,14 +6,14 @@ import { color, padding, fontFamily, fontSize } from './CommonStyles.js'
 const styles={
     container: {
         display: 'flex',
-        alignItems: 'flex-start',
-        margin: padding.small
+        alignItems: 'flex-start'
     },
 
     contentContainer: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        margin: padding.small
     },
 
     labelContainer: {

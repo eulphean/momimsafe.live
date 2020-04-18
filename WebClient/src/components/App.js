@@ -1,8 +1,6 @@
 import React from 'react'
 import Radium from 'radium'
-import { HashRouter as Router, Route, Switch } from 'react-router-dom'
-import { padding } from './CommonStyles.js'
-import ScrollToTop from './ScrollToTop.js'
+import HalfCircleButton, { CircleType } from './HalfCircleButton.js'
 import LiveInfo from './LiveInfo.js'
 import VideoStream from './VideoStream.js'
 import TextInput from './TextInput.js'
@@ -11,6 +9,28 @@ import Websocket from './Websocket.js'
 
 const styles = {
   container: {
+    // Empty for now.  
+  },
+
+  topButton: {
+    display: 'flex',
+    alignItems: 'center',
+    position: 'absolute',
+    margin: 'auto',
+    top: '-5px',
+    left: '0px',
+    right: '0px',
+    opacity: '90%'
+  },
+
+  bottomButton: {
+    alignItems: 'center',
+    position: 'absolute',
+    margin: 'auto',
+    left: '0px',
+    right: '0px',
+    bottom: '-5px',
+    opacity: '90%'
   }
 };
 
@@ -26,15 +46,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <Router basename={process.env.PUBLIC_URL}> 
-         <ScrollToTop /> 
-         <Switch>
-            <Route path="/">
-              <LiveInfo />
-            </Route>
-          </Switch>
-        </Router>
+      <div style={styles.container}>
+        <LiveInfo />
+          <HalfCircleButton shape={CircleType.Bottom} style={styles.topButton}>
+              About
+          </HalfCircleButton>
+          <HalfCircleButton shape={CircleType.Top} style={styles.bottomButton}>
+              Send
+          </HalfCircleButton>
       </div>
     );
   }
