@@ -3,13 +3,14 @@ import Radium from 'radium'
 import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import { padding } from './CommonStyles.js'
 import ScrollToTop from './ScrollToTop.js'
+import LiveInfo from './LiveInfo.js'
 import VideoStream from './VideoStream.js'
 import TextInput from './TextInput.js'
 import Websocket from './Websocket.js'
 
+
 const styles = {
   container: {
-    padding: padding.big,
   }
 };
 
@@ -25,17 +26,12 @@ class App extends React.Component {
 
   render() {
     return (
-      <div style={styles.container}>
+      <div>
         <Router basename={process.env.PUBLIC_URL}> 
          <ScrollToTop /> 
-         <Websocket 
-            ref={this.websocket}
-            newImageCbk={this.onStreamImage.bind(this)} 
-         />
          <Switch>
             <Route path="/">
-              <VideoStream imageSrc={this.state.imageSrc}/>
-              <TextInput onSubmit={this.emitMessage.bind(this)} />
+              <LiveInfo />
             </Route>
           </Switch>
         </Router>
@@ -56,3 +52,11 @@ class App extends React.Component {
 }
 
 export default Radium(App);
+
+// Bring this in later in the development. But it's good that these are developed. 
+{/* <Websocket 
+ref={this.websocket}
+newImageCbk={this.onStreamImage.bind(this)} 
+/> */}
+{/* <VideoStream imageSrc={this.state.imageSrc}/>
+<TextInput onSubmit={this.emitMessage.bind(this)} /> */}

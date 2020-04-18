@@ -11,7 +11,7 @@ class VideoStream extends React.Component {
 
     render() {
         return (
-            <img alt={'Live Stream'} src={this.props.imageSrc} />
+        <img width='1000px' alt={'Live Stream'} src={this.props.imageSrc} />
         );
     }
 }
