@@ -9,10 +9,10 @@ var herokuURL = "https://mysterious-shore-86207.herokuapp.com/receipt";
 var cv = require('opencv4nodejs');
 
 // camera device. 
-const FPS = 30; 
+const FPS = 15; 
 const videoCap = new cv.VideoCapture(0); 
-videoCap.set(cv.CAP_PROP_FRAME_HEIGHT, 200); 
-videoCap.set(cv.CAP_PROP_FRAME_WIDTH, 200); 
+videoCap.set(cv.CAP_PROP_FRAME_HEIGHT, 900); 
+videoCap.set(cv.CAP_PROP_FRAME_WIDTH, 900); 
 
 var socket = io.connect(localhostURL, {
     reconnection: true, 
