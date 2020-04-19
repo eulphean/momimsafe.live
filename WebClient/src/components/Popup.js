@@ -1,5 +1,6 @@
 import React from 'react'
 import Radium from 'radium'
+import TextInput from './TextInput.js'
 import { color, padding, fontFamily, fontSize } from './CommonStyles.js'
 import { ReactComponent as Exit } from './close.svg'
 import { fadeOutUp, fadeOutDown, fadeInDown, fadeInUp } from 'react-animations'
@@ -137,7 +138,7 @@ const styles={
     },
 
     body: {
-        marginTop: padding.extraSmall,
+        marginTop: padding.small,
         justifyContent: 'center',
         fontFamily: fontFamily.opensanslight,
         fontSize: fontSize.small
@@ -169,6 +170,22 @@ const styles={
         fontSize: fontSize.small,
         color: color.pureTeal,
         letterSpacing: '1px'
+    },
+
+    input: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%',
+        marginTop: padding.small
+    },
+
+    sendButtonContainer: {
+        background: color.sunLight, 
+        fontFamily: fontFamily.bebas,
+        fontSize: fontSize.small,
+        color: color.pureTeal,
+        letterSpacing: '1.5px',
+        marginLeft: padding.extraSmall
     }
 }
 
@@ -183,6 +200,8 @@ class Popup extends React.Component {
             isVisible : false,
             popupState: PopupState.None
         };
+
+        this.textInput = React.createRef(); 
     }
 
     render() {
@@ -234,7 +253,7 @@ class Popup extends React.Component {
         }
 
         return (
-            <div style={styles.container}>
+            <div onTouchStart={this.handleOnTouch.bind(this)} style={styles.container}>
                 <div style={overlayStyle}></div>
                 <div onAnimationEnd={this.contentAnimationEnd.bind(this)} style={contentContainerStyle}>
                     {content}
@@ -297,10 +316,16 @@ class Popup extends React.Component {
                 <div style={styles.title}>
                     Send A Message
                 </div>
+                <div style={styles.input}>
+                    <TextInput ref={this.textInput} />
+                    <button onClick={this.handleSendMessage.bind(this)} style={styles.sendButtonContainer}>
+                        SEND
+                    </button>
+                </div>
                 <div style={styles.body}>
                     {sendBody}
                 </div>
-                { closeButton }
+                {closeButton}
             </div>
         );
     }
@@ -312,7 +337,9 @@ class Popup extends React.Component {
         }); 
     }
 
-    hidePopup() {
+    hidePopup(event) {
+        event.stopPropagation(); 
+
         this.setState({
             popupState: PopupState.Close
         }); 
@@ -320,6 +347,23 @@ class Popup extends React.Component {
         // Kick off to bring the buttons back. 
         this.props.onClose(); 
     }
-}
+
+    handleOnTouch(event) {
+        // Don't let this propogate to the main screen
+        // where touch events mean something. 
+        event.stopPropagation();
+    }
+
+    handleSendMessage(event) {
+        event.stopPropagation(); 
+        // Clear the content first
+        this.textInput.current.clearContent(); 
+        let content = this.textInput.current.getContent(); 
+        this.props.onSend(content); 
+
+        // Also, hide the popup.
+        this.hidePopup(event); 
+    }
+ }
 
 export default Radium(Popup);

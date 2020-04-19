@@ -57,6 +57,7 @@ class App extends React.Component {
         <Popup 
           ref={this.popupRef}
           onClose={this.handlePopupClose.bind(this)}
+          onSend={this.handleSendMessage.bind(this)}
           type={this.state.popupType} />
         <HalfCircleButton 
           key={'About'}
@@ -124,6 +125,10 @@ class App extends React.Component {
     this.setState({
       showButtons: false
     }); 
+  }
+
+  handleSendMessage(content) {
+    console.log('Main app has ' + content); 
   }
 }
 
