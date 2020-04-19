@@ -40,24 +40,27 @@ const styles={
     fadeIn: {
         animationName: fadeIn,
         animationDuration: fadeInDuration,
-        animationFillMode: 'forwards'
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in'
     },
 
     fadeInDown: {
         animationName: Radium.keyframes(fadeInDown, 'fadeInDown'),
         animationDuration: slideInDuration,
-        animationFillMode: 'forwards'
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in'
     },
 
     fadeOut: {
         animationName: Radium.keyframes(fadeOut, 'fadeOut'),
-        animationDuration: '5s'
+        animationDuration: '2s'
     },
 
     fadeInUp: {
         animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
         animationDuration: slideInDuration,
-        animationFillMode: 'forwards'
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in'
     },
 
     showOverlay: {
@@ -148,25 +151,45 @@ class Popup extends React.Component {
     }
 
     render() {
-        let overlayStyle = this.state.isVisible ? [styles.overlay, styles.showOverlay, styles.fadeIn] : styles.overlay; 
+        let overlayStyle = this.state.isVisible ? [styles.overlay, styles.showOverlay, styles.fadeIn] : [styles.overlay, styles.fadeOut]; 
 
         let content, contentContainerStyle; 
         if (this.props.type === PopupType.About) {
             content = this.getAboutContent(); 
-            contentContainerStyle = this.state.isVisible ? [styles.contentContainer, styles.showContent, styles.fadeInDown] : styles.contentContainer; 
+            contentContainerStyle = this.state.isVisible ? [styles.contentContainer, styles.showContent, styles.fadeInDown] : [styles.contentContainer, styles.fadeOut]; 
         } else {
             content = this.getSendContent(); 
-            contentContainerStyle = this.state.isVisible ? [styles.contentContainer, styles.showContent, styles.fadeInUp] : styles.contentContainer;
+            contentContainerStyle = this.state.isVisible ? [styles.contentContainer, styles.showContent, styles.fadeInUp] : [styles.contentContainer, styles.fadeOut];
         }
 
         return (
             <div style={styles.container}>
-                <div style={overlayStyle}></div>
-                <div style={contentContainerStyle}>
+                <div onAnimationEnd={this.overlayAnimationEnd.bind(this)} style={overlayStyle}></div>
+                <div onAnimationEnd={this.contentAnimationEnd.bind(this)} style={contentContainerStyle}>
                     {content}
                 </div>
             </div>
         );
+    }
+    
+    overlayAnimationEnd() {
+        this.setState({
+            isAnimating: false
+        }); 
+
+        if (this.state.isVisible) {
+            console.log('Overlay Show animation end'); 
+        } else {
+            console.log('Overlay Close animation end'); 
+        }
+    }
+
+    contentAnimationEnd() {
+        if (this.state.isVisible) {
+            console.log('Content show animation end'); 
+        } else {
+            console.log('Content close animation end'); 
+        }
     }
 
     getCloseButton() {
@@ -227,10 +250,9 @@ class Popup extends React.Component {
     }
 
     hidePopup() {
-        this.props.onClose(); 
+        // this.props.onClose(); 
         // Set Z index to low. 
         this.setState({
-            isVisible: false
         }); 
     }
 }

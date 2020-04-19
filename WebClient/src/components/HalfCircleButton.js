@@ -21,13 +21,16 @@ const styles={
 
     fadeInDown: {
         animationName: Radium.keyframes(fadeInDown, 'fadeInDown'),
-        animationDuration: '2s'
+        animationDuration: '2s',
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in'
     },
 
     fadeOutUp: {
         animationName: Radium.keyframes(fadeOutUp, 'fadeOutUp'),
-        animationDuration: '5s',
-        animationFillMode: 'forwards'
+        animationDuration: '3s',
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-out'
     },
 
     fadeInUp: {
@@ -37,7 +40,7 @@ const styles={
 
     fadeOutDown: {
         animationName: Radium.keyframes(fadeOutDown, 'fadeOutUp'),
-        animationDuration: '5s',
+        animationDuration: '3s',
         animationFillMode: 'forwards'
     },
 
