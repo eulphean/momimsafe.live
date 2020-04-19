@@ -21,17 +21,25 @@ const styles={
         right: '0px',
         background: color.deepSky,
         opacity: '50%',
-        zIndex: '1'
+        zIndex: '-999'
+    },
+
+    showOverlay: {
+        zIndex: '998'
     },
 
     contentContainer: {
         position: 'fixed',
-        zIndex: '2',
+        zIndex: '-999',
         top:'0px',
         bottom: '0px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+
+    showContent: {
+        zIndex: '999'
     },
 
     content: {
@@ -99,16 +107,19 @@ class Popup extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-   
+            isVisible : false
         };
     }
 
     render() {
         let content = this.props.type === PopupType.About ? this.getAboutContent() : this.getSendContent();
+        let overlayStyle = this.state.isVisible ? [styles.overlay, styles.showOverlay] : styles.overlay; 
+        let contentContainerStyle = this.state.isVisible ? [styles.contentContainer, styles.showContent] : styles.contentContainer; 
+
         return (
             <div style={styles.container}>
-                <div style={styles.overlay}></div>
-                <div style={styles.contentContainer}>
+                <div style={overlayStyle}></div>
+                <div style={contentContainerStyle}>
                     {content}
                 </div>
             </div>
@@ -117,7 +128,7 @@ class Popup extends React.Component {
 
     getCloseButton() {
         return (
-            <button style={styles.buttonContainer}>
+            <button style={styles.buttonContainer} onClick={this.hidePopup.bind(this)}>
                 CLOSE
             </button>
         ); 
@@ -125,7 +136,7 @@ class Popup extends React.Component {
 
     getIconButton() {
         return(
-            <div style={styles.iconContainer}>
+            <div style={styles.iconContainer} onClick={this.hidePopup.bind(this)}>
                 <Exit style={styles.icon} />
             </div>
         ); 
@@ -163,6 +174,20 @@ class Popup extends React.Component {
                 { closeButton }
             </div>
         );
+    }
+
+    showPopup() {
+        // Set Z index to high. 
+        this.setState({
+            isVisible: true
+        }); 
+    }
+
+    hidePopup() {
+        // Set Z index to low. 
+        this.setState({
+            isVisible: false
+        }); 
     }
 }
 

@@ -39,19 +39,29 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      imageSrc: ''
+      imageSrc: '',
+      popupType: PopupType.About
     };
 
     this.websocket = React.createRef(); 
+    this.popupRef = React.createRef(); 
   }
 
   render() {
     return (
       <div style={styles.container}>
         <LiveInfo />
-        <HalfCircleButton shape={CircleType.Bottom} style={styles.topButton}>About</HalfCircleButton>
-        <Popup type={PopupType.About} />
-        <HalfCircleButton shape={CircleType.Top} style={styles.bottomButton}>Send</HalfCircleButton>
+        <Popup 
+          ref={this.popupRef}
+          type={this.state.popupType} />
+        <HalfCircleButton 
+          onClick={this.handleClick.bind(this)} 
+          shape={CircleType.Bottom} 
+          style={styles.topButton}>About</HalfCircleButton>
+        <HalfCircleButton 
+          onClick={this.handleClick.bind(this)}
+          shape={CircleType.Top} 
+          style={styles.bottomButton}>Send</HalfCircleButton>
       </div>
     );
   }
@@ -65,6 +75,17 @@ class App extends React.Component {
 
   emitMessage(text) {
     this.websocket.current.sendMessage(text); 
+  }
+
+  handleClick(type) {
+    let popupType = (type === 'About') ? PopupType.About : PopupType.Send;
+    // Set popup type based on the button click. 
+    this.setState({
+      popupType: popupType
+    });
+
+    // Show popup. 
+    this.popupRef.current.showPopup(); 
   }
 }
 

@@ -50,10 +50,14 @@ class HalfCircleButton extends React.Component {
         let circleStyle = this.props.shape === CircleType.Top ? styles.topCircle : styles.bottomCircle; 
         let buttonStyle = [styles.container, circleStyle, this.props.style]; 
         return (
-            <div style={buttonStyle}>
+            <div onClick={this.handleClick.bind(this)} style={buttonStyle}>
                 {this.props.children}
             </div>
         );
+    }
+
+    handleClick() {
+        this.props.onClick(this.props.children); 
     }
 }
 
