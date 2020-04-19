@@ -2,11 +2,25 @@ import React from 'react'
 import Radium from 'radium'
 import { color, padding, fontFamily, fontSize } from './CommonStyles.js'
 import { ReactComponent as Exit } from './close.svg'
+import { fadeOut, fadeInDown, fadeInUp } from 'react-animations'
 
 export var PopupType = {
     About: 0,
     Send: 1
 }; 
+
+// Custom Fade in animation. 
+const fadeIn = Radium.keyframes({
+    from: {
+        opacity: '0%'
+    },
+    to: {
+        opacity: '50%'
+    }
+}, 'fadesIn'); 
+
+const fadeInDuration = '0.5s'; 
+const slideInDuration = '1s'; 
 
 const styles={
     container: {
@@ -20,8 +34,30 @@ const styles={
         left: '0px',
         right: '0px',
         background: color.deepSky,
-        opacity: '50%',
         zIndex: '-999'
+    },
+
+    fadeIn: {
+        animationName: fadeIn,
+        animationDuration: fadeInDuration,
+        animationFillMode: 'forwards'
+    },
+
+    fadeInDown: {
+        animationName: Radium.keyframes(fadeInDown, 'fadeInDown'),
+        animationDuration: slideInDuration,
+        animationFillMode: 'forwards'
+    },
+
+    fadeOut: {
+        animationName: Radium.keyframes(fadeOut, 'fadeOut'),
+        animationDuration: '5s'
+    },
+
+    fadeInUp: {
+        animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
+        animationDuration: slideInDuration,
+        animationFillMode: 'forwards'
     },
 
     showOverlay: {
@@ -112,9 +148,16 @@ class Popup extends React.Component {
     }
 
     render() {
-        let content = this.props.type === PopupType.About ? this.getAboutContent() : this.getSendContent();
-        let overlayStyle = this.state.isVisible ? [styles.overlay, styles.showOverlay] : styles.overlay; 
-        let contentContainerStyle = this.state.isVisible ? [styles.contentContainer, styles.showContent] : styles.contentContainer; 
+        let overlayStyle = this.state.isVisible ? [styles.overlay, styles.showOverlay, styles.fadeIn] : styles.overlay; 
+
+        let content, contentContainerStyle; 
+        if (this.props.type === PopupType.About) {
+            content = this.getAboutContent(); 
+            contentContainerStyle = this.state.isVisible ? [styles.contentContainer, styles.showContent, styles.fadeInDown] : styles.contentContainer; 
+        } else {
+            content = this.getSendContent(); 
+            contentContainerStyle = this.state.isVisible ? [styles.contentContainer, styles.showContent, styles.fadeInUp] : styles.contentContainer;
+        }
 
         return (
             <div style={styles.container}>
@@ -184,6 +227,7 @@ class Popup extends React.Component {
     }
 
     hidePopup() {
+        this.props.onClose(); 
         // Set Z index to low. 
         this.setState({
             isVisible: false

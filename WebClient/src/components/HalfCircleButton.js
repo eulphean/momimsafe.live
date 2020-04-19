@@ -1,6 +1,7 @@
 import React from 'react'
 import Radium from 'radium'
 import { color, padding, fontFamily, fontSize } from './CommonStyles.js'
+import { fadeInDown, fadeInUp, fadeOutUp, fadeOutDown } from 'react-animations'
 
 export var CircleType = {
     Top : 0, 
@@ -18,10 +19,32 @@ const styles={
         letterSpacing: '1px'
     },
 
+    fadeInDown: {
+        animationName: Radium.keyframes(fadeInDown, 'fadeInDown'),
+        animationDuration: '2s'
+    },
+
+    fadeOutUp: {
+        animationName: Radium.keyframes(fadeOutUp, 'fadeOutUp'),
+        animationDuration: '5s',
+        animationFillMode: 'forwards'
+    },
+
+    fadeInUp: {
+        animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
+        animationDuration: '2s'
+    },
+
+    fadeOutDown: {
+        animationName: Radium.keyframes(fadeOutDown, 'fadeOutUp'),
+        animationDuration: '5s',
+        animationFillMode: 'forwards'
+    },
+
     bottomCircle: {
         height:'45px',
         width:'90px',
-        borderRadius:' 0 0 90px 90px',
+        borderRadius:' 0 0 90px 90px'
     },
 
     topCircle: {
@@ -47,8 +70,17 @@ class HalfCircleButton extends React.Component {
     }
 
     render() {
-        let circleStyle = this.props.shape === CircleType.Top ? styles.topCircle : styles.bottomCircle; 
-        let buttonStyle = [styles.container, circleStyle, this.props.style]; 
+        // Set circle and animation style
+        let circleStyle, aniStyle; 
+        if (this.props.shape === CircleType.Top) {
+            circleStyle = styles.topCircle; 
+            aniStyle = this.props.show ? styles.fadeInUp : styles.fadeOutDown; 
+        } else {
+            circleStyle = styles.bottomCircle; 
+            aniStyle = this.props.show ? styles.fadeInDown : styles.fadeOutUp; 
+        }
+
+        let buttonStyle = [styles.container, circleStyle, aniStyle, this.props.style]; 
         return (
             <div onClick={this.handleClick.bind(this)} style={buttonStyle}>
                 {this.props.children}

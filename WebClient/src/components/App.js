@@ -25,6 +25,7 @@ const styles = {
   },
 
   bottomButton: {
+    display: 'flex',
     alignItems: 'center',
     position: 'absolute',
     margin: 'auto',
@@ -40,7 +41,8 @@ class App extends React.Component {
     super(props);
     this.state={
       imageSrc: '',
-      popupType: PopupType.About
+      popupType: PopupType.About,
+      showButtons: true
     };
 
     this.websocket = React.createRef(); 
@@ -53,12 +55,17 @@ class App extends React.Component {
         <LiveInfo />
         <Popup 
           ref={this.popupRef}
+          onClose={this.handlePopupClose.bind(this)}
           type={this.state.popupType} />
         <HalfCircleButton 
+          key={'About'}
+          show={this.state.showButtons}
           onClick={this.handleClick.bind(this)} 
           shape={CircleType.Bottom} 
           style={styles.topButton}>About</HalfCircleButton>
         <HalfCircleButton 
+          key={'Send'}
+          show={this.state.showButtons}
           onClick={this.handleClick.bind(this)}
           shape={CircleType.Top} 
           style={styles.bottomButton}>Send</HalfCircleButton>
@@ -77,11 +84,18 @@ class App extends React.Component {
     this.websocket.current.sendMessage(text); 
   }
 
+  handlePopupClose() {
+    this.setState({
+      showButtons: true
+    }); 
+  }
+
   handleClick(type) {
     let popupType = (type === 'About') ? PopupType.About : PopupType.Send;
     // Set popup type based on the button click. 
     this.setState({
-      popupType: popupType
+      popupType: popupType,
+      showButtons: false
     });
 
     // Show popup. 
