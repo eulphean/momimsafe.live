@@ -5,7 +5,7 @@
 
 var io = require('socket.io-client'); 
 var localhostURL = "http://localhost:5000/streamer"; 
-var herokuURL = "https://mysterious-shore-86207.herokuapp.com/receipt";
+var herokuURL = "https://blooming-refuge-71111.herokuapp.com/streamer";
 var cv = require('opencv4nodejs');
 
 // camera device. 
@@ -14,7 +14,7 @@ const videoCap = new cv.VideoCapture(0);
 videoCap.set(cv.CAP_PROP_FRAME_HEIGHT, 900); 
 videoCap.set(cv.CAP_PROP_FRAME_WIDTH, 900); 
 
-var socket = io.connect(localhostURL, {
+var socket = io.connect(herokuURL, {
     reconnection: true, 
     reconnectionDelay: 500, 
     reconnectionAttempts: Infinity 

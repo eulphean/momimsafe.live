@@ -4,14 +4,14 @@ var socket;
 var table;
 
 var localhostURL = "http://localhost:5000/central"
-var herokuURL = "https://mysterious-shore-86207.herokuapp.com/store";
+var herokuURL = "https://blooming-refuge-71111.herokuapp.com/central";
 
 function setup(){
   table = document.getElementById('entries');
   table.width = displayWidth; // Change
   setupTableTitle(); 
 
-  socket = io(localhostURL, { 
+  socket = io(herokuURL, { 
     reconnection: true,
     reconnectionDelay: 500, 
     reconnectionAttempts: Infinity 

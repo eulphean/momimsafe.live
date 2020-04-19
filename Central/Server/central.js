@@ -22,7 +22,7 @@ var app = express();
 var server = app.listen(process.env.PORT || 5000, function() {
     console.log('Central server successfully started'); 
 });
-app.use(express.static('../Client')); 
+app.use(express.static('./Client')); 
 
 // ------------------ Websocket ------------------------ //
 var io = socket(server); 

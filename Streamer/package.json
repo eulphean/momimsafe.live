@@ -1,12 +1,16 @@
 {
-  "name": "receipt-server",
+  "name": "central-server",
   "version": "1.0.0",
-  "description": "This is the nodejs server that gets connected to the printer",
-  "main": "printer.js",
+  "description": "This is the central nodejs server through which all communication happens",
+  "main": "streamer.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node streamer.js"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Amay Kataria",
   "license": "ISC",
   "dependencies": {
     "opencv4nodejs": "5.5.0",

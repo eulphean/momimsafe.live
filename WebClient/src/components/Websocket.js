@@ -3,7 +3,7 @@ import Radium from 'radium'
 import io  from 'socket.io-client'
 
 const localhostURL = "http://localhost:5000/app"
-const herokuURL = "https://mysterious-shore-86207.herokuapp.com/app";
+const herokuURL = "https://blooming-refuge-71111.herokuapp.com//app";
 
 
 class Websocket extends React.Component {
