@@ -4,11 +4,13 @@ import { color, padding, fontFamily, fontSize } from './CommonStyles.js'
 import { ReactComponent as Exit } from './close.svg'
 import { fadeOutUp, fadeOutDown, fadeInDown, fadeInUp } from 'react-animations'
 
+// Receives a prop to define the type of popup.  
 export var PopupType = {
     About: 0,
     Send: 1
 }; 
 
+// Maintain the current popup state (to track animations)
 var PopupState = {
     Open: 0,
     Close: 1,
@@ -304,7 +306,6 @@ class Popup extends React.Component {
     }
 
     showPopup() {
-        // Set Z index to high. 
         this.setState({
             isVisible: true,
             popupState: PopupState.Open
