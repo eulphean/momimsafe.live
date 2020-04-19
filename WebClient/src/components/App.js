@@ -115,7 +115,6 @@ class App extends React.Component {
     clearTimeout(this.buttonTimeout); 
     this.buttonTimeout = setTimeout(this.hideButtons.bind(this), this.timeoutDuration); 
 
-    console.log('Touching the screen'); 
     this.setState({
       showButtons: true
     }); 
@@ -128,7 +127,8 @@ class App extends React.Component {
   }
 
   handleSendMessage(content) {
-    console.log('Main app has ' + content); 
+    // TODO: Bind the Websocket 
+    // TO SEND THE MESSAGE TO THE PRINTER
   }
 }
 
