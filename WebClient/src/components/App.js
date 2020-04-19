@@ -7,7 +7,6 @@ import VideoStream from './VideoStream.js'
 import TextInput from './TextInput.js'
 import Websocket from './Websocket.js'
 
-
 const styles = {
   container: {
     // Empty for now.  
@@ -47,11 +46,13 @@ class App extends React.Component {
 
     this.websocket = React.createRef(); 
     this.popupRef = React.createRef(); 
+    this.timeoutDuration = 3000; 
+    this.buttonTimeout = setTimeout(this.hideButtons.bind(this), this.timeoutDuration); 
   }
 
   render() {
     return (
-      <div style={styles.container}>
+      <div onTouchStart={this.onTouch.bind(this)} style={styles.container}>
         <LiveInfo />
         <Popup 
           ref={this.popupRef}
@@ -88,9 +89,15 @@ class App extends React.Component {
     this.setState({
       showButtons: true
     }); 
+
+    // Enable timeout again. 
+    this.buttonTimeout = setTimeout(this.hideButtons.bind(this), this.timeoutDuration); 
   }
 
   handleClick(type) {
+    // Remove any hiding timeout because the buttons are hiding anyways. 
+    clearTimeout(this.buttonTimeout);
+
     let popupType = (type === 'About') ? PopupType.About : PopupType.Send;
     // Set popup type based on the button click. 
     this.setState({
@@ -100,6 +107,23 @@ class App extends React.Component {
 
     // Show popup. 
     this.popupRef.current.showPopup(); 
+  }
+
+  onTouch() {
+    // Clear previous timeout, set new timeout. 
+    clearTimeout(this.buttonTimeout); 
+    this.buttonTimeout = setTimeout(this.hideButtons.bind(this), this.timeoutDuration); 
+
+    console.log('Touching the screen'); 
+    this.setState({
+      showButtons: true
+    }); 
+  }
+
+  hideButtons() {
+    this.setState({
+      showButtons: false
+    }); 
   }
 }
 

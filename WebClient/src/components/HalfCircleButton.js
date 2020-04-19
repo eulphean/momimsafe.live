@@ -8,6 +8,9 @@ export var CircleType = {
     Bottom : 1
 }; 
 
+const fadeInDuration = '1s';
+const fadeOutDuration = '1s';
+
 const styles={
     container: {
         display: 'flex',
@@ -21,27 +24,30 @@ const styles={
 
     fadeInDown: {
         animationName: Radium.keyframes(fadeInDown, 'fadeInDown'),
-        animationDuration: '2s',
+        animationDuration: fadeInDuration,
         animationFillMode: 'forwards',
         animationTimingFunction: 'ease-in'
     },
 
     fadeOutUp: {
         animationName: Radium.keyframes(fadeOutUp, 'fadeOutUp'),
-        animationDuration: '3s',
+        animationDuration: fadeOutDuration,
         animationFillMode: 'forwards',
         animationTimingFunction: 'ease-out'
     },
 
     fadeInUp: {
         animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
-        animationDuration: '2s'
+        animationDuration: fadeInDuration,
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in'
     },
 
     fadeOutDown: {
         animationName: Radium.keyframes(fadeOutDown, 'fadeOutUp'),
-        animationDuration: '3s',
-        animationFillMode: 'forwards'
+        animationDuration: fadeOutDuration,
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-out'
     },
 
     bottomCircle: {
