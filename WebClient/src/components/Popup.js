@@ -202,6 +202,7 @@ class Popup extends React.Component {
         };
 
         this.textInput = React.createRef(); 
+        this.content = React.createRef(); 
     }
 
     render() {
@@ -294,7 +295,7 @@ class Popup extends React.Component {
         let closeButton = this.getCloseButton(); 
         let iconButton = this.getIconButton();  
         return (
-            <div style={styles.content}>
+            <div ref={this.content} style={styles.content}>
                 { iconButton }
                 <div style={styles.title}>
                     Mom I'm Safe
@@ -311,10 +312,10 @@ class Popup extends React.Component {
         let closeButton = this.getCloseButton();
         let iconButton = this.getIconButton();
         return (
-            <div style={styles.content}>
+            <div ref={this.content} style={styles.content}>
                 { iconButton }
                 <div style={styles.title}>
-                    Send A Message
+                    Send Some Love
                 </div>
                 <div style={styles.input}>
                     <TextInput ref={this.textInput} />
@@ -331,6 +332,9 @@ class Popup extends React.Component {
     }
 
     showPopup() {
+        // Adjust the scroll top.
+        this.content.current.scrollTop = 0; 
+
         this.setState({
             isVisible: true,
             popupState: PopupState.Open
