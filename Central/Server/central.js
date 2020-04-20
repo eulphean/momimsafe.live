@@ -29,7 +29,6 @@ var io = socket(server);
 var appSocket = io.of('/app').on('connection', onWebClient); // Connects all web instance to this. 
 var receiptSocket = io.of('/receipt').on('connection', onReceiptClient); // Connects receipt server to this. 
 var centralClientSocket = io.of('/central').on('connection', onCentralClient); // Connects the web instance of central server to read data. 
-var streamerSocker = io.of('/streamer').on('connection', onStreamerClient); // Connects video streamer client to this. 
 
 // Send an event to all connected clients to keep the Socket Connection Alive. 
 // This event is sent every 1 second to every client connected. 
@@ -40,7 +39,6 @@ function alive() {
     appSocket.emit('time', t); 
     receiptSocket.emit('time', t);
     centralClientSocket.emit('time', t); 
-    streamerSocker.emit('time', t); 
 }
 
 function onWebClient(socket) {
@@ -59,20 +57,6 @@ function onCentralClient(socket) {
     console.log('New Central Web Client connection: ' + socket.id); 
     socket.on('readEntries', onReadEntries); 
     socket.on('disconnect', () => console.log('Central Web client ' + socket.id + ' diconnected'));
-}
-
-function onStreamerClient(socket) {
-    console.log('New Streamer Client connection:  ' + socket.id); 
-    socket.on('image', handleImage)
-    // Handle incoming events from the streamer. 
-    socket.on('disconnect', () => console.log('Streamer client ' + socket.id + ' diconnected'));
-}
-
-function handleImage(data) {
-    // Forward the data to the central client. 
-    centralClientSocket.emit('image', data); 
-    // Forward this over to the main web client. 
-    appSocket.emit('image', data); 
 }
 
 // ------------------ Handle incoming text payload ------------------------ //

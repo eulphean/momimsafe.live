@@ -9,10 +9,10 @@ var herokuURL = "https://blooming-refuge-71111.herokuapp.com/streamer";
 var cv = require('opencv4nodejs');
 
 // camera device. 
-const FPS = 15; 
+const FPS = 2; 
 const videoCap = new cv.VideoCapture(0); 
-videoCap.set(cv.CAP_PROP_FRAME_HEIGHT, 900); 
-videoCap.set(cv.CAP_PROP_FRAME_WIDTH, 900); 
+videoCap.set(cv.CAP_PROP_FRAME_HEIGHT, 800); 
+videoCap.set(cv.CAP_PROP_FRAME_WIDTH, 800); 
 
 var socket = io.connect(herokuURL, {
     reconnection: true, 

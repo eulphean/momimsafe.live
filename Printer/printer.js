@@ -1,6 +1,6 @@
 var io = require('socket.io-client'); 
 var localhostURL = "http://localhost:5000/receipt"
-var herokuURL = "https://blooming-refuge-71111.herokuapp.com//receipt";
+var herokuURL = "https://blooming-refuge-71111.herokuapp.com/receipt";
 
 
 var socket = io.connect(localhostURL, {

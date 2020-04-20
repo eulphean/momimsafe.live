@@ -1,10 +1,10 @@
 {
-  "name": "central-server",
+  "name": "stream-websocket-relay",
   "version": "1.0.0",
   "description": "This is the central nodejs server through which all communication happens",
-  "main": "streamer.js",
+  "main": "websocket-relay.js",
   "scripts": {
-    "start": "node streamer.js"
+    "start": "node websocket-relay.js momimsafe 8081 8082"
   },
   "repository": {
     "type": "git",
@@ -13,7 +13,8 @@
   "author": "Amay Kataria",
   "license": "ISC",
   "dependencies": {
-    "opencv4nodejs": "5.5.0",
-    "socket.io-client": "^2.2.0"
+    "http-server": "0.12.1",
+    "ws": "7.2.3",
+    "fs": "0.0.1-security"
   }
 }
