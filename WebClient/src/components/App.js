@@ -4,6 +4,7 @@ import HalfCircleButton, { CircleType } from './HalfCircleButton.js'
 import LiveInfo from './LiveInfo.js'
 import Popup, {PopupType} from './Popup.js'
 import VideoStream from './VideoStream.js'
+import { withOrientationChange } from 'react-device-detect'
 import TextInput from './TextInput.js'
 import Websocket from './Websocket.js'
 
@@ -133,7 +134,7 @@ class App extends React.Component {
   }
 }
 
-export default Radium(App);
+export default Radium(withOrientationChange(App));
 
 // Bring this in later in the development. But it's good that these are developed. 
 {/* <Websocket 

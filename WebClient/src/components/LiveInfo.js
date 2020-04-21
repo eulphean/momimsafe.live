@@ -10,7 +10,22 @@ const styles={
         justifyContent: 'space-between',
         alignItems: 'flex-start',
         margin: padding.small,
-        zIndex: '15'
+        zIndex: '15',
+
+        '@media (min-width: 600px)': {  
+            // no change.
+            margin: padding.big
+        },
+
+        '@media (min-width: 750px)': {  
+            // no change.
+            margin: padding.veryBig
+        },
+
+        '@media (min-width: 1200px)': {  
+            // no change.
+            margin: padding.huge
+        },
     },
 
     infoContainer: {
@@ -25,7 +40,12 @@ const styles={
         backgroundColor: color.liveRed,
         borderRadius: '5px',
         padding: padding.extraSmall,
-        zIndex: '15'
+        zIndex: '15',
+
+        '@media (min-width: 900px)': {  
+            // no change.
+            padding: padding.verySmall
+        },
     },
 
     textStyle: {
@@ -42,22 +62,21 @@ const styles={
             fontSize: fontSize.big,
         },
 
-        '@media (min-width: 750px)': {  
+        '@media (min-width: 750px) and (orientation: portrait)': {  
             // no change.
+            fontSize: fontSize.veryBig
         },
 
-        '@media (min-width: 900px)': {  
-            // no change.
-            fontSize: fontSize.veryBig,
-            
+        '@media (min-width: 900px) and (orientation: portrait)': {  
+            fontSize: fontSize.huge
         },
 
         '@media (min-width: 1200px)' : {
-            
+            fontSize: fontSize.veryHuge
         },
 
         '@media (min-width: 1400px)' : {
-            fontSize: fontSize.extraBig,
+
         },
 
         '@media (min-width: 1700px)' : {
