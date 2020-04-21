@@ -19,8 +19,39 @@ const styles={
         background:color.pureTeal,
         color: color.sunLight,
         fontFamily: fontFamily.bebas,
+        fontSize: fontSize.big,
         letterSpacing: '1px',
-        zIndex: '30'
+        zIndex: '30',
+
+        '@media (min-width: 450px)': {  
+            // no change.
+        },
+
+        '@media (min-width: 600px)': {  
+            fontSize: fontSize.big
+        },
+
+        '@media (min-width: 750px)': {  
+            // no change.
+        },
+
+        '@media (min-width: 900px)': {  
+            // no change.
+            fontSize: fontSize.veryBig,
+            
+        },
+
+        '@media (min-width: 1200px)' : {
+            
+        },
+
+        '@media (min-width: 1400px)' : {
+            fontSize: fontSize.extraBig,
+        },
+
+        '@media (min-width: 1700px)' : {
+            // no change.
+        }
     },
 
     fadeInDown: {
@@ -61,13 +92,6 @@ const styles={
         height:'45px',
         width:'90px',
         borderRadius: '90px 90px 0 0'
-    },
-
-    textStyle: {
-        fontFamily: fontFamily.bebas,
-        fontSize: fontSize.verySmall,
-        color: color.sunLight,
-        letterSpacing: '1px',
     }
 }
 
