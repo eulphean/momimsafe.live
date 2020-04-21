@@ -36,11 +36,10 @@ const styles={
 
         '@media (min-width: 450px)': {  
             // no change.
-            fontSize: fontSize.verySmall
         },
 
         '@media (min-width: 600px)': {  
-            fontSize: fontSize.big
+            fontSize: fontSize.big,
         },
 
         '@media (min-width: 750px)': {  

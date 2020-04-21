@@ -28,7 +28,7 @@ const styles={
         },
 
         '@media (min-width: 600px)': {  
-            fontSize: fontSize.big
+            fontSize: fontSize.veryBig
         },
 
         '@media (min-width: 750px)': {  
@@ -85,13 +85,80 @@ const styles={
     bottomCircle: {
         height:'45px',
         width:'90px',
-        borderRadius:' 0 0 90px 90px'
+        borderRadius:' 0 0 90px 90px',
+
+        '@media (min-width: 450px)': {  
+            // no change.
+        },
+
+        '@media (min-width: 600px)': {  
+            // With every font size increasing we need to change
+            // the size of the circle as well. 
+            fontSize: fontSize.veryBig,
+            height: '50px',
+            width: '100px',
+            borderRadius: ' 0 0 100px 100px'
+        },
+
+        '@media (min-width: 750px)': {  
+            // no change.
+        },
+
+        '@media (min-width: 900px)': {  
+            // no change.
+            
+        },
+
+        '@media (min-width: 1200px)' : {
+            
+        },
+
+        '@media (min-width: 1400px)' : {
+            
+        },
+
+        '@media (min-width: 1700px)' : {
+            // no change.
+        }
     },
 
     topCircle: {
         height:'45px',
         width:'90px',
-        borderRadius: '90px 90px 0 0'
+        borderRadius: '90px 90px 0 0',
+
+        '@media (min-width: 450px)': {  
+            // no change.
+        },
+
+        '@media (min-width: 600px)': {  
+            fontSize: fontSize.veryBig,
+            height: '50px',
+            width: '100px',
+            borderRadius: ' 100px 100px 0px 0px'
+        },
+
+        '@media (min-width: 750px)': {  
+            // no change.
+        },
+
+        '@media (min-width: 900px)': {  
+            // no change.
+            fontSize: fontSize.veryBig,
+            
+        },
+
+        '@media (min-width: 1200px)' : {
+            
+        },
+
+        '@media (min-width: 1400px)' : {
+            fontSize: fontSize.extraBig,
+        },
+
+        '@media (min-width: 1700px)' : {
+            // no change.
+        }
     }
 }
 
