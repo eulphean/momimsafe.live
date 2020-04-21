@@ -100,21 +100,36 @@ const styles={
             borderRadius: ' 0 0 100px 100px'
         },
 
-        '@media (min-width: 750px)': {  
-            // no change.
+        '@media (min-width: 750px) and (orientation: portrait)': { 
+            fontSize: fontSize.huge, 
+            height: '70px',
+            width: '140px',
+            borderRadius: ' 0px 0px 140px 140px'
         },
 
         '@media (min-width: 900px)': {  
-            // no change.
-            
+            fontSize: fontSize.huge, 
+            height: '70px',
+            width: '140px',
+            borderRadius: ' 0px 0px 140px 140px'
+        },
+
+        '@media (min-width: 900px) and (orentiation: portrait)': {  
+            fontSize: fontSize.extraHuge, 
+            height: '80px',
+            width: '160px',
+            borderRadius: ' 0px 0px 160px 160px'
         },
 
         '@media (min-width: 1200px)' : {
-            
+            fontSize: fontSize.massive, 
+            height: '90px',
+            width: '180px',
+            borderRadius: ' 0px 0px 180px 180px'
         },
 
         '@media (min-width: 1400px)' : {
-            
+
         },
 
         '@media (min-width: 1700px)' : {
@@ -138,22 +153,37 @@ const styles={
             borderRadius: ' 100px 100px 0px 0px'
         },
 
-        '@media (min-width: 750px)': {  
-            // no change.
+        '@media (min-width: 750px) and (orientation: portrait)': {  
+            fontSize: fontSize.huge,
+            height: '70px',
+            width: '140px',
+            borderRadius: ' 140px 140px 0px 0px'
         },
 
         '@media (min-width: 900px)': {  
+            fontSize: fontSize.huge,
+            height: '70px',
+            width: '140px',
+            borderRadius: ' 140px 140px 0px 0px'
+        },
+
+        '@media (min-width: 900px) and (orientation: portrait)': {  
             // no change.
-            fontSize: fontSize.veryBig,
-            
+            fontSize: fontSize.extraHuge,
+            height: '80px',
+            width: '160px',
+            borderRadius: ' 160px 160px 0px 0px'
         },
 
         '@media (min-width: 1200px)' : {
-            
+            // no change.
+            fontSize: fontSize.massive,
+            height: '90px',
+            width: '180px',
+            borderRadius: ' 180px 180px 0px 0px'
         },
 
         '@media (min-width: 1400px)' : {
-            fontSize: fontSize.extraBig,
         },
 
         '@media (min-width: 1700px)' : {
