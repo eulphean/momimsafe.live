@@ -54,6 +54,7 @@ class App extends React.Component {
     return (
       <div onTouchStart={this.onTouch.bind(this)} style={styles.container}>
         <LiveInfo />
+        <VideoStream ref={this.videoStream} />
         <Popup 
           ref={this.popupRef}
           onClose={this.handlePopupClose.bind(this)}
@@ -139,5 +140,3 @@ export default Radium(App);
 ref={this.websocket}
 newImageCbk={this.onStreamImage.bind(this)} 
 /> */}
-{/* <VideoStream imageSrc={this.state.imageSrc}/>
-<TextInput onSubmit={this.emitMessage.bind(this)} /> */}

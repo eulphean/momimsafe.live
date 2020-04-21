@@ -13,7 +13,8 @@ const styles={
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        margin: padding.small
+        margin: padding.small,
+        zIndex: '15'
     },
 
     labelContainer: {
@@ -27,6 +28,10 @@ const styles={
         fontSize: fontSize.verySmall,
         color: color.sunLight,
         letterSpacing: '1px',
+    },
+
+    infoColor: {
+        color: color.liveRed
     },
 
     smallMargin: {
@@ -51,19 +56,20 @@ class LiveInfo extends React.Component {
     }
 
     render() {
+        let infoTextStyle=[styles.textStyle, styles.infoColor];
         return (
             <div style={styles.container}>
                 <div style={styles.contentContainer}>
                     <div style={[styles.labelContainer, styles.textStyle]}>
                         {label}
                     </div>
-                    <div style={[styles.smallMargin, styles.textStyle]}>
+                    <div style={[styles.smallMargin, infoTextStyle]}>
                         {location}
                     </div>
-                    <div style={styles.textStyle}>
+                    <div style={infoTextStyle}>
                         {this.state.date}
                     </div>
-                    <div style={styles.textStyle}>
+                    <div style={infoTextStyle}>
                         {this.state.time}
                     </div>
                 </div>

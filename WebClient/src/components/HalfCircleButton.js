@@ -19,7 +19,8 @@ const styles={
         background:color.pureTeal,
         color: color.sunLight,
         fontFamily: fontFamily.bebas,
-        letterSpacing: '1px'
+        letterSpacing: '1px',
+        zIndex: '30'
     },
 
     fadeInDown: {
