@@ -225,39 +225,39 @@ const styles={
         backgroundColor: color.sunLight,
         right: fontSize.extraSmall,
         marginRight: '-' + fontSize.verySmall,
+        height: fontSize.verySmall,
+        width: fontSize.verySmall,
+        fill: color.pureTeal,
 
         '@media (min-width: 600px)': {  
             marginRight: '-' + fontSize.big
         },
 
+
+        '@media (min-width: 750px)': {  
+            height: fontSize.big, 
+            width: fontSize.big
+        },
+
         '@media (min-width: 900px)': {  
+            height: fontSize.veryBig, 
+            width: fontSize.veryBig,
             marginRight: '-' + fontSize.veryHuge
         },
 
         '@media (min-width: 1200px)': {  
             marginRight: '-' + fontSize.extraMassive
-        }
-    },
-
-    icon: {
-        height: fontSize.verySmall,
-        width: fontSize.verySmall,
-        fill: color.pureTeal,
-
-        '@media (min-width: 750px)': {  
-            height: fontSize.small, 
-            width: fontSize.small
-        },
-
-        '@media (min-width: 1200px)' : {
-            height: fontSize.veryBig, 
-            width: fontSize.veryBig
         },
 
         '@media (min-width: 1400px)' : {
-            height: fontSize.huge, 
-            width: fontSize.huge
+            height: fontSize.extraBig, 
+            width: fontSize.extraBig,
         }
+    },
+
+    icon: { 
+        width: '100%',
+        height: '100%'
     },
 
     buttonContainer: {
