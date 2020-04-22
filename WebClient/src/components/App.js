@@ -10,7 +10,6 @@ import Websocket from './Websocket.js'
 
 const styles = {
   container: {
-    // Empty for now.  
   },
 
   topButton: {
@@ -47,7 +46,7 @@ class App extends React.Component {
 
     this.websocket = React.createRef(); 
     this.popupRef = React.createRef(); 
-    this.timeoutDuration = 3000; 
+    this.timeoutDuration = 5000; 
     //this.buttonTimeout = setTimeout(this.hideButtons.bind(this), this.timeoutDuration); 
   }
 

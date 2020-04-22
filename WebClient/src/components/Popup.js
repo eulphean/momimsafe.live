@@ -37,9 +37,9 @@ const customFadeOut = Radium.keyframes({
     }
 }, 'fadesOut'); 
 
-const fadeInDuration = '0.8s'; 
-const slideInDuration = '0.8s'; 
-const fadeOutDuration = '0.8s';
+const fadeInDuration = '0.5s'; 
+const slideInDuration = '1.5s'; 
+const fadeOutDuration = '1.5s';
 
 const styles={
     container: {
@@ -59,37 +59,44 @@ const styles={
     fadeIn: {
         animationName: customFadeIn,
         animationDuration: fadeInDuration,
-        animationFillMode: 'forwards'
+        animationFillMode: 'forwards',
+        animationTimingFunction:'ease-in'
     },
 
+    
     fadeOut: {
         animationName: customFadeOut,
         animationDuration: fadeOutDuration,
-        animationFillMode: 'forwards'
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-out'
     },
 
     fadeOutUp: {
         animationName: Radium.keyframes(fadeOutUp, 'fadeOutUp'),
         animationDuration: fadeOutDuration,
-        animationFillMode: 'forwards'
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-out'
     },
 
     fadeOutDown: {
         animationName: Radium.keyframes(fadeOutDown, 'fadeOutDown'),
         animationDuration: fadeOutDuration,
-        animationFillMode: 'forwards'
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-out'
     },
 
     fadeInDown: {
         animationName: Radium.keyframes(fadeInDown, 'fadeInDown'),
         animationDuration: slideInDuration,
-        animationFillMode: 'forwards'
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in'
     },
 
     fadeInUp: {
         animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
         animationDuration: slideInDuration,
-        animationFillMode: 'forwards'
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in'
     },
 
     showOverlay: {
@@ -208,9 +215,16 @@ const styles={
         backgroundColor: color.sunLight,
         right: fontSize.extraSmall,
         marginRight: '-' + fontSize.verySmall,
+        height: fontSize.verySmall,
+        width: fontSize.verySmall,
 
         '@media (min-width: 600px)': {  
             marginRight: '-' + fontSize.big
+        },
+
+        '@media (min-width: 750px)': {  
+            height: fontSize.small, 
+            width: fontSize.small
         },
 
         '@media (min-width: 900px)': {  
@@ -218,29 +232,21 @@ const styles={
         },
 
         '@media (min-width: 1200px)': {  
-            marginRight: '-' + fontSize.extraMassive
-        }
-    },
-
-    icon: {
-        height: fontSize.verySmall,
-        width: fontSize.verySmall,
-        fill: color.pureTeal,
-
-        '@media (min-width: 750px)': {  
-            height: fontSize.small, 
-            width: fontSize.small
-        },
-
-        '@media (min-width: 1200px)' : {
             height: fontSize.veryBig, 
-            width: fontSize.veryBig
-        },
+            width: fontSize.veryBig,
+            marginRight: '-' + fontSize.extraMassive
+        }, 
 
         '@media (min-width: 1400px)' : {
             height: fontSize.huge, 
             width: fontSize.huge
         }
+    },
+
+    icon: {
+        height: '100%',
+        width: '100%',
+        fill: color.pureTeal
     },
 
     buttonContainer: {
@@ -270,7 +276,7 @@ const styles={
     }
 }
 
-const aboutBody='This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty Thi'; 
+const aboutBody='This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty Thi he safety, secuirty This is project he safety, secuirty This is project he safety, secuirty This is project he safety, secuirty This is project he safety, secuirty This is project he safety, secuirty This is project cuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is project '; 
 
 const sendBody='This project is send send sensd. This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.';
 
