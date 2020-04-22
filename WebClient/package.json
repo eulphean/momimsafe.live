@@ -2,7 +2,7 @@
   "name": "momimsafe.live",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://momimsafe.live",
+  "homepage": "momimsafe.live",
   "dependencies": {
     "@cycjimmy/jsmpeg-player": "^5.0.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
@@ -28,7 +28,7 @@
     "test": "react-scripts test --no-cache",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -b deploy -d build"
   },
   "browserslist": {
     "production": [
