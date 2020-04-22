@@ -110,7 +110,10 @@ const styles={
         bottom: '0px',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        height: '100%',
+        width: '100%',
+        display: 'flex'
     },
 
     showContent: {
@@ -121,7 +124,6 @@ const styles={
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        zIndex: '2',
         borderRadius: fontSize.extraSmall,
         background: color.pureTeal,
         color: color.sunLight,
@@ -180,7 +182,7 @@ const styles={
     },
 
     body: {
-        marginTop: padding.small,
+        marginTop: padding.extraSmall,
         justifyContent: 'center',
         fontFamily: fontFamily.opensanslight,
         fontSize: fontSize.small
@@ -207,16 +209,10 @@ const styles={
 
     iconContainer: {
         display: 'flex',
-        alignItems: 'center',
         justifyContent: 'center',
-        alignSelf: 'flex-end',
-        borderRadius: fontSize.small,
-        padding: padding.extraSmall,
-        backgroundColor: color.sunLight,
-        right: fontSize.extraSmall,
-        marginRight: '-' + fontSize.verySmall,
         height: fontSize.verySmall,
         width: fontSize.verySmall,
+        fill: color.pureTeal,
 
         '@media (min-width: 600px)': {  
             marginRight: '-' + fontSize.big
@@ -243,13 +239,23 @@ const styles={
         }
     },
 
+    iconBox: {
+        alignSelf: 'flex-end',
+        padding: padding.extraSmall,
+        backgroundColor: color.sunLight,
+        marginRight: '-' + fontSize.verySmall,
+        borderRadius: fontSize.verySmall
+    },
+
     icon: {
         height: '100%',
-        width: '100%',
-        fill: color.pureTeal
+        width: '100%'
     },
 
     buttonContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         marginTop: padding.big, 
         marginBottom: padding.extraBig,
         background: color.sunLight, 
@@ -264,9 +270,10 @@ const styles={
     input: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
+        alignItems: 'center',
         width: '100%',
-        marginTop: padding.extraSmall
+        marginTop: padding.verySmall,
+        marginBottom: padding.verySmall
     },
 
     sendButtonContainer: {
@@ -370,16 +377,18 @@ class Popup extends React.Component {
     getCloseButton() {
         let buttonContainerStyle=[styles.buttonContainer, styles.mediaQueryOnText];
         return (
-            <button style={buttonContainerStyle} onClick={this.hidePopup.bind(this)}>
+            <div style={buttonContainerStyle} onClick={this.hidePopup.bind(this)}>
                 CLOSE
-            </button>
+            </div>
         ); 
     }
 
     getIconButton() {
         return(
-            <div style={styles.iconContainer} onClick={this.hidePopup.bind(this)}>
-                <Exit style={styles.icon} />
+            <div style={styles.iconBox} onClick={this.hidePopup.bind(this)}>
+                <div style={styles.iconContainer}>
+                    <Exit style={styles.icon} />
+                </div>
             </div>
         ); 
     }
@@ -390,7 +399,7 @@ class Popup extends React.Component {
         let bodyStyle = [styles.body, styles.mediaQueryOnText];
         return (
             <div ref={this.content} style={styles.content}>
-                { iconButton }
+                {/* { iconButton } */}
                 <div style={styles.title}>
                     Mom I'm Safe
                 </div>
@@ -409,7 +418,7 @@ class Popup extends React.Component {
         let bodyStyle = [styles.body, styles.mediaQueryOnText];
         return (
             <div ref={this.content} style={styles.content}>
-                { iconButton }
+                {/* { iconButton } */}
                 <div style={styles.title}>
                     Send Some Love
                 </div>

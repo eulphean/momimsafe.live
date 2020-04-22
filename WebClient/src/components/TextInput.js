@@ -7,6 +7,7 @@ const styles={
         display: 'flex',
         width: '100%',
         height: '50px',
+
         '@media (min-width: 750px) and (orientation: portrait)': {  
             height: '60px'
         },
