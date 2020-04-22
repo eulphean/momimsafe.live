@@ -37,29 +37,25 @@ const styles={
     fadeInDown: {
         animationName: Radium.keyframes(fadeInDown, 'fadeInDown'),
         animationDuration: fadeInDuration,
-        animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-in'
+        animationFillMode: 'forwards'
     },
 
     fadeOutUp: {
         animationName: Radium.keyframes(fadeOutUp, 'fadeOutUp'),
         animationDuration: fadeOutDuration,
-        animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-in'
+        animationFillMode: 'forwards'
     },
 
     fadeInUp: {
         animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
         animationDuration: fadeInDuration,
-        animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-in'
+        animationFillMode: 'forwards'
     },
 
     fadeOutDown: {
         animationName: Radium.keyframes(fadeOutDown, 'fadeOutUp'),
         animationDuration: fadeOutDuration,
-        animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-in'
+        animationFillMode: 'forwards'
     },
 
     bottomCircle: {

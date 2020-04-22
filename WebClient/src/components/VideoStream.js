@@ -20,8 +20,7 @@ const styles={
     flipInX: {
         animationName: Radium.keyframes(fadeInLeft, 'flipInX'),
         animationDuration: fadeInDuration,
-        animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-in'
+        animationFillMode: 'forwards'
     },
     
     canvas: {
