@@ -21,7 +21,7 @@ const styles = {
     top: '-5px',
     left: '0px',
     right: '0px',
-    opacity: '90%'
+    opacity: '0.9'
   },
 
   bottomButton: {
@@ -32,7 +32,7 @@ const styles = {
     left: '0px',
     right: '0px',
     bottom: '-5px',
-    opacity: '90%'
+    opacity: '0.2'
   }
 };
 
