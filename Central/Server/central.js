@@ -91,10 +91,6 @@ function storePayloadToDb(payload) {
 }
 
 // THIS FUNCTION WILL NEED TO BE REWRITTEN. 
-// DON'T NEED FILTERS. JUST GET ALL THE RECEIPTS FOR NOW.
-// MAIN CLIENT WILL ALSO CALL THIS TO QUERY FOR LAST 50 messages or something. 
-// I DONT KNOW HOW MANY LAST MESSAGES WILL I SHOW. 
-var externalBufferRows; 
 function onReadEntries(data) {
     console.log('Request to Read entries from ' + data.from + ' to ' + data.to);
 

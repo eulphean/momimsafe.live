@@ -34,13 +34,11 @@ function onEntries() {
 function getData(s) {
   var startDate = document.getElementById('start').value; 
   var endDate = document.getElementById('end').value; 
-  var externalBufferRows = document.getElementById('externalbuffer').value
 
   var data = { 
     from: startDate, 
     to: endDate,
     state: s, // Determines what kind of callback to fire from the store. 
-    erows: externalBufferRows
   }; 
 
   console.log('Browser payload: ' + data.erows); 
@@ -82,10 +80,7 @@ function showEntries(entries) {
     timeCell.innerHTML = entries[i].time; 
     
     var keyCell = row.insertCell(2); 
-    keyCell.innerHTML =  entries[i].key; 
-    
-    var binaryCell = row.insertCell(3); 
-    binaryCell.innerHTML = entries[i].encrypted; 
+    keyCell.innerHTML =  entries[i].message; 
   }
 }
 
