@@ -32,7 +32,7 @@ const styles = {
     left: '0px',
     right: '0px',
     bottom: '-5px',
-    opacity: '0.2'
+    opacity: '0.9'
   }
 };
 
@@ -48,7 +48,7 @@ class App extends React.Component {
     this.websocket = React.createRef(); 
     this.popupRef = React.createRef(); 
     this.timeoutDuration = 3000; 
-    this.buttonTimeout = setTimeout(this.hideButtons.bind(this), this.timeoutDuration); 
+    //this.buttonTimeout = setTimeout(this.hideButtons.bind(this), this.timeoutDuration); 
   }
 
   render() {

@@ -117,6 +117,10 @@ const styles={
         }
     },
 
+    hide: {
+        visibility: 'hidden'
+    },
+
     topCircle: {
         height:'45px',
         width:'90px',
@@ -190,7 +194,7 @@ class HalfCircleButton extends React.Component {
             } else if (this.props.show === false) {
                 aniStyle = styles.fadeOutDown;
             } else {
-                aniStyle = {};
+                aniStyle = styles.hide;
             }
         } else {
             circleStyle = styles.bottomCircle; 
@@ -199,7 +203,7 @@ class HalfCircleButton extends React.Component {
             } else if (this.props.show === false) {
                 aniStyle = styles.fadeOutUp; 
             } else {
-                aniStyle={};
+                aniStyle=styles.hide;
             }
         }
 
