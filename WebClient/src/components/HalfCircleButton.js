@@ -8,8 +8,8 @@ export var CircleType = {
     Bottom : 1
 }; 
 
-const fadeInDuration = '1s';
-const fadeOutDuration = '1s';
+const fadeInDuration = '0.8s';
+const fadeOutDuration = '0.8s';
 
 const styles={
     container: {

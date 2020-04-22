@@ -37,9 +37,9 @@ const customFadeOut = Radium.keyframes({
     }
 }, 'fadesOut'); 
 
-const fadeInDuration = '0.5s'; 
-const slideInDuration = '1s'; 
-const fadeOutDuration = '1s';
+const fadeInDuration = '0.8s'; 
+const slideInDuration = '0.8s'; 
+const fadeOutDuration = '0.8s';
 
 const styles={
     container: {
