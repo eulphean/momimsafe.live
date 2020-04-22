@@ -4,7 +4,7 @@ import JSMpeg from '@cycjimmy/jsmpeg-player'
 import { color } from './CommonStyles';
 import { fadeInLeft } from 'react-animations'
 
-const url="ws://radiant-oasis-49153.herokuapp.com/";
+const url="wss://radiant-oasis-49153.herokuapp.com/";
 const fadeInDuration = '3s'
 
 const styles={

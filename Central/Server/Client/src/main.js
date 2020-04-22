@@ -20,7 +20,7 @@ function setup(){
   socket.once('connect', onConnected);
   
   var canvas = document.getElementById('video-canvas');
-	var url = 'ws://' + 'radiant-oasis-49153.herokuapp.com/'; 
+	var url = 'wss://' + 'radiant-oasis-49153.herokuapp.com/'; 
 	var player = new JSMpeg.Player(url, {canvas: canvas});
 }
 
