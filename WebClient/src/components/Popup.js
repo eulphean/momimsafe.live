@@ -256,12 +256,15 @@ const styles={
         fontFamily: fontFamily.bebas,
         fontSize: fontSize.small,
         color: color.pureTeal,
-        letterSpacing: '1px'
+        letterSpacing: '1px',
+        padding: padding.small,
+        borderRadius: fontSize.verySmall
     },
 
     input: {
         display: 'flex',
         flexDirection: 'row',
+        justifyContent: 'center',
         width: '100%',
         marginTop: padding.extraSmall
     },
@@ -271,8 +274,10 @@ const styles={
         fontFamily: fontFamily.bebas,
         fontSize: fontSize.small,
         color: color.pureTeal,
-        letterSpacing: '1.5px',
-        marginLeft: padding.extraSmall
+        letterSpacing: '1px',
+        marginLeft: padding.extraSmall,
+        padding: padding.small,
+        borderRadius: fontSize.verySmall
     }
 }
 
