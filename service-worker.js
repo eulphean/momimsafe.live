@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/momimsafe.live/precache-manifest.7c4ed1b11b493bdaae9cf511d7d96baa.js"
+  "/momimsafe.live/precache-manifest.428ccacb6d9ee63f80fda6335b7ece85.js"
 );
 
 self.addEventListener('message', (event) => {
