@@ -361,7 +361,7 @@ class Popup extends React.Component {
         }
 
         return (
-            <div onTouchStart={this.handleOnTouch.bind(this)} style={styles.container}>
+            <div onClick={this.handleOnTouch.bind(this)} onTouchStart={this.handleOnTouch.bind(this)} style={styles.container}>
                 <div style={overlayStyle}></div>
                 <div onAnimationEnd={this.contentAnimationEnd.bind(this)} style={contentContainerStyle}>
                     {content}
@@ -457,6 +457,7 @@ class Popup extends React.Component {
     }
 
     hidePopup(event) {
+        event.preventDefault(); 
         event.stopPropagation(); 
 
         this.setState({
@@ -471,9 +472,11 @@ class Popup extends React.Component {
         // Don't let this propogate to the main screen
         // where touch events mean something. 
         event.stopPropagation();
+        event.preventDefault(); 
     }
 
     handleSendMessage(event) {
+        event.preventDefault(); 
         event.stopPropagation(); 
         // Clear the content first
         this.textInput.current.clearContent(); 

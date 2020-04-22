@@ -22,6 +22,7 @@ const styles={
         fontSize: fontSize.big,
         letterSpacing: '1px',
         zIndex: '30',
+        cursor: 'pointer',
 
         '@media (min-width: 600px)': {  
             fontSize: fontSize.veryBig
@@ -29,8 +30,7 @@ const styles={
 
         '@media (min-width: 900px)': {  
             // no change.
-            fontSize: fontSize.veryBig,
-            
+            fontSize: fontSize.veryBig
         }
     },
 
