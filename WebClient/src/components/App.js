@@ -42,7 +42,7 @@ class App extends React.Component {
     this.state={
       imageSrc: '',
       popupType: PopupType.About,
-      showButtons: true
+      showButtons: ''
     };
 
     this.websocket = React.createRef(); 

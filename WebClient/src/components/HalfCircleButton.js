@@ -23,34 +23,14 @@ const styles={
         letterSpacing: '1px',
         zIndex: '30',
 
-        '@media (min-width: 450px)': {  
-            // no change.
-        },
-
         '@media (min-width: 600px)': {  
             fontSize: fontSize.veryBig
-        },
-
-        '@media (min-width: 750px)': {  
-            // no change.
         },
 
         '@media (min-width: 900px)': {  
             // no change.
             fontSize: fontSize.veryBig,
             
-        },
-
-        '@media (min-width: 1200px)' : {
-            
-        },
-
-        '@media (min-width: 1400px)' : {
-            fontSize: fontSize.extraBig,
-        },
-
-        '@media (min-width: 1700px)' : {
-            // no change.
         }
     },
 
@@ -65,21 +45,21 @@ const styles={
         animationName: Radium.keyframes(fadeOutUp, 'fadeOutUp'),
         animationDuration: fadeOutDuration,
         animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-out'
+        animationTimingFunction: 'ease-in-out'
     },
 
     fadeInUp: {
         animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
         animationDuration: fadeInDuration,
         animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-in'
+        animationTimingFunction: 'ease-in-out'
     },
 
     fadeOutDown: {
         animationName: Radium.keyframes(fadeOutDown, 'fadeOutUp'),
         animationDuration: fadeOutDuration,
         animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-out'
+        animationTimingFunction: 'ease-in-out'
     },
 
     bottomCircle: {
@@ -205,10 +185,22 @@ class HalfCircleButton extends React.Component {
         let circleStyle, aniStyle; 
         if (this.props.shape === CircleType.Top) {
             circleStyle = styles.topCircle; 
-            aniStyle = this.props.show ? styles.fadeInUp : styles.fadeOutDown; 
+            if (this.props.show) {
+                aniStyle = styles.fadeInUp; 
+            } else if (this.props.show === false) {
+                aniStyle = styles.fadeOutDown;
+            } else {
+                aniStyle = {};
+            }
         } else {
             circleStyle = styles.bottomCircle; 
-            aniStyle = this.props.show ? styles.fadeInDown : styles.fadeOutUp; 
+            if (this.props.show) {
+                aniStyle = styles.fadeInDown;
+            } else if (this.props.show === false) {
+                aniStyle = styles.fadeOutUp; 
+            } else {
+                aniStyle={};
+            }
         }
 
         let buttonStyle = [styles.container, circleStyle, aniStyle, this.props.style]; 

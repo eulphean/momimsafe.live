@@ -2,6 +2,9 @@ import React from 'react'
 import Radium from 'radium'
 import moment from 'moment-timezone'
 import { color, padding, fontFamily, fontSize } from './CommonStyles.js'
+import { fadeIn } from 'react-animations'
+
+const fadeInDuration = '3s';
 
 const styles={
     container: {
@@ -26,6 +29,13 @@ const styles={
             // no change.
             margin: padding.huge
         },
+    },
+
+    fadeIn: {
+        animationName: Radium.keyframes(fadeIn, 'fadeIn'),
+        animationDuration: fadeInDuration,
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in-out'
     },
 
     infoContainer: {
@@ -113,17 +123,17 @@ class LiveInfo extends React.Component {
         let infoTextStyle=[styles.textStyle, styles.infoColor];
         return (
             <div style={styles.container}>
-                <div style={[styles.labelContainer, styles.textStyle]}>
+                <div style={[styles.labelContainer, styles.textStyle, styles.fadeIn]}>
                     {label}
                 </div>
                 <div style={styles.infoContainer}>
-                    <div style={[styles.smallMargin, infoTextStyle]}>
+                    <div style={[styles.smallMargin, infoTextStyle, styles.fadeIn]}>
                         {location}
                     </div>
-                    <div style={infoTextStyle}>
+                    <div style={[infoTextStyle, styles.fadeIn]}>
                         {this.state.date}
                     </div>
-                    <div style={infoTextStyle}>
+                    <div style={[infoTextStyle, styles.fadeIn]}>
                         {this.state.time}
                     </div>
                 </div>

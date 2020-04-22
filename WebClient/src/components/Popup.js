@@ -67,35 +67,35 @@ const styles={
         animationName: customFadeOut,
         animationDuration: fadeOutDuration,
         animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-out'
+        animationTimingFunction: 'ease-in-out'
     },
 
     fadeOutUp: {
         animationName: Radium.keyframes(fadeOutUp, 'fadeOutUp'),
         animationDuration: fadeOutDuration,
         animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-out'
+        animationTimingFunction: 'ease-in-out'
     },
 
     fadeOutDown: {
         animationName: Radium.keyframes(fadeOutDown, 'fadeOutDown'),
         animationDuration: fadeOutDuration,
         animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-out'
+        animationTimingFunction: 'ease-in-out'
     },
 
     fadeInDown: {
         animationName: Radium.keyframes(fadeInDown, 'fadeInDown'),
         animationDuration: slideInDuration,
         animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-in'
+        animationTimingFunction: 'ease-in-out'
     },
 
     fadeInUp: {
         animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
         animationDuration: slideInDuration,
         animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-in'
+        animationTimingFunction: 'ease-in-out'
     },
 
     showOverlay: {

@@ -1,10 +1,11 @@
 import React from 'react'
 import Radium from 'radium'
 import JSMpeg from '@cycjimmy/jsmpeg-player'
-import donotenter from './donotenter.jpg'
 import { color } from './CommonStyles';
+import { fadeInLeft } from 'react-animations'
 
 const url="ws://radiant-oasis-49153.herokuapp.com/";
+const fadeInDuration = '3s'
 
 const styles={
     container: {
@@ -15,6 +16,13 @@ const styles={
         right: '0px',
         zIndex: '10',
     },
+
+    flipInX: {
+        animationName: Radium.keyframes(fadeInLeft, 'flipInX'),
+        animationDuration: fadeInDuration,
+        animationFillMode: 'forwards',
+        animationTimingFunction: 'ease-in-out'
+    },
     
     canvas: {
         height: '100vh',
@@ -22,8 +30,9 @@ const styles={
     },
 
     overlay: {
-        background: color.deepSky,
-        opacity: '25%',
+        background: 'rgb(252,240,225)',
+        background: 'linear-gradient(356deg, rgba(252,240,225,1) 0%, rgba(5,90,133,1) 100%)',
+        opacity: '20%',
         position: 'absolute',
         top: '0px',
         bottom: '0px',
@@ -53,8 +62,9 @@ class VideoStream extends React.Component {
     }
 
     render() {
+        let containerStyle = [styles.container, styles.flipInX];
         return (    
-            <div style={styles.container} ref={this.container}>
+            <div style={containerStyle} ref={this.container}>
                 <div style={styles.overlay}>
                 </div>
                 <canvas style={styles.canvas} ref={this.canvas}></canvas>
