@@ -121,21 +121,12 @@ const styles={
     },
 
     content: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
         borderRadius: fontSize.extraSmall,
-        background: color.pureTeal,
-        color: color.sunLight,
-        paddingLeft: padding.small, // Bind this to media query
-        paddingRight: padding.small, // Bind this to media query 
         overflow: 'scroll',
         maxWidth: 'calc(100% - 50px)', // Bind this to media query
         maxHeight: 'calc(100% - 100px)', // Bind this to media query
-
+        
         '@media (min-width: 600px)': {      
-            paddingLeft: padding.big, 
-            paddingRight: padding.big,
             maxWidth: 'calc(100% - 100px)', // Bind this to media query
             maxHeight: 'calc(100% - 100px)', // Bind this to media query
         },
@@ -145,6 +136,25 @@ const styles={
             maxHeight: 'calc(100% - 100px)', // Bind this to media query
         },
 
+        '@media (min-width: 1200px)' : {
+            maxWidth: 'calc(100% - 300px)', // Bind this to media query
+            maxHeight: 'calc(100% - 100px)', // Bind this to media query
+        }
+    },
+
+    stretchContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        background: color.pureTeal,
+        color: color.sunLight,
+        paddingLeft: padding.small, // Bind this to media query
+        paddingRight: padding.small, // Bind this to media query,
+        '@media (min-width: 600px)': {      
+            paddingLeft: padding.big, 
+            paddingRight: padding.big
+        },
+
         '@media (min-width: 900px)': {  
             paddingLeft: padding.extraBig, 
             paddingRight: padding.extraBig
@@ -152,10 +162,8 @@ const styles={
 
         '@media (min-width: 1200px)' : {
             paddingLeft: padding.huge, 
-            paddingRight: padding.huge,
-            maxWidth: 'calc(100% - 300px)', // Bind this to media query
-            maxHeight: 'calc(100% - 100px)', // Bind this to media query
-        }
+            paddingRight: padding.huge
+        } 
     },
 
     title: {
@@ -209,18 +217,17 @@ const styles={
 
     iconContainer: {
         display: 'flex',
+        alignItems: 'center',
         justifyContent: 'center',
-        height: fontSize.verySmall,
-        width: fontSize.verySmall,
-        fill: color.pureTeal,
+        alignSelf: 'flex-end',
+        borderRadius: fontSize.small,
+        padding: padding.extraSmall,
+        backgroundColor: color.sunLight,
+        right: fontSize.extraSmall,
+        marginRight: '-' + fontSize.verySmall,
 
         '@media (min-width: 600px)': {  
             marginRight: '-' + fontSize.big
-        },
-
-        '@media (min-width: 750px)': {  
-            height: fontSize.small, 
-            width: fontSize.small
         },
 
         '@media (min-width: 900px)': {  
@@ -228,28 +235,29 @@ const styles={
         },
 
         '@media (min-width: 1200px)': {  
-            height: fontSize.veryBig, 
-            width: fontSize.veryBig,
             marginRight: '-' + fontSize.extraMassive
-        }, 
+        }
+    },
+
+    icon: {
+        height: fontSize.verySmall,
+        width: fontSize.verySmall,
+        fill: color.pureTeal,
+
+        '@media (min-width: 750px)': {  
+            height: fontSize.small, 
+            width: fontSize.small
+        },
+
+        '@media (min-width: 1200px)' : {
+            height: fontSize.veryBig, 
+            width: fontSize.veryBig
+        },
 
         '@media (min-width: 1400px)' : {
             height: fontSize.huge, 
             width: fontSize.huge
         }
-    },
-
-    iconBox: {
-        alignSelf: 'flex-end',
-        padding: padding.extraSmall,
-        backgroundColor: color.sunLight,
-        marginRight: '-' + fontSize.verySmall,
-        borderRadius: fontSize.verySmall
-    },
-
-    icon: {
-        height: '100%',
-        width: '100%'
     },
 
     buttonContainer: {
@@ -385,10 +393,8 @@ class Popup extends React.Component {
 
     getIconButton() {
         return(
-            <div style={styles.iconBox} onClick={this.hidePopup.bind(this)}>
-                <div style={styles.iconContainer}>
-                    <Exit style={styles.icon} />
-                </div>
+            <div onClick={this.hidePopup.bind(this)} style={styles.iconContainer}>
+                <Exit style={styles.icon} />
             </div>
         ); 
     }
@@ -399,14 +405,16 @@ class Popup extends React.Component {
         let bodyStyle = [styles.body, styles.mediaQueryOnText];
         return (
             <div ref={this.content} style={styles.content}>
-                {/* { iconButton } */}
-                <div style={styles.title}>
-                    Mom I'm Safe
+                <div style={styles.stretchContainer}>
+                    { iconButton }
+                    <div style={styles.title}>
+                        Mom I'm Safe
+                    </div>
+                    <div style={bodyStyle}>
+                        {aboutBody}
+                    </div>
+                    { closeButton }
                 </div>
-                <div style={bodyStyle}>
-                    {aboutBody}
-                </div>
-                { closeButton }
             </div>
         )
     }
@@ -418,20 +426,22 @@ class Popup extends React.Component {
         let bodyStyle = [styles.body, styles.mediaQueryOnText];
         return (
             <div ref={this.content} style={styles.content}>
-                {/* { iconButton } */}
-                <div style={styles.title}>
-                    Send Some Love
+                <div style={styles.stretchContainer}>
+                    { iconButton }
+                    <div style={styles.title}>
+                        Send Some Love
+                    </div>
+                    <div style={styles.input}>
+                        <TextInput ref={this.textInput} />
+                        <button onClick={this.handleSendMessage.bind(this)} style={sendButtonContainerStyle}>
+                            SEND
+                        </button>
+                    </div>
+                    <div style={bodyStyle}>
+                        {sendBody}
+                    </div>
+                    {closeButton}
                 </div>
-                <div style={styles.input}>
-                    <TextInput ref={this.textInput} />
-                    <button onClick={this.handleSendMessage.bind(this)} style={sendButtonContainerStyle}>
-                        SEND
-                    </button>
-                </div>
-                <div style={bodyStyle}>
-                    {sendBody}
-                </div>
-                {closeButton}
             </div>
         );
     }
