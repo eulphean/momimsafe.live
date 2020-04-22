@@ -29,7 +29,7 @@ const styles={
 
         '@media (min-width: 1200px)': {  
             // no change.
-            margin: padding.huge
+            margin: padding.extraBig
         },
     },
 
@@ -76,23 +76,11 @@ const styles={
 
         '@media (min-width: 750px) and (orientation: portrait)': {  
             // no change.
-            fontSize: fontSize.veryBig
+            fontSize: fontSize.big
         },
 
         '@media (min-width: 900px) and (orientation: portrait)': {  
-            fontSize: fontSize.huge
-        },
-
-        '@media (min-width: 1200px)' : {
-            fontSize: fontSize.veryHuge
-        },
-
-        '@media (min-width: 1400px)' : {
-
-        },
-
-        '@media (min-width: 1700px)' : {
-            // no change.
+            fontSize: fontSize.veryBig
         }
     },
 

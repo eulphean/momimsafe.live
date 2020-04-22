@@ -99,7 +99,9 @@ class App extends React.Component {
     this.buttonTimeout = setTimeout(this.hideButtons.bind(this), this.timeoutDuration); 
   }
 
-  handleClick(type) {
+  handleClick(event, type) {
+    event.stopPropagation();
+    event.preventDefault();
     // Remove any hiding timeout because the buttons are hiding anyways. 
     clearTimeout(this.buttonTimeout);
 
