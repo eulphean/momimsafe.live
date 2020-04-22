@@ -270,7 +270,7 @@ const styles={
     }
 }
 
-const aboutBody='This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is ab This is project is abThis is project is abThis is project is ab is project is abThis is project is ab is project is abThis is project is ab is project is abThis is project is ab is project is abThis is project is abis project is abThis is project is ab2 ject is abThis is project is ab2 ject is abThis is project is ab2 ject is abThis  abThis  abThis abThis abThis abThis abThis This abThis abThisThis abThis abThisThis abThis abThisThis abThis abThisThis abThis abThisThis abThis abThisThis abThis abThisThis abThis abThis'; 
+const aboutBody='This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty Thi'; 
 
 const sendBody='This project is send send sensd. This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.';
 
