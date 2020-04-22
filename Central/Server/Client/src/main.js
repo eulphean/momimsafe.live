@@ -17,7 +17,11 @@ function setup(){
     reconnectionAttempts: Infinity 
   }); 
 
-  socket.once('connect', onConnected); 
+  socket.once('connect', onConnected);
+  
+  var canvas = document.getElementById('video-canvas');
+	var url = 'ws://' + 'radiant-oasis-49153.herokuapp.com/'; 
+	var player = new JSMpeg.Player(url, {canvas: canvas});
 }
 
 function logTime(time) {
@@ -51,14 +55,8 @@ function onConnected() {
 
   // Subsribe to other events. 
   socket.on('showEntries', showEntries); 
-  socket.on('image', updateStream); 
   socket.on('time', logTime); 
   socket.on('disconnect', () => console.log('Socket Server Disconnected')); 
-}
-
-function updateStream(data) {
-  var img = document.getElementById('frame'); 
-  img.src = 'data:image/jpeg;base64,' + data; 
 }
 
 function showEntries(entries) {

@@ -65,6 +65,10 @@
         word-wrap: break-word
       }
 
+      .video {
+        margin-bottom: 20px
+      }
+
       h2 {
         color: darkslategrey;
       }
@@ -72,13 +76,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script type="text/javascript" src="Library/p5.min.js"></script>
     <script type="text/javascript" src="Library/p5.dom.min.js"></script>
+    <script type="text/javascript" src="Library/jsmpeg.min.js"></script>
     <script type="text/javascript"src="src/main.js"></script>
   </head>
   <body>
     <div class=container>
         <div class='input'>
             <h2>mumimsafe.live</h2>
-            <img id="frame" />
+            <div class="video">
+              <canvas id="video-canvas"></canvas>
+            </div>
             <div class="form">
                 <div class='item'><label class='datelabel' for=start>Start Date</label><input type="date" id="start" /></div>
                 <div class='item'><label class='datelabel' for=end>End Date</label><input type="date" id="end"/></div>
