@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8c85b9ce36bb30a437a13f08e9bf59ef",
+    "revision": "3daf1185a7a2a89790b070e6e0c9e5cb",
     "url": "/momimsafe.live/index.html"
   },
   {
-    "revision": "bd39bf07acb3443598e2",
+    "revision": "3bc9de3a8281039676ba",
     "url": "/momimsafe.live/static/css/main.d69e3f92.chunk.css"
   },
   {
-    "revision": "f008a6a7552bf1a841cc",
-    "url": "/momimsafe.live/static/js/2.7c2b1cbf.chunk.js"
+    "revision": "9c57af71e1405141edc4",
+    "url": "/momimsafe.live/static/js/2.a5442fdd.chunk.js"
   },
   {
     "revision": "fb4cf92c4d66c0387aa3469e4893fc9a",
-    "url": "/momimsafe.live/static/js/2.7c2b1cbf.chunk.js.LICENSE.txt"
+    "url": "/momimsafe.live/static/js/2.a5442fdd.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "bd39bf07acb3443598e2",
-    "url": "/momimsafe.live/static/js/main.d887ebee.chunk.js"
+    "revision": "3bc9de3a8281039676ba",
+    "url": "/momimsafe.live/static/js/main.a49ee737.chunk.js"
   },
   {
-    "revision": "30a3cd92c18065eb7bff",
-    "url": "/momimsafe.live/static/js/runtime-main.86f5035e.js"
+    "revision": "413971d62fc28c6ab795",
+    "url": "/momimsafe.live/static/js/runtime-main.2edffe86.js"
   },
   {
     "revision": "0c6cd72756c6ef3bcaf0337ad7036b56",
