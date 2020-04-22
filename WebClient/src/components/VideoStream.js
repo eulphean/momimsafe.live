@@ -32,12 +32,12 @@ const styles={
     overlay: {
         background: 'rgb(252,240,225)',
         background: 'linear-gradient(356deg, rgba(252,240,225,1) 0%, rgba(5,90,133,1) 100%)',
-        opacity: '20%',
+        opacity: '0.2',
         position: 'absolute',
         top: '0px',
         bottom: '0px',
         left: '0px',
-        right: '0px',
+        right: '0px'
     }
 }; 
 

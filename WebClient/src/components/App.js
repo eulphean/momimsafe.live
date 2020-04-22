@@ -54,6 +54,9 @@ class App extends React.Component {
   render() {
     return (
       <div onTouchStart={this.onTouch.bind(this)} style={styles.container}>
+        <Websocket 
+          ref={this.websocket}
+        /> 
         <LiveInfo />
         <VideoStream ref={this.videoStream} />
         <Popup 
@@ -129,15 +132,8 @@ class App extends React.Component {
   }
 
   handleSendMessage(content) {
-    // TODO: Bind the Websocket 
-    // TO SEND THE MESSAGE TO THE PRINTER
+    this.websocket.current.sendMessage(content); 
   }
 }
 
 export default Radium(withOrientationChange(App));
-
-// Bring this in later in the development. But it's good that these are developed. 
-{/* <Websocket 
-ref={this.websocket}
-newImageCbk={this.onStreamImage.bind(this)} 
-/> */}

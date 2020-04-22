@@ -13,7 +13,7 @@ class Websocket extends React.Component {
 
         };
 
-        this.socket = io(localhostURL, { 
+        this.socket = io(herokuURL, { 
             reconnection: true, 
             reconnectionDelay: 500, 
             reconnectionAttempts: Infinity
@@ -32,7 +32,6 @@ class Websocket extends React.Component {
 
         // Subscribe to events. 
         this.socket.on('time', this.logTime.bind(this)); 
-        this.socket.on('image', this.props.newImageCbk.bind(this)); 
         this.socket.on('disconnect', this.disconnect.bind(this));
     }
 

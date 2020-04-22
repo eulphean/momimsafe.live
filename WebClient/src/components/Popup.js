@@ -21,19 +21,19 @@ var PopupState = {
 // Custom Fade in animation. 
 const customFadeIn = Radium.keyframes({
     from: {
-        opacity: '0%'
+        opacity: '0'
     },
     to: {
-        opacity: '50%'
+        opacity: '0.5'
     }
 }, 'fadesIn'); 
 
 const customFadeOut = Radium.keyframes({
     from: {
-        opacity: '50%'
+        opacity: '0.5'
     },
     to: {
-        opacity: '0%'
+        opacity: '0'
     }
 }, 'fadesOut'); 
 

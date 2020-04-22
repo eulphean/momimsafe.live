@@ -6,6 +6,8 @@ import { fadeIn } from 'react-animations'
 
 const fadeInDuration = '3s';
 
+const index = '40'; 
+
 const styles={
     container: {
         display: 'flex',
@@ -13,7 +15,7 @@ const styles={
         justifyContent: 'space-between',
         alignItems: 'flex-start',
         margin: padding.small,
-        zIndex: '15',
+        zIndex: index,
 
         '@media (min-width: 600px)': {  
             // no change.
@@ -41,7 +43,7 @@ const styles={
     infoContainer: {
         display: 'flex',
         flexDirection: 'column',
-        zIndex: '15',
+        zIndex: index,
         justifyContent: 'center',
         alignItems: 'flex-end'
     },
@@ -50,7 +52,7 @@ const styles={
         backgroundColor: color.liveRed,
         borderRadius: '5px',
         padding: padding.extraSmall,
-        zIndex: '15',
+        zIndex: index,
 
         '@media (min-width: 900px)': {  
             // no change.
