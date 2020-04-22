@@ -52,7 +52,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div onTouchStart={this.onTouch.bind(this)} style={styles.container}>
+      <div onClick={this.onTouch.bind(this)} onTouchStart={this.onTouch.bind(this)} style={styles.container}>
         <Websocket 
           ref={this.websocket}
         /> 
