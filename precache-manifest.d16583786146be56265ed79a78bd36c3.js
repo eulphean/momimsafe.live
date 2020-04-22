@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "298c2fceac8321a7ce0c3d20ce3f9ac9",
+    "revision": "f6cb07f25b85813f2da394eef3d7e0f8",
     "url": "/momimsafe.live/index.html"
   },
   {
-    "revision": "b94484dcfa94bfa778d9",
+    "revision": "dd2f3f9488495971e0d9",
     "url": "/momimsafe.live/static/css/main.8f4544e6.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/momimsafe.live/static/js/2.dcbf225d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b94484dcfa94bfa778d9",
-    "url": "/momimsafe.live/static/js/main.de05fd49.chunk.js"
+    "revision": "dd2f3f9488495971e0d9",
+    "url": "/momimsafe.live/static/js/main.f75da617.chunk.js"
   },
   {
     "revision": "413971d62fc28c6ab795",
