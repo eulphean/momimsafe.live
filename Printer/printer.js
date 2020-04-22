@@ -47,10 +47,13 @@ function onPayload (payload) {
         device.open(function() {
             // Set basic styles. 
             generateHeader(date, time); 
+            printer.spacing(); 
             printer.newLine(); 
-            generateMiddle(message);
+            generateMessage(message);
+            // printer.newLine();
+            // End routine. 
             printer.cut(0, 5);
-            printer.flush();  
+            printer.flush(); 
         });
     } catch (e) {
         console.log('Failure while printing: Check if we have run out of paper.');
@@ -62,23 +65,19 @@ function generateHeader(date, time) {
     // Defualt spacing for header section 
     printer.spacing(); 
     printer.lineSpace(); 
-    printer.setReverseColors(true); 
     printer.align('ct'); 
 
     // ------------- Title -------------- // 
 
     // Font style. 
-    printer.font('b');
-    printer.style('b');
     printer.size(2, 2); 
-
+    printer.setReverseColors(true); 
     printer.text(' MUMIMSAFE '); 
     printer.size(1, 1); 
     printer.setReverseColors(false);
     printer.newLine(); 
     printer.setReverseColors(true); 
     printer.text(' www.mumimsafe.live '); 
-    printer.newLine(); 
 
     // ------------- Date, Time ---------- // 
     
@@ -88,22 +87,17 @@ function generateHeader(date, time) {
     printer.style('b'); 
     printer.size(1, 1); 
 
+    printer.text('CHICAGO, USA'); 
     var t = date + ' ' + time; 
     printer.text(t);
 }
 
-function generateMiddle(message) {
-    // ------------- Title -------------- // 
-    printer.setReverseColors(true); 
-    printer.text(' MESSAGE '); 
-    printer.newLine();
-
+function generateMessage(message) {
     // ------------- Message -------------- // 
-    printer.spacing(0); 
-    printer.lineSpace(0);
+    printer.setReverseColors(false); 
+    // printer.spacing(0); 
+    // printer.lineSpace(0);
     printer.align('ct'); 
-    printer.size(1, 0.5);
-    printer.text(message); 
-    printer.newLine();
-    printer.setReverseColors(false);
+    printer.size(2, 2);
+    printer.text(message);
 }

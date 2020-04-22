@@ -240,8 +240,8 @@ const styles={
         },
 
         '@media (min-width: 900px)': {  
-            height: fontSize.veryBig, 
-            width: fontSize.veryBig,
+            // height: fontSize.veryBig, 
+            // width: fontSize.veryBig,
             marginRight: '-' + fontSize.veryHuge
         },
 
@@ -250,8 +250,8 @@ const styles={
         },
 
         '@media (min-width: 1400px)' : {
-            height: fontSize.extraBig, 
-            width: fontSize.extraBig,
+            // height: fontSize.extraBig, 
+            // width: fontSize.extraBig,
         }
     },
 
