@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/momimsafe.live/static/css/main.d69e3f92.chunk.css",
+    "main.js": "/momimsafe.live/static/js/main.d887ebee.chunk.js",
+    "main.js.map": "/momimsafe.live/static/js/main.d887ebee.chunk.js.map",
+    "runtime-main.js": "/momimsafe.live/static/js/runtime-main.86f5035e.js",
+    "runtime-main.js.map": "/momimsafe.live/static/js/runtime-main.86f5035e.js.map",
+    "static/js/2.7c2b1cbf.chunk.js": "/momimsafe.live/static/js/2.7c2b1cbf.chunk.js",
+    "static/js/2.7c2b1cbf.chunk.js.map": "/momimsafe.live/static/js/2.7c2b1cbf.chunk.js.map",
+    "index.html": "/momimsafe.live/index.html",
+    "precache-manifest.32d0ec5f5dafbdf7a3753460ea02e1bf.js": "/momimsafe.live/precache-manifest.32d0ec5f5dafbdf7a3753460ea02e1bf.js",
+    "service-worker.js": "/momimsafe.live/service-worker.js",
+    "static/css/main.d69e3f92.chunk.css.map": "/momimsafe.live/static/css/main.d69e3f92.chunk.css.map",
+    "static/js/2.7c2b1cbf.chunk.js.LICENSE.txt": "/momimsafe.live/static/js/2.7c2b1cbf.chunk.js.LICENSE.txt",
+    "static/media/stylesheet.css": "/momimsafe.live/static/media/opensans-regular-webfont.d407a585.woff2",
+    "static/media/close.18445307.svg": "/momimsafe.live/static/media/close.18445307.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.86f5035e.js",
+    "static/js/2.7c2b1cbf.chunk.js",
+    "static/css/main.d69e3f92.chunk.css",
+    "static/js/main.d887ebee.chunk.js"
+  ]
+}
