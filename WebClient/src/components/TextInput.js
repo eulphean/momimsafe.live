@@ -6,17 +6,41 @@ const styles={
     container: {
         display: 'flex',
         width: '100%',
-        height: '50px'
+        height: '50px',
+        '@media (min-width: 750px) and (orientation: portrait)': {  
+            height: '60px'
+        },
+
+        '@media (min-width: 1200px)' : {
+           height: '70px'
+        },
+
+        '@media (min-width: 1400px)' : {
+           height: '80px'
+        }
     },
 
-    textarea: {
+    textArea: {
         width: '100%',
         fontSize: fontSize.small,
         padding: padding.small,
         fontFamily: fontFamily.bebas,
         color: color.pureTeal,
-        letterSpacing: '1.5px'
-    }
+        letterSpacing: '1px',
+
+        '@media (min-width: 750px) and (orientation: portrait)': {  
+            fontSize: fontSize.big
+        },
+
+        '@media (min-width: 1200px)' : {
+            // no change.
+            fontSize: fontSize.veryBig
+        },
+
+        '@media (min-width: 1400px)' : {
+            fontSize: fontSize.extraBig
+        }
+    },
 }
 
 class TextInput extends React.Component {
@@ -31,7 +55,7 @@ class TextInput extends React.Component {
         return (
             <div style={styles.container}>
                 <textarea 
-                    style={styles.textarea} 
+                    style={styles.textArea} 
                     outline='none' 
                     maxLength='500' 
                     value={this.state.value}

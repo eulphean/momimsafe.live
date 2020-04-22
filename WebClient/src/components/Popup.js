@@ -124,17 +124,58 @@ const styles={
         borderRadius: fontSize.extraSmall,
         background: color.pureTeal,
         color: color.sunLight,
+        paddingLeft: padding.small, // Bind this to media query
+        paddingRight: padding.small, // Bind this to media query 
+        overflow: 'scroll',
         maxWidth: 'calc(100% - 50px)', // Bind this to media query
         maxHeight: 'calc(100% - 100px)', // Bind this to media query
-        paddingLeft: padding.small,
-        paddingRight: padding.small,
-        overflow: 'scroll'
+
+        '@media (min-width: 600px)': {      
+            paddingLeft: padding.big, 
+            paddingRight: padding.big,
+            maxWidth: 'calc(100% - 100px)', // Bind this to media query
+            maxHeight: 'calc(100% - 100px)', // Bind this to media query
+        },
+
+        '@media (min-width: 750px)': {  
+            maxWidth: 'calc(100% - 150px)', // Bind this to media query
+            maxHeight: 'calc(100% - 100px)', // Bind this to media query
+        },
+
+        '@media (min-width: 900px)': {  
+            paddingLeft: padding.extraBig, 
+            paddingRight: padding.extraBig
+        },
+
+        '@media (min-width: 1200px)' : {
+            paddingLeft: padding.huge, 
+            paddingRight: padding.huge,
+            maxWidth: 'calc(100% - 300px)', // Bind this to media query
+            maxHeight: 'calc(100% - 100px)', // Bind this to media query
+        }
     },
 
     title: {
-        marginTop: padding.extraBig,
+        marginTop: padding.big,
         fontFamily: fontFamily.bilbo,
-        fontSize: fontSize.extraHuge
+        fontSize: fontSize.massive,
+       
+        '@media (min-width: 750px)': {  
+            fontSize: fontSize.veryMassive
+        },
+
+        '@media (min-width: 900px)': {  
+            fontSize: fontSize.extraMassive
+        },
+
+        '@media (min-width: 1200px)' : {
+            // no change.
+            fontSize: fontSize.enormous
+        },
+
+        '@media (min-width: 1400px)' : {
+            fontSize: fontSize.veryEnormous
+        },
     },
 
     body: {
@@ -144,8 +185,26 @@ const styles={
         fontSize: fontSize.small
     },
 
+    mediaQueryOnText: {
+        '@media (min-width: 750px) and (orientation: portrait)': {  
+            fontSize: fontSize.big
+        },
+
+        '@media (min-width: 900px)': {  
+            fontSize: fontSize.big
+        },
+
+        '@media (min-width: 1200px)' : {
+            // no change.
+            fontSize: fontSize.veryBig
+        },
+
+        '@media (min-width: 1400px)' : {
+            fontSize: fontSize.extraBig
+        }
+    },
+
     iconContainer: {
-        position: 'absolute',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -153,13 +212,41 @@ const styles={
         borderRadius: fontSize.small,
         padding: padding.extraSmall,
         backgroundColor: color.sunLight,
-        right: fontSize.extraSmall
+        right: fontSize.extraSmall,
+        marginRight: '-' + fontSize.verySmall,
+
+        '@media (min-width: 600px)': {  
+            marginRight: '-' + fontSize.big
+        },
+
+        '@media (min-width: 900px)': {  
+            marginRight: '-' + fontSize.veryHuge
+        },
+
+        '@media (min-width: 1200px)': {  
+            marginRight: '-' + fontSize.extraMassive
+        }
     },
 
     icon: {
         height: fontSize.verySmall,
         width: fontSize.verySmall,
-        fill: color.pureTeal
+        fill: color.pureTeal,
+
+        '@media (min-width: 750px)': {  
+            height: fontSize.small, 
+            width: fontSize.small
+        },
+
+        '@media (min-width: 1200px)' : {
+            height: fontSize.veryBig, 
+            width: fontSize.veryBig
+        },
+
+        '@media (min-width: 1400px)' : {
+            height: fontSize.huge, 
+            width: fontSize.huge
+        }
     },
 
     buttonContainer: {
@@ -176,7 +263,7 @@ const styles={
         display: 'flex',
         flexDirection: 'row',
         width: '100%',
-        marginTop: padding.small
+        marginTop: padding.extraSmall
     },
 
     sendButtonContainer: {
@@ -276,8 +363,9 @@ class Popup extends React.Component {
     }
 
     getCloseButton() {
+        let buttonContainerStyle=[styles.buttonContainer, styles.mediaQueryOnText];
         return (
-            <button style={styles.buttonContainer} onClick={this.hidePopup.bind(this)}>
+            <button style={buttonContainerStyle} onClick={this.hidePopup.bind(this)}>
                 CLOSE
             </button>
         ); 
@@ -294,13 +382,14 @@ class Popup extends React.Component {
     getAboutContent() {
         let closeButton = this.getCloseButton(); 
         let iconButton = this.getIconButton();  
+        let bodyStyle = [styles.body, styles.mediaQueryOnText];
         return (
             <div ref={this.content} style={styles.content}>
                 { iconButton }
                 <div style={styles.title}>
                     Mom I'm Safe
                 </div>
-                <div style={styles.body}>
+                <div style={bodyStyle}>
                     {aboutBody}
                 </div>
                 { closeButton }
@@ -311,6 +400,8 @@ class Popup extends React.Component {
     getSendContent() {
         let closeButton = this.getCloseButton();
         let iconButton = this.getIconButton();
+        let sendButtonContainerStyle=[styles.sendButtonContainer, styles.mediaQueryOnText];
+        let bodyStyle = [styles.body, styles.mediaQueryOnText];
         return (
             <div ref={this.content} style={styles.content}>
                 { iconButton }
@@ -319,11 +410,11 @@ class Popup extends React.Component {
                 </div>
                 <div style={styles.input}>
                     <TextInput ref={this.textInput} />
-                    <button onClick={this.handleSendMessage.bind(this)} style={styles.sendButtonContainer}>
+                    <button onClick={this.handleSendMessage.bind(this)} style={sendButtonContainerStyle}>
                         SEND
                     </button>
                 </div>
-                <div style={styles.body}>
+                <div style={bodyStyle}>
                     {sendBody}
                 </div>
                 {closeButton}
