@@ -21,7 +21,7 @@ const styles={
         animationName: Radium.keyframes(fadeInLeft, 'flipInX'),
         animationDuration: fadeInDuration,
         animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-in-out'
+        animationTimingFunction: 'ease-in'
     },
     
     canvas: {

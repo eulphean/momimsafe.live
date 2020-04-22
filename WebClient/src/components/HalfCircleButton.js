@@ -45,21 +45,21 @@ const styles={
         animationName: Radium.keyframes(fadeOutUp, 'fadeOutUp'),
         animationDuration: fadeOutDuration,
         animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-in-out'
+        animationTimingFunction: 'ease-in'
     },
 
     fadeInUp: {
         animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
         animationDuration: fadeInDuration,
         animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-in-out'
+        animationTimingFunction: 'ease-in'
     },
 
     fadeOutDown: {
         animationName: Radium.keyframes(fadeOutDown, 'fadeOutUp'),
         animationDuration: fadeOutDuration,
         animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-in-out'
+        animationTimingFunction: 'ease-in'
     },
 
     bottomCircle: {

@@ -37,7 +37,7 @@ const styles={
         animationName: Radium.keyframes(fadeIn, 'fadeIn'),
         animationDuration: fadeInDuration,
         animationFillMode: 'forwards',
-        animationTimingFunction: 'ease-in-out'
+        animationTimingFunction: 'ease-in'
     },
 
     infoContainer: {
