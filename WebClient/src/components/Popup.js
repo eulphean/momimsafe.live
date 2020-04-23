@@ -4,6 +4,7 @@ import TextInput from './TextInput.js'
 import { color, padding, fontFamily, fontSize } from './CommonStyles.js'
 import { ReactComponent as Exit } from './close.svg'
 import { fadeOutUp, fadeOutDown, fadeInDown, fadeInUp } from 'react-animations'
+import receipt from './receipt.jpg'
 
 // Receives a prop to define the type of popup.  
 export var PopupType = {
@@ -313,12 +314,36 @@ const styles={
 
     disabled: {
         color: color.disabled
+    },
+
+    imageContainer: {
+        marginTop: padding.small,
+        width: '100%'
+    },
+
+    footer: {
+        display: 'flex',
+        alignItems: 'center',
+        color: color.link,
+        alignSelf: 'center',
+        fontFamily: fontFamily.bebas, 
+        fontSize: fontSize.verySmall,
+        marginBottom: padding.small,
+        letterSpacing: '1.5px',
+
+        '@media (min-width: 750px)': {  
+            fontSize: fontSize.small,
+        },
+
+        '@media (min-width: 1200px)' : {
+            fontSize: fontSize.big
+        }
     }
 }
 
-const aboutBody='This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty This is project is about the safety, secuirty Thi he safety, secuirty This is project he safety, secuirty This is project he safety, secuirty This is project he safety, secuirty This is project he safety, secuirty This is project he safety, secuirty This is project cuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is projectcuirty This is project he safety, secuirty This is project '; 
+const aboutBody="This project is currently a live video feed of my home studio, where I spend most of my day during the COVID-19 lockdown in Chicago, Illinois. Since Chicago went into lockdown on March 20th, I have not stepped into my studio at Mana Contemporary, where I'm currently a new-media resident. Meanwhile, I revamped my home studio, which has become my primary space for thinking, making, and elaborating on ideas. This work was developed in response to the consistent inquiries of well-being from my close friends, family members, and especially my mom in India, who ceaselessly desires us to video chat everyday during this global pandemic. As Chicago will open up from this lockdown, I will slowly become more comfortable to go outside. However, momimsafe.live will continue to be the one-stop place for my dear ones around the world to check on me and make sure I'm safe, secure, and engaged in making.";
 
-const sendBody='This project is send send sensd. This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.This project is send send sensd.';
+const sendBody='There may be times when you see me working in my studio, or you may not. But to get my attention, you can leave me a message by typing in the textbox above and hitting the send button. Your message will be printed by a receipt printer in the studio right next to my desk. I’ll be keeping an eye on these messages that you leave for me. Be nice and send some love.';
 
 class Popup extends React.Component {
     constructor(props) {
@@ -421,6 +446,7 @@ class Popup extends React.Component {
     }
 
     getAboutContent() {
+        let footer = this.getFooter(); 
         let closeButton = this.getCloseButton(); 
         let iconButton = this.getIconButton();  
         let bodyStyle = [styles.body, styles.mediaQueryOnText];
@@ -435,12 +461,14 @@ class Popup extends React.Component {
                         {aboutBody}
                     </div>
                     { closeButton }
+                    { footer }
                 </div>
             </div>
         )
     }
 
     getSendContent() {
+        let footer = this.getFooter();
         let closeButton = this.getCloseButton();
         let iconButton = this.getIconButton();
         let sendButtonContainerStyle=[styles.mediaQueryOnText, styles.sendButtonContainer];
@@ -461,11 +489,26 @@ class Popup extends React.Component {
                     </div>
                     <div style={bodyStyle}>
                         {sendBody}
+                        {/* <img style={styles.imageContainer} src={receipt} /> */}
                     </div>
                     {closeButton}
+                    {footer}
                 </div>
             </div>
         );
+    }
+
+    getFooter() {
+        const website = 'https://amaykataria.com'
+        return (
+            <a 
+                style={styles.footer} 
+                target='_blank' 
+                rel="noopener noreferrer" 
+                href={website}>
+                © Amay Kataria 2020
+            </a>
+        )
     }
 
     showPopup() {

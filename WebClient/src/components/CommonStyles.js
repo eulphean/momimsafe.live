@@ -3,7 +3,8 @@ const color = {
     liveRed: '#D0011B',
     sunLight: '#FCF0E1',
     deepSky: '#02293C',
-    disabled: '#7E8A90'
+    disabled: '#7E8A90',
+    link: '#F7C98C'
 };
 
 const fontSize = {
