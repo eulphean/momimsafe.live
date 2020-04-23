@@ -471,6 +471,11 @@ class Popup extends React.Component {
     showPopup() {
         // Adjust the scroll top.
         this.content.current.scrollTop = 0; 
+        if (this.props.type === PopupType.About) {
+            this.setState({
+                disabled: true
+            }); 
+        }
 
         this.setState({
             isVisible: true,

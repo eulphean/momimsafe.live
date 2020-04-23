@@ -10,12 +10,13 @@ import Websocket from './Websocket.js'
 
 const styles = {
   container: {
+    position: 'relative'
   },
 
   topButton: {
     display: 'flex',
     alignItems: 'center',
-    position: 'absolute',
+    position: 'fixed',
     margin: 'auto',
     top: '-5px',
     left: '0px',
@@ -26,7 +27,7 @@ const styles = {
   bottomButton: {
     display: 'flex',
     alignItems: 'center',
-    position: 'absolute',
+    position: 'fixed',
     margin: 'auto',
     left: '0px',
     right: '0px',
