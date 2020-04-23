@@ -103,6 +103,10 @@ const styles={
         zIndex: '998'
     },
 
+    showContent: {
+        zIndex: '999'
+    },
+
     contentContainer: {
         position: 'fixed',
         zIndex: '-999',
@@ -116,13 +120,9 @@ const styles={
         display: 'flex'
     },
 
-    showContent: {
-        zIndex: '999'
-    },
-
     content: {
         borderRadius: fontSize.extraSmall,
-        overflow: 'scroll',
+        overflow: 'auto',
         maxWidth: 'calc(100% - 50px)', // Bind this to media query
         maxHeight: 'calc(100% - 100px)', // Bind this to media query
         
@@ -170,22 +170,29 @@ const styles={
         marginTop: padding.big,
         fontFamily: fontFamily.bilbo,
         fontSize: fontSize.massive,
+
+        '@media (min-width: 600px)': {  
+            fontSize: fontSize.extraMassive
+        },
        
         '@media (min-width: 750px)': {  
-            fontSize: fontSize.veryMassive
+            fontSize: fontSize.enormous
+        },
+
+        '@media (min-width: 750px) and (orientation: portrait)': {  
+            fontSize: fontSize.extraEnormous
         },
 
         '@media (min-width: 900px)': {  
-            fontSize: fontSize.extraMassive
+            fontSize: fontSize.extraEnormous
         },
 
         '@media (min-width: 1200px)' : {
             // no change.
-            fontSize: fontSize.enormous
+            fontSize: fontSize.extraInsane
         },
 
         '@media (min-width: 1400px)' : {
-            fontSize: fontSize.veryEnormous
         },
     },
 
@@ -207,11 +214,11 @@ const styles={
 
         '@media (min-width: 1200px)' : {
             // no change.
-            fontSize: fontSize.veryBig
+            fontSize: fontSize.big
         },
 
         '@media (min-width: 1400px)' : {
-            fontSize: fontSize.extraBig
+            fontSize: fontSize.veryBig
         }
     },
 
@@ -234,14 +241,15 @@ const styles={
         },
 
 
-        '@media (min-width: 750px)': {  
-            height: fontSize.big, 
-            width: fontSize.big
+        '@media (min-width: 750px) and (orientation:portrait)': {  
+            
         },
 
         '@media (min-width: 900px)': {  
             // height: fontSize.veryBig, 
             // width: fontSize.veryBig,
+            height: fontSize.big, 
+            width: fontSize.big,
             marginRight: '-' + fontSize.veryHuge
         },
 
@@ -292,7 +300,19 @@ const styles={
         letterSpacing: '1px',
         marginLeft: padding.extraSmall,
         padding: padding.small,
-        borderRadius: fontSize.verySmall
+        borderRadius: fontSize.verySmall,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'stretch',
+
+        '@media (min-width: 900px)' : {
+            width: '100px'
+        }
+    },
+
+    disabled: {
+        color: color.disabled
     }
 }
 
@@ -305,7 +325,8 @@ class Popup extends React.Component {
         super(props);
         this.state={
             isVisible : false,
-            popupState: PopupState.None
+            popupState: PopupState.None,
+            disabled: true
         };
 
         this.textInput = React.createRef(); 
@@ -422,7 +443,8 @@ class Popup extends React.Component {
     getSendContent() {
         let closeButton = this.getCloseButton();
         let iconButton = this.getIconButton();
-        let sendButtonContainerStyle=[styles.sendButtonContainer, styles.mediaQueryOnText];
+        let sendButtonContainerStyle=[styles.mediaQueryOnText, styles.sendButtonContainer];
+        sendButtonContainerStyle = this.state.disabled ? [sendButtonContainerStyle, styles.disabled] : sendButtonContainerStyle; 
         let bodyStyle = [styles.body, styles.mediaQueryOnText];
         return (
             <div ref={this.content} style={styles.content}>
@@ -432,8 +454,8 @@ class Popup extends React.Component {
                         Send Some Love
                     </div>
                     <div style={styles.input}>
-                        <TextInput ref={this.textInput} />
-                        <button onClick={this.handleSendMessage.bind(this)} style={sendButtonContainerStyle}>
+                        <TextInput onChange={this.onTextInputChange.bind(this)} ref={this.textInput} />
+                        <button disabled={this.state.disabled} onClick={this.handleSendMessage.bind(this)} style={sendButtonContainerStyle}>
                             SEND
                         </button>
                     </div>
@@ -457,7 +479,6 @@ class Popup extends React.Component {
     }
 
     hidePopup(event) {
-        event.preventDefault(); 
         event.stopPropagation(); 
 
         this.setState({
@@ -472,11 +493,9 @@ class Popup extends React.Component {
         // Don't let this propogate to the main screen
         // where touch events mean something. 
         event.stopPropagation();
-        event.preventDefault(); 
     }
 
     handleSendMessage(event) {
-        event.preventDefault(); 
         event.stopPropagation(); 
         // Clear the content first
         this.textInput.current.clearContent(); 
@@ -485,6 +504,18 @@ class Popup extends React.Component {
 
         // Also, hide the popup.
         this.hidePopup(event); 
+    }
+
+    onTextInputChange(newContent) {
+        if (newContent.length !== 0) {
+            this.setState({
+                disabled: false
+            });
+        } else {
+            this.setState({
+                disabled: true
+            });
+        }
     }
  }
 

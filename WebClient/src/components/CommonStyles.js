@@ -2,7 +2,8 @@ const color = {
     pureTeal: '#055A85',
     liveRed: '#D0011B',
     sunLight: '#FCF0E1',
-    deepSky: '#02293C'
+    deepSky: '#02293C',
+    disabled: '#7E8A90'
 };
 
 const fontSize = {
@@ -20,7 +21,13 @@ const fontSize = {
     extraMassive: '52px',
     enormous: '56px',
     veryEnormous: '60px',
-    extraEnormous: '64px'
+    extraEnormous: '64px',
+    insane: '68px',
+    veryInstane: '72px',
+    extraInsane: '76px',
+    gaia: '80px',
+    veryGaia: '84px',
+    extraGaia: '88px'
 };
 
 const padding = {

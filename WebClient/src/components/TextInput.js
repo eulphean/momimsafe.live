@@ -50,12 +50,19 @@ class TextInput extends React.Component {
         this.state={
             value: ''
         };
+
+        this.textArea = React.createRef();
+    }
+
+    componentDidMount() {
+        this.textArea.current.focus();
     }
 
     render() {
         return (
             <div style={styles.container}>
                 <textarea 
+                    ref={this.textArea}
                     style={styles.textArea} 
                     outline='none' 
                     maxLength='500' 
@@ -70,6 +77,8 @@ class TextInput extends React.Component {
         this.setState({
             value: event.target.value
         }); 
+
+        this.props.onChange(event.target.value); 
     }
 
     clearContent() {
