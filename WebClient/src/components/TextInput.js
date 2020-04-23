@@ -55,7 +55,7 @@ class TextInput extends React.Component {
     }
 
     componentDidMount() {
-        this.textArea.current.focus();
+        
     }
 
     render() {
