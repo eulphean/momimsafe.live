@@ -2,7 +2,7 @@
   "name": "momimsafe.live",
   "version": "0.1.0",
   "private": false,
-  "homepage": "momimsafe.live",
+  "homepage": "https://momimsafe.live",
   "dependencies": {
     "@cycjimmy/jsmpeg-player": "^5.0.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
