@@ -52,7 +52,8 @@ function onPayload (payload) {
             generateMessage(message);
             // printer.newLine();
             // End routine. 
-            printer.cut(0, 5);
+            //printer.cut(0, 5);
+            printer.feed(1);
             printer.flush(); 
         });
     } catch (e) {
