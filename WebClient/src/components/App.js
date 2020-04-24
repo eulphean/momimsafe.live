@@ -42,13 +42,13 @@ class App extends React.Component {
     this.state={
       imageSrc: '',
       popupType: PopupType.About,
-      showButtons: ''
+      showButtons: true
     };
 
     this.websocket = React.createRef(); 
     this.popupRef = React.createRef(); 
-    this.timeoutDuration = 3000; 
-    //this.buttonTimeout = setTimeout(this.hideButtons.bind(this), this.timeoutDuration); 
+    this.timeoutDuration = 5000; 
+    this.buttonTimeout = setTimeout(this.hideButtons.bind(this), this.timeoutDuration); 
   }
 
   render() {
