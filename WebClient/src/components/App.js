@@ -13,25 +13,28 @@ const styles = {
     position: 'relative'
   },
 
+  buttonWrapper: {
+    position: 'fixed',
+    top: '0px',
+    bottom: '0px',
+    left: '0px',
+    right: '0px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: '30'
+  },
+
   topButton: {
     display: 'flex',
     alignItems: 'center',
-    position: 'fixed',
-    margin: 'auto',
-    top: '-5px',
-    left: '0px',
-    right: '0px',
     opacity: '0.9'
   },
 
   bottomButton: {
     display: 'flex',
     alignItems: 'center',
-    position: 'fixed',
-    margin: 'auto',
-    left: '0px',
-    right: '0px',
-    bottom: '-5px',
     opacity: '0.9'
   }
 };
@@ -58,24 +61,26 @@ class App extends React.Component {
           ref={this.websocket}
         /> 
         <LiveInfo />
+        <div style={styles.buttonWrapper}>
+          <HalfCircleButton 
+            key={'About'}
+            show={this.state.showButtons}
+            onClick={this.handleClick.bind(this)}
+            shape={CircleType.Top} 
+            style={styles.bottomButton}>About</HalfCircleButton>
+          <HalfCircleButton 
+            key={'Send'}
+            show={this.state.showButtons}
+            onClick={this.handleClick.bind(this)} 
+            shape={CircleType.Bottom} 
+            style={styles.topButton}>Send</HalfCircleButton>
+        </div>
         <VideoStream ref={this.videoStream} />
         <Popup 
           ref={this.popupRef}
           onClose={this.handlePopupClose.bind(this)}
           onSend={this.handleSendMessage.bind(this)}
           type={this.state.popupType} />
-        <HalfCircleButton 
-          key={'About'}
-          show={this.state.showButtons}
-          onClick={this.handleClick.bind(this)} 
-          shape={CircleType.Bottom} 
-          style={styles.topButton}>About</HalfCircleButton>
-        <HalfCircleButton 
-          key={'Send'}
-          show={this.state.showButtons}
-          onClick={this.handleClick.bind(this)}
-          shape={CircleType.Top} 
-          style={styles.bottomButton}>Send</HalfCircleButton>
       </div>
     );
   }
