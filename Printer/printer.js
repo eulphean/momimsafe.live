@@ -46,6 +46,7 @@ function onPayload (payload) {
         // Printer commands to generate a receipt. 
         device.open(function() {
             // Set basic styles. 
+            printer.encode('UTF-8');
             generateHeader(date, time); 
             printer.spacing(); 
             printer.newLine(); 
