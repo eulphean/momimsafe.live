@@ -4,7 +4,9 @@ const color = {
     sunLight: '#FCF0E1',
     deepSky: '#02293C',
     disabled: '#7E8A90',
-    link: '#F7C98C'
+    link: '#F7C98C',
+    white: '#FFFFFF',
+    black: '#000000'
 };
 
 const fontSize = {
@@ -63,7 +65,8 @@ const fontFamily = {
     bebas: 'bebas_neueregular',
     bilbo: 'bilboregular',
     opensanslight: 'open_sanslight',
-    opensansregular: 'open_sansregular'
+    opensansregular: 'open_sansregular',
+    thermal: 'thermalregular'
 };
 
 // These are styles that are common across all the description

@@ -13,7 +13,7 @@ class Websocket extends React.Component {
 
         };
 
-        this.socket = io(herokuURL, { 
+        this.socket = io(localhostURL, { 
             reconnection: true, 
             reconnectionDelay: 500, 
             reconnectionAttempts: Infinity
@@ -33,6 +33,7 @@ class Websocket extends React.Component {
         // Subscribe to events. 
         this.socket.on('time', this.logTime.bind(this)); 
         this.socket.on('disconnect', this.disconnect.bind(this));
+        this.socket.on('receiveRandomEntries', this.receiveEntries.bind(this))
     }
 
     disconnect() {
@@ -54,6 +55,16 @@ class Websocket extends React.Component {
         // Send this payload to commit to the database. 
         console.log('Emitting Write Payload'); 
         this.socket.emit('writePayload', payload);
+    }
+
+    requestData() {
+        this.socket.emit('readRandomEntries'); 
+    }
+
+    receiveEntries(payload) {
+        console.log('Receipts received');
+        // console.log(payload); 
+        this.props.processEntries(payload); 
     }
 }
 

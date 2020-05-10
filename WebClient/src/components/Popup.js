@@ -4,7 +4,7 @@ import TextInput from './TextInput.js'
 import { color, padding, fontFamily, fontSize } from './CommonStyles.js'
 import { ReactComponent as Exit } from './close.svg'
 import { fadeOutUp, fadeOutDown, fadeInDown, fadeInUp } from 'react-animations'
-import receipt from './receipt.jpg'
+import Receipt from './Receipt.js'
 
 // Receives a prop to define the type of popup.  
 export var PopupType = {
@@ -468,6 +468,7 @@ class Popup extends React.Component {
     }
 
     getSendContent() {
+        let receipts = this.processReceipts(); 
         let footer = this.getFooter();
         let closeButton = this.getCloseButton();
         let iconButton = this.getIconButton();
@@ -489,8 +490,8 @@ class Popup extends React.Component {
                     </div>
                     <div style={bodyStyle}>
                         {sendBody}
-                        {/* <img style={styles.imageContainer} src={receipt} /> */}
                     </div>
+                    {receipts}
                     {closeButton}
                     {footer}
                 </div>
@@ -564,6 +565,17 @@ class Popup extends React.Component {
                 disabled: true
             });
         }
+    }
+
+    processReceipts() {
+        let entries = this.props.receipts;
+        var receipts = []; 
+        for (let i = 0; i < entries.length; i++) {
+            receipts.push(
+                <Receipt key={i} entry={entries[i]} />
+            ); 
+        }
+        return receipts; 
     }
  }
 

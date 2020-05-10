@@ -45,7 +45,8 @@ class App extends React.Component {
     this.state={
       imageSrc: '',
       popupType: PopupType.About,
-      showButtons: true
+      showButtons: true,
+      receipts: {}
     };
 
     this.websocket = React.createRef(); 
@@ -59,6 +60,7 @@ class App extends React.Component {
       <div onClick={this.onTouch.bind(this)} onTouchStart={this.onTouch.bind(this)} style={styles.container}>
         <Websocket 
           ref={this.websocket}
+          processEntries={this.entriesReceived.bind(this)}
         /> 
         <LiveInfo />
         <div style={styles.buttonWrapper}>
@@ -80,7 +82,8 @@ class App extends React.Component {
           ref={this.popupRef}
           onClose={this.handlePopupClose.bind(this)}
           onSend={this.handleSendMessage.bind(this)}
-          type={this.state.popupType} />
+          type={this.state.popupType} 
+          receipts={this.state.receipts}/>
       </div>
     );
   }
@@ -120,6 +123,16 @@ class App extends React.Component {
 
     // Show popup. 
     this.popupRef.current.showPopup(); 
+
+
+    // [NOTE] Should be removed later
+    this.websocket.current.requestData(); 
+  }
+
+  entriesReceived(payload) {
+    this.setState({
+      receipts: payload
+    });
   }
 
   onTouch() {

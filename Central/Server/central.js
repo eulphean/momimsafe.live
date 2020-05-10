@@ -45,6 +45,7 @@ function onWebClient(socket) {
     console.log('New Web Client connection: ' + socket.id); 
     // For every incoming message payload from main web client application. 
     socket.on('writePayload', onTextPayload); 
+    socket.on('readRandomEntries', onReadRandomEntries)
     socket.on('disconnect', () => console.log('Web client ' + socket.id + ' disconnected')); 
 }
 
@@ -57,6 +58,24 @@ function onCentralClient(socket) {
     console.log('New Central Web Client connection: ' + socket.id); 
     socket.on('readEntries', onReadEntries); 
     socket.on('disconnect', () => console.log('Central Web client ' + socket.id + ' diconnected'));
+}
+
+function onReadRandomEntries() {
+    console.log('Requesting for some random entries.');
+    var queryText = 'SELECT * FROM entries ORDER BY random() limit 5;'; 
+    pool.query(queryText, sqlReadRandomCallback);
+}
+
+function sqlReadRandomCallback(error, results) {
+    if (error) {
+        throw error;
+    }
+    
+    // Format the results somehow. 
+    var entries = results.rows; 
+
+    console.log('Sending random entries');
+    appSocket.emit('receiveRandomEntries', entries)
 }
 
 // ------------------ Handle incoming text payload ------------------------ //

@@ -74,12 +74,12 @@ function generateHeader(date, time) {
     // Font style. 
     printer.size(2, 2); 
     printer.setReverseColors(true); 
-    printer.text(' MUMIMSAFE '); 
+    printer.text(' MOMIMSAFE '); 
     printer.size(1, 1); 
     printer.setReverseColors(false);
     printer.newLine(); 
     printer.setReverseColors(true); 
-    printer.text(' www.mumimsafe.live '); 
+    printer.text(' momimsafe.live '); 
 
     // ------------- Date, Time ---------- // 
     
