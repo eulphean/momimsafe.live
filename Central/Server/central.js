@@ -57,6 +57,7 @@ function onReceiptClient(socket) {
 function onCentralClient(socket) {
     console.log('New Central Web Client connection: ' + socket.id); 
     socket.on('readEntries', onReadEntries); 
+    socket.on('deleteTestEntries', onDeleteTestEntries)
     socket.on('disconnect', () => console.log('Central Web client ' + socket.id + ' diconnected'));
 }
 
@@ -75,7 +76,7 @@ function sqlReadRandomCallback(error, results) {
     var entries = results.rows; 
 
     console.log('Sending random entries');
-    appSocket.emit('receiveRandomEntries', entries)
+    appSocket.emit('receiveRandomEntries', entries);
 }
 
 // ------------------ Handle incoming text payload ------------------------ //
@@ -107,6 +108,21 @@ function storePayloadToDb(payload) {
 
         console.log('Success: New entry in the databse with message ' + msg); 
     }); 
+}
+
+// Delete all the test messages from the data base. 
+function onDeleteTestEntries() {
+    var queryText = "DELETE FROM entries WHERE message LIKE '%test%'"; 
+    pool.query(queryText, onDeletionComplete); 
+}
+
+function onDeletionComplete(error, results) {
+    if (error) {
+        throw error;
+    }
+    
+    console.log('Deletion Succesful'); 
+    centralClientSocket.emit('deleteSuccess');
 }
 
 // THIS FUNCTION WILL NEED TO BE REWRITTEN. 

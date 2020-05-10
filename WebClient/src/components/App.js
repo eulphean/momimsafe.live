@@ -114,6 +114,12 @@ class App extends React.Component {
     // Remove any hiding timeout because the buttons are hiding anyways. 
     clearTimeout(this.buttonTimeout);
 
+    // Request some random data to show as receipts
+    // from the hosted database. 
+    if (type === 'Send') {
+      this.websocket.current.requestData(); 
+    }
+
     let popupType = (type === 'About') ? PopupType.About : PopupType.Send;
     // Set popup type based on the button click. 
     this.setState({
@@ -122,11 +128,7 @@ class App extends React.Component {
     });
 
     // Show popup. 
-    this.popupRef.current.showPopup(); 
-
-
-    // [NOTE] Should be removed later
-    this.websocket.current.requestData(); 
+    this.popupRef.current.showPopup();
   }
 
   entriesReceived(payload) {

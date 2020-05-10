@@ -28,6 +28,10 @@ function logTime(time) {
   console.log('Socket Connection Alive: ' + time); 
 }
 
+function onDeleteEntries() {
+  socket.emit('deleteTestEntries'); 
+}
+
 function onEntries() {
   // Clear the table first. 
   clearTable(); 
@@ -55,6 +59,7 @@ function onConnected() {
 
   // Subsribe to other events. 
   socket.on('showEntries', showEntries); 
+  socket.on('deleteSuccess', onEntries); // Requery all the entries. 
   socket.on('time', logTime); 
   socket.on('disconnect', () => console.log('Socket Server Disconnected')); 
 }
