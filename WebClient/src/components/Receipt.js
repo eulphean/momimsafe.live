@@ -14,7 +14,28 @@ const styles={
         fontFamily: fontFamily.thermal,
         paddingLeft: padding.extraSmall,
         paddingRight: padding.extraSmall,
-        width: '100%'
+        margin: padding.extraSmall,
+        width: '100%',
+
+        '@media (min-width: 450px) and (orientation: landscape)' : {
+            width: 'calc(100%/2 - 4%)'
+        },
+
+        '@media (min-width: 750px)' : {
+            width: 'calc(100%/2 - 3%)'
+        },
+
+        '@media (min-width: 900px)' : {
+            width: 'calc(100%/2 - 2%)'
+        },
+
+        '@media (min-width: 1200px)' : {
+            width: 'calc(100%/3 - 2%)'
+        },
+
+        '@media (min-width: 1400px)' : {
+            width: 'calc(100%/4 - 2%)'
+        },
     },
 
     title: {
@@ -42,6 +63,7 @@ const styles={
     },
 
     dateTimeContainer: {
+        marginTop: padding.verySmall,
         display: 'flex',
         flexDirection: 'row'
     },
@@ -84,9 +106,9 @@ class Receipt extends React.Component {
                 <div style={websiteStyle}>
                     momimsafe.live
                 </div>
-                <div style={styles.city}>
+                {/* <div style={styles.city}>
                     CHICAGO, USA
-                </div>
+                </div> */}
                 <div style={styles.dateTimeContainer}>
                     <div style={styles.dateTime}>
                         {d}

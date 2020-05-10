@@ -125,7 +125,7 @@ const styles={
         borderRadius: fontSize.extraSmall,
         borderStyle: 'dotted',
         borderColor: color.link,
-        borderWidth: padding.extraSmall,
+        borderWidth: '3px',
         overflow: 'auto',
         maxWidth: 'calc(100% - 50px)', // Bind this to media query
         maxHeight: 'calc(100% - 100px)', // Bind this to media query
@@ -341,6 +341,13 @@ const styles={
         '@media (min-width: 1200px)' : {
             fontSize: fontSize.big
         }
+    },
+
+    receiptsContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        marginTop: padding.small
     }
 }
 
@@ -494,7 +501,9 @@ class Popup extends React.Component {
                     <div style={bodyStyle}>
                         {sendBody}
                     </div>
-                    {receipts}
+                    <div style={styles.receiptsContainer}>
+                        {receipts}
+                    </div>
                     {closeButton}
                     {footer}
                 </div>
