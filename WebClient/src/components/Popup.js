@@ -123,6 +123,9 @@ const styles={
 
     content: {
         borderRadius: fontSize.extraSmall,
+        borderStyle: 'dotted',
+        borderColor: color.link,
+        borderWidth: padding.extraSmall,
         overflow: 'auto',
         maxWidth: 'calc(100% - 50px)', // Bind this to media query
         maxHeight: 'calc(100% - 100px)', // Bind this to media query

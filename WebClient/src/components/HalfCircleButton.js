@@ -24,6 +24,9 @@ const styles={
         zIndex: '30',
         cursor: 'pointer',
         margin: padding.extraSmall,
+        borderWidth: '3px',
+        borderStyle: 'dotted',
+        borderColor: color.link,
 
         '@media (min-width: 750px) and (orientation: portrait)': {  
             fontSize: fontSize.extraMassive

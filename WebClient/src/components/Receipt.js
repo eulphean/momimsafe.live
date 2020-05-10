@@ -20,6 +20,8 @@ const styles={
     title: {
         fontSize: fontSize.small,
         letterSpacing: '1.5px',
+        paddingTop: padding.extraSmall,
+        paddingBottom: padding.extraSmall,
         paddingLeft: padding.verySmall,
         paddingRight: padding.verySmall,
         marginTop: padding.veryBig,
