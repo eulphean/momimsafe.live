@@ -118,7 +118,6 @@ const styles={
         justifyContent: 'center',
         height: '100%',
         width: '100%',
-        display: 'flex'
     },
 
     content: {
@@ -351,9 +350,9 @@ const styles={
     }
 }
 
-const aboutBody="This project is currently a live video feed of my home studio, where I spend most of my day during the COVID-19 lockdown in Chicago, Illinois. Since Chicago went into lockdown on March 20th, I have not stepped into my studio at Mana Contemporary, where I'm currently a new-media resident. Meanwhile, I revamped my home studio, which has become my primary space for thinking, making, and elaborating on ideas. This work was developed in response to the consistent inquiries of well-being from my close friends, family members, and especially my mom in India, who ceaselessly desires us to video chat everyday during this global pandemic. As Chicago will open up from this lockdown, I will slowly become more comfortable to go outside. However, momimsafe.live will continue to be the one-stop place for my dear ones around the world to check on me and make sure I'm safe, secure, and engaged in making.";
+const aboutBody="momimsafe is an active live-stream of my home studio space, where I spend the majority of my time in this post-covid era. It was developed in response to the COVID-19 lockdown, with an urgent need in mind; to be visually and physically accessible to all my friends and family globally; especially my mom, who has been concerned about my safety and health during this time. It's a twisted take on communication, which is personal and can exist for an extended period of time. To bridge your virtual space with my physical space, you can send me messages that are archived and printed in my space in real-time.";
 
-const sendBody='There may be times when you see me working in my studio, or you may not. But you can leave me a message by typing in the textbox above and hitting the send button. Your message will be printed by a receipt printer in my studio situated on the left side of my desk, alongside a raspberry pi retrofitted with a LCD, streaming live news 24x7. These messages come as anonymous. So leave a trace in my studio, be honest, and send some love.';
+const sendBody='There may be times when you see me working in my studio, or you may not. But you can leave me a message by typing in the textbox above and hitting the send button. Your messages will be printed by a receipt printer in my studio, which is situated on the left side of my desk. These messages arrive in real-time and are anonymous. So leave a trace in my space, be honest, and send some love. Below are some the receipts produced already. Send a message and see more of them.';
 
 class Popup extends React.Component {
     constructor(props) {

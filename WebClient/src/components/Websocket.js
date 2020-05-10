@@ -1,8 +1,9 @@
 import React from 'react'
 import Radium from 'radium'
 import io  from 'socket.io-client'
+import moment from 'moment-timezone'
 
-const localhostURL = "http://localhost:5000/app"
+//const localhostURL = "http://localhost:5000/app"
 const herokuURL = "https://blooming-refuge-71111.herokuapp.com/app";
 
 
@@ -45,11 +46,11 @@ class Websocket extends React.Component {
     }
 
     sendMessage(message) {
-        var now = new Date(); 
+        // Use the local time in Chicago as the point of reference. 
         var payload = {
           message: message.toLowerCase(), 
-          date: now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate(),
-          time: now.toLocaleTimeString()
+          date: moment.tz('America/Chicago').format('YYYY-MM-DD'),
+          time: moment.tz('America/Chicago').format('h:mm:ss a')
         };
         
         // Send this payload to commit to the database. 

@@ -10,11 +10,12 @@ const styles={
         textAlign: 'center',
         background: color.white,
         color: color.black,
+        marginLeft: padding.extraSmall,
+        marginRight: padding.extraSmall,
         marginTop: padding.small,
         fontFamily: fontFamily.thermal,
         paddingLeft: padding.extraSmall,
         paddingRight: padding.extraSmall,
-        margin: padding.extraSmall,
         width: '100%',
 
         '@media (min-width: 450px) and (orientation: landscape)' : {
@@ -98,8 +99,8 @@ class Receipt extends React.Component {
 
     render() {
         let websiteStyle = [styles.title, styles.website]; 
-        let d = this.props.entry.date.toString().split("T")[0]; 
-        console.log(d);
+        // Date
+        let d = this.beautifyDate();
         return (
             <div style={styles.container}>
                 <div style={styles.title}>{' MOMIMSAFE '}</div>
@@ -111,10 +112,10 @@ class Receipt extends React.Component {
                 </div> */}
                 <div style={styles.dateTimeContainer}>
                     <div style={styles.dateTime}>
-                        {d}
+                        {d.date}
                     </div>
                     <div style={styles.dateTime}>
-                        {this.props.entry.time}
+                        {d.time}
                     </div>
                 </div>
                 <div style={styles.message}>
@@ -122,6 +123,19 @@ class Receipt extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    beautifyDate() {
+        let d = this.props.entry.date.toString().split("T")[0]; 
+        let t = this.props.entry.time.toString().split(':');
+        var dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+        d = d.split('-');
+        d = new Date(d[0], d[1]-1, d[2], t[0], t[1], t[2]); 
+        var obj = {
+            date: d.toLocaleDateString('en-US', dateOptions),
+            time: d.toLocaleTimeString('en-US')
+        }
+        return obj;
     }
 }
 

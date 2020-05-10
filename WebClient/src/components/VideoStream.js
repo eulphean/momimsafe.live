@@ -1,7 +1,6 @@
 import React from 'react'
 import Radium from 'radium'
 import JSMpeg from '@cycjimmy/jsmpeg-player'
-import { color } from './CommonStyles';
 import { fadeInLeft } from 'react-animations'
 
 const url="wss://radiant-oasis-49153.herokuapp.com/";
@@ -30,7 +29,6 @@ const styles={
     },
 
     overlay: {
-        background: 'rgb(252,240,225)',
         background: 'linear-gradient(356deg, rgba(252,240,225,1) 0%, rgba(5,90,133,1) 100%)',
         opacity: '0.35',
         position: 'absolute',
