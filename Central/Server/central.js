@@ -63,7 +63,7 @@ function onCentralClient(socket) {
 
 function onReadRandomEntries() {
     console.log('Requesting for some random entries.');
-    var queryText = 'SELECT * FROM entries ORDER BY random() limit 5;'; 
+    var queryText = 'SELECT * FROM entries ORDER BY random() limit 12;'; 
     pool.query(queryText, sqlReadRandomCallback);
 }
 
