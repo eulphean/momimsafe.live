@@ -5,8 +5,6 @@ import moment from 'moment-timezone'
 
 //const localhostURL = "http://localhost:5000/app"
 const herokuURL = "https://blooming-refuge-71111.herokuapp.com/app";
-
-
 class Websocket extends React.Component {
     constructor(props) {
         super(props);
