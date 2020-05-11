@@ -4,7 +4,7 @@
   "description": "This is the central nodejs server through which all communication happens",
   "main": "websocket-relay.js",
   "scripts": {
-    "start": "node websocket-relay.js momimsafe 8081 8082"
+    "start": "node websocket-relay.js private_life_momimsafe 8081 8082"
   },
   "repository": {
     "type": "git",
