@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mana Writeup</title>
+    <style> 
+      body {
+        padding: 0; margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: black;
+        font-size: 15px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .container {
+        width:50%;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .receipts {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .image {
+        margin-top: 4px;
+        margin-bottom: 4px;
+        border: #055A85;
+        border-style: solid;
+        border-width: 2px;
+        width: calc(100%/3 - 1.0%);
+        box-shadow: 1px 1px 2px #7E8A90;
+      }
+
+      .video {
+        width: 100%;
+      }
+
+      #video-canvas {
+        width: 100%;
+        border: #055A85;
+        border-style: solid;
+        border-width: 2px;
+        box-shadow: 1px 1px 2px #7E8A90;
+      }
+
+      .writeup {
+        color: black; 
+        font-family: Neue Haas Unica;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        font-size: 28px;
+      }
+
+      .artcontainer {
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .title {
+        font-family: Neue Haas Unica;
+        font-size: 20px;
+      }
+
+      .buttons {
+        margin: 8px;
+        font-size: 16px;
+      }
+
+    </style>
+    <script type="text/javascript" src="Library/jsmpeg.min.js"></script>
+    <link href="//db.onlinewebfonts.com/c/7250d52844cced73ed70675d1b78c60c?family=Neue+Haas+Unica" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div class=container>
+      <div class='artcontainer'>
+        <div class='receipts'>
+          <img class='image' src="./images/receipt0.png" />
+          <img class='image' src="./images/receipt1.png" />
+          <img class='image' src="./images/receipt3.png" />
+        </div>
+        <div class='title'>
+          <i>receipts</i>, courtesy Amay Kataria
+        </div>
+      </div>
+      <div class='writeup'>
+        <a href='https://momimsafe.live' target='_blank' rel="noopener noreferrer" >momimsafe</a> is an active live-stream of my home studio space, where I spend the majority of my time in this post-covid era. It was developed in response to the COVID19 lockdown, with an urgent need in mind; to be visually and physically accessible to all my friends and family globally; especially my mom, who has been concerned about my safety and health during this time. It's a twisted take on communication, which is personal and can exist for an unrestricted period of time. To bridge your virtual space with my physical space, you can send me messages that are archived and printed in my space in real-time.
+      </div>
+      <div class='artcontainer'>
+        <div class="video">
+          <canvas id="video-canvas"></canvas>
+        </div>
+        <div class='title'>
+          <i>embedded live feed</i>, courtesy Amay Kataria
+        </div>
+        <button id='start' onclick="startRecording()" class='buttons'>Start Recording</button>
+        <button onclick="download()" class='buttons'>Download Recording</button>
+      </div>
+      <div class='writeup'>
+        When I reflect back on what persuaded me to create this work after the lockdown was initiated, I believe it was driven by an increased sense of care and affection for my loved ones. I imagined about creating an alternate form of communication between us that was more personal and could exist for an extended period of time. I departed from the traditional face to face conversation format to a surveillance model, which put my personal space and privacy at stake to ensure that my loved ones are not worried about me. Wherever they are in the world, whatever timezone they are in, they can feel connected to me at any time. Thus, it begs the question, how justified is an increase in surveillance, when it’s meant to achieve some greater good?<br /><br />
+        
+        I also look at this work as an alternate performative space that would have never sprung up if the world was not going through this situation. This space is filled with mundane tasks that echo an acceptance of the current situation with resilience and patience.<br /><br />
+
+        While trying to blur the line between virtual and the physical world, I departed from the oversaturated nature of digital messaging to an alternate communication model with receipt printers. This really helped participants transcend from their virtual to my physical space. To achieve that, I developed a system that could let them send messages on the website, that get printed physically in my personal space in real-time. Occassionally, I catch these messages getting printed and acknowledge them by waving back at the camera. These messages are stored in a database as an archive for the future to reflect back on the crisis and embrace the love and care of my friends and family that helped me thrive through these times.<br /><br />
+        In the future, I can imagine a network of receipt printers to create a new form of social communication, where the intention would be to leave messages as a poetic gesture to occupy space and create memory in the physical space of our loved ones. 
+      </div>
+      <div class='artcontainer'>
+        <div class='receipts'>
+          <img class='image' src="./images/receipt2.png" />
+          <img class='image' src="./images/receipt4.png" />
+          <img class='image' src="./images/receipt5.png" />
+          <img class='image' src="./images/receipt6.png" />
+          <img class='image' src="./images/receipt7.png" />
+          <img class='image' src="./images/receipt8.png" />
+          <img class='image' src="./images/receipt9.png" />
+          <img class='image' src="./images/receipt10.png" />
+          <img class='image' src="./images/receipt11.png" />
+        </div>
+        <div class='title'>
+          <i>receipts</i>, courtesy Amay Kataria
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    var time = 10; // minutes
+    var stream; var recordedChunks = []; var mediaRecorder; 
+    var options = { mimeType: 'video/webm; codecs=vp9' };
+    var canvas = document.getElementById('video-canvas');
+    console.log(canvas);
+    // stream = canvas.captureStream(20);
+    var startButton = document.getElementById('start'); 
+    var url = 'ws://' + 'radiant-oasis-49153.herokuapp.com/'; 
+    var player = new JSMpeg.Player(url, {canvas: canvas});
+
+    function startRecording() { 
+      stream = canvas.captureStream(30);
+      // Start recording. 
+      try {
+        mediaRecorder = new MediaRecorder(stream, options);
+      } catch (e0) {
+        console.log('Unable to create MediaRecorder with options Object: ', e0);
+        try {
+          options = {mimeType: 'video/webm; codecs=vp9'};
+          mediaRecorder = new MediaRecorder(stream, options);
+        } catch (e1) {
+          console.log('Unable to create MediaRecorder with options Object: ', e1);
+          try {
+            options = 'video/webm; codecs=vp9'; // Chrome 47
+            mediaRecorder = new MediaRecorder(stream, options);
+          } catch (e2) {
+            alert('MediaRecorder is not supported by this browser.\n\n' +
+              'Try Firefox 29 or later, or Chrome 47 or later, ' +
+              'with Enable experimental Web Platform features enabled from chrome://flags.');
+            console.error('Exception while creating MediaRecorder:', e2);
+            return;
+          }
+        }
+      }
+      
+      console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
+      // mediaRecorder.onstop = handleStop;
+      mediaRecorder.ondataavailable = handleDataAvailable;
+      mediaRecorder.start(500); // Every blob is worth 1second of data.
+      console.log('MediaRecorder started', mediaRecorder);
+      startButton.innerHTML = 'Stop Recording'
+
+      setTimeout(stopRecording, time*60*1000); // After number of seconds. 
+    } 
+
+    function download() {
+      console.log('Download Recording');
+      var blob = new Blob(recordedChunks, {
+        type: "video/webm"
+      });
+      var url = URL.createObjectURL(blob);
+      console.log(url);
+      var a = document.createElement("a");
+      document.body.appendChild(a);
+      a.style = "display: none";
+      a.href = url;
+      a.download = Date.now() + '.webm';
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }
+
+    function handleDataAvailable(event) {
+      console.log('data-available'); 
+      if (event.data.size > 0) {
+        recordedChunks.push(event.data); 
+        // console.log(recordedChunks); 
+      } else {
+        console.log('nothing');
+      }
+    }
+
+    function stopRecording() {
+      // Stop recording, initiate download
+      // Restart recording. 
+      mediaRecorder.stop(); 
+      startButton.innerHTML ='Start Recording'; 
+      console.log('MediaRecorder stopped');
+
+      // Initiate the download.
+      download(); 
+
+      // Start recording again. 
+      startRecording(); 
+    }
+
+  </script>
+</html>
