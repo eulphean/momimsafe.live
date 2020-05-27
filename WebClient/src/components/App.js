@@ -1,11 +1,13 @@
 import React from 'react'
 import Radium from 'radium'
 import HalfCircleButton, { CircleType } from './HalfCircleButton.js'
+import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import LiveInfo from './LiveInfo.js'
 import Popup, {PopupType} from './Popup.js'
 import VideoStream from './VideoStream.js'
 import { withOrientationChange } from 'react-device-detect'
 import Websocket from './Websocket.js'
+import LastReceipt from './LastReceipt.js'
 
 const styles = {
   container: {
@@ -55,12 +57,26 @@ class App extends React.Component {
   }
 
   render() {
+    let content = this.getContent(); 
     return (
       <div onClick={this.onTouch.bind(this)} onTouchStart={this.onTouch.bind(this)} style={styles.container}>
         <Websocket 
           ref={this.websocket}
           processEntries={this.entriesReceived.bind(this)}
         /> 
+        <Router basename={process.env.PUBLIC_URL}>
+          <Switch>
+            <Route path="/last"><LastReceipt /></Route>
+            <Route path="/">{content}</Route>
+          </Switch>
+        </Router>
+      </div>
+    );
+  }
+
+  getContent() {
+    return (
+      <div>
         <LiveInfo />
         <div style={styles.buttonWrapper}>
           <HalfCircleButton 
@@ -84,7 +100,7 @@ class App extends React.Component {
           type={this.state.popupType} 
           receipts={this.state.receipts}/>
       </div>
-    );
+    ); 
   }
 
   onStreamImage(data) {
