@@ -11,8 +11,6 @@ const styles={
         background: color.white,
         color: color.black,
         fontFamily: fontFamily.thermal,
-        paddingLeft: padding.extraSmall,
-        paddingRight: padding.extraSmall,
         width: '100%',
         height: '100%'
     },

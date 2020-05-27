@@ -7,21 +7,18 @@ import Websocket from './Websocket.js'
 const styles={
     container: {
         display: 'flex',
-        backgroundColor: 'red'
+        backgroundColor: 'red',
+        justifyContent: 'center'
     },
 
-    receiptContainer: {
+    scrollContainer: {
         display: 'flex',
-        width: '100%',
-        height: '100%'
-    },
+        backgroundColor: 'green',
+        flexDirection: 'column',
+        overflow: 'scroll',
+        maxHeight: '100vh',
 
-    individualReceipt: {
-        display: 'flex',
-        marginLeft: padding.extraSmall,
-        marginRight: padding.extraSmall,
-        marginTop: padding.small,
-    
+        alignItems: 'center',
         '@media (min-width: 450px) and (orientation: landscape)' : {
             width: 'calc(100%/2 - 4%)'
         },
@@ -41,6 +38,17 @@ const styles={
         '@media (min-width: 1400px)' : {
             width: 'calc(100%/4 - 2%)'
         },
+    },
+
+    individualReceipt: {
+        display: 'flex',    
+        flexDirection: 'column',
+        width: '100%'
+    },
+
+    actionContainer: {
+        display: 'flex',
+        alignSelf: 'center'
     }
     
 }
@@ -49,21 +57,22 @@ class LastReceipt extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            lastPayload: ''
+            lastPayload: []
         };
 
         this.websocket = React.createRef();
     }
 
     render() {
+        let receipts = this.processCurrentPayload();
         return (
             <div style={styles.container}>
                 <Websocket 
                     ref={this.websocket}
                     processLastMessage={this.processLastMessage.bind(this)}
                 /> 
-                <div style={styles.receiptContainer}>
-                   {this.state.lastPayload}
+                <div style={styles.scrollContainer}>
+                    {receipts}
                 </div>
             </div>
         );
@@ -73,6 +82,31 @@ class LastReceipt extends React.Component {
        this.pullLastMessage(); 
     }
 
+    getActions() {
+        return (
+            <div style={styles.actionContainer}>
+                <button onClick={this.pullLastMessage.bind(this)}>
+                    PULL
+                </button>
+            </div>
+        ); 
+    }
+
+    processCurrentPayload() {
+        let receipts = []; 
+        for (let a = 0; a < this.state.lastPayload.length; a++) {
+            let actions = this.getActions(); 
+            let r = (        
+                <div key={a} style={styles.individualReceipt} >
+                    <Receipt entry={this.state.lastPayload[a]} />
+                    {actions}
+                </div>
+            ); 
+            receipts.push(r); 
+        }
+        return receipts; 
+    }
+
     pullLastMessage() {
         console.log('Trying to pull the last message');
         this.websocket.current.requestLastMessage(); 
@@ -80,12 +114,12 @@ class LastReceipt extends React.Component {
 
     processLastMessage(payload) {
         console.log('Last Message received'); 
-        let receipt = (
-            <div style={styles.individualReceipt} >
-                <Receipt entry={payload} />
-            </div>); 
+
+        let currentPayload = this.state.lastPayload; 
+        currentPayload.push(payload); 
+
         this.setState({
-            lastPayload: receipt
+            lastPayload: currentPayload
         });
     }
 }
