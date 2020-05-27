@@ -3,22 +3,27 @@ import Radium from 'radium'
 import Receipt from './Receipt.js'
 import { padding } from './CommonStyles.js'
 import Websocket from './Websocket.js'
+import { fadeInDown } from 'react-animations'
+
+
+const fadeInDuration = '2.5s';
 
 const styles={
     container: {
         display: 'flex',
         backgroundColor: 'red',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width: '100vw',
+        height: '100vh'
     },
 
-    scrollContainer: {
+    content: {
         display: 'flex',
-        backgroundColor: 'green',
         flexDirection: 'column',
-        overflow: 'scroll',
-        maxHeight: '100vh',
-
         alignItems: 'center',
+        justifyContent: 'center',
+        position: 'fixed',
+
         '@media (min-width: 450px) and (orientation: landscape)' : {
             width: 'calc(100%/2 - 4%)'
         },
@@ -40,17 +45,33 @@ const styles={
         },
     },
 
+    scrollContainer: {
+        display: 'flex',
+        backgroundColor: 'green',
+        flexDirection: 'column',
+        overflow: 'scroll',
+        maxHeight: '100vh',
+        width: '100%',
+
+        alignItems: 'center'
+    },
+
     individualReceipt: {
         display: 'flex',    
         flexDirection: 'column',
         width: '100%'
     },
 
-    actionContainer: {
+    actionBar: {
         display: 'flex',
         alignSelf: 'center'
-    }
-    
+    },
+
+    fadeInDown: {
+        animationName: Radium.keyframes(fadeInDown, 'fadeInDown'),
+        animationDuration: fadeInDuration,
+        animationTimingFunction: 'ease-in'
+    },
 }
 
 class LastReceipt extends React.Component {
@@ -65,14 +86,18 @@ class LastReceipt extends React.Component {
 
     render() {
         let receipts = this.processCurrentPayload();
+        let actions = this.getActions(); 
         return (
             <div style={styles.container}>
                 <Websocket 
                     ref={this.websocket}
                     processLastMessage={this.processLastMessage.bind(this)}
                 /> 
-                <div style={styles.scrollContainer}>
-                    {receipts}
+                <div style={styles.content}>
+                    {actions}
+                    <div style={styles.scrollContainer}>
+                        {receipts}
+                    </div>
                 </div>
             </div>
         );
@@ -95,14 +120,16 @@ class LastReceipt extends React.Component {
     processCurrentPayload() {
         let receipts = []; 
         for (let a = 0; a < this.state.lastPayload.length; a++) {
-            let actions = this.getActions(); 
-            let r = (        
-                <div key={a} style={styles.individualReceipt} >
+            let receiptStyle = [styles.individualReceipt]; 
+            if (a<1) {
+                receiptStyle= [styles.individualReceipt, styles.fadeInDown]; 
+            }
+            let r = (  
+                <div key={a} style={receiptStyle} >
                     <Receipt entry={this.state.lastPayload[a]} />
-                    {actions}
                 </div>
             ); 
-            receipts.push(r); 
+            receipts.unshift(r); 
         }
         return receipts; 
     }
@@ -125,11 +152,3 @@ class LastReceipt extends React.Component {
 }
 
 export default Radium(LastReceipt);
-
-// receiptsContainer: {
-//     display: 'flex',
-//     flexDirection: 'row',
-//     flexWrap: 'wrap',
-//     marginTop: padding.small,
-//     justifyContent: 'center'
-// },
