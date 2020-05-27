@@ -9,7 +9,7 @@ class Websocket extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-
+            
         };
 
         this.socket = io(herokuURL, { 
@@ -62,7 +62,6 @@ class Websocket extends React.Component {
 
     receiveEntries(payload) {
         console.log('Receipts received');
-        // console.log(payload); 
         this.props.processEntries(payload); 
     }
 }

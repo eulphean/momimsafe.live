@@ -116,6 +116,7 @@ class App extends React.Component {
     // Request some random data to show as receipts
     // from the hosted database. 
     if (type === 'Send') {
+      console.log('send');
       this.websocket.current.requestData(); 
     }
 

@@ -79,7 +79,9 @@ const styles={
         alignSelf: 'center',
         marginTop: padding.small,
         fontSize: fontSize.small,
-        marginBottom: padding.big
+        marginBottom: padding.big,
+        overflowWrap: 'anywhere',
+        flexWrap: 'wrap'
     }
 }
 
