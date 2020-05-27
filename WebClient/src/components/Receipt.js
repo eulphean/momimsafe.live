@@ -10,33 +10,11 @@ const styles={
         textAlign: 'center',
         background: color.white,
         color: color.black,
-        marginLeft: padding.extraSmall,
-        marginRight: padding.extraSmall,
-        marginTop: padding.small,
         fontFamily: fontFamily.thermal,
         paddingLeft: padding.extraSmall,
         paddingRight: padding.extraSmall,
         width: '100%',
-
-        '@media (min-width: 450px) and (orientation: landscape)' : {
-            width: 'calc(100%/2 - 4%)'
-        },
-
-        '@media (min-width: 750px)' : {
-            width: 'calc(100%/2 - 3%)'
-        },
-
-        '@media (min-width: 900px)' : {
-            width: 'calc(100%/2 - 2%)'
-        },
-
-        '@media (min-width: 1200px)' : {
-            width: 'calc(100%/3 - 2%)'
-        },
-
-        '@media (min-width: 1400px)' : {
-            width: 'calc(100%/4 - 2%)'
-        },
+        height: '100%'
     },
 
     title: {

@@ -32,7 +32,8 @@ class Websocket extends React.Component {
         // Subscribe to events. 
         this.socket.on('time', this.logTime.bind(this)); 
         this.socket.on('disconnect', this.disconnect.bind(this));
-        this.socket.on('receiveRandomEntries', this.receiveEntries.bind(this))
+        this.socket.on('receiveRandomEntries', this.receiveEntries.bind(this)); 
+        this.socket.on('lastEntry', this.receiveLastEntry.bind(this)); 
     }
 
     disconnect() {
@@ -56,13 +57,26 @@ class Websocket extends React.Component {
         this.socket.emit('writePayload', payload);
     }
 
+    // Send function and callback function. 
     requestData() {
         this.socket.emit('readRandomEntries'); 
     }
 
+
     receiveEntries(payload) {
-        console.log('Receipts received');
+        console.log('Entries received');
         this.props.processEntries(payload); 
+    }
+
+    // Send function and callback function. 
+    requestLastMessage() {
+        console.log('Request received');
+        this.socket.emit('readLastMessage'); 
+    }
+
+    receiveLastEntry(payload) {
+        console.log('Entry received');
+        this.props.processLastMessage(payload); 
     }
 }
 

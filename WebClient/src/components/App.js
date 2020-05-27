@@ -60,10 +60,7 @@ class App extends React.Component {
     let content = this.getContent(); 
     return (
       <div onClick={this.onTouch.bind(this)} onTouchStart={this.onTouch.bind(this)} style={styles.container}>
-        <Websocket 
-          ref={this.websocket}
-          processEntries={this.entriesReceived.bind(this)}
-        /> 
+     
         <Router basename={process.env.PUBLIC_URL}>
           <Switch>
             <Route path="/last"><LastReceipt /></Route>
@@ -77,6 +74,10 @@ class App extends React.Component {
   getContent() {
     return (
       <div>
+        <Websocket 
+          ref={this.websocket}
+          processEntries={this.entriesReceived.bind(this)}
+        /> 
         <LiveInfo />
         <div style={styles.buttonWrapper}>
           <HalfCircleButton 
