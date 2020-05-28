@@ -89,6 +89,7 @@ class LastReceipt extends React.Component {
         super(props);
         this.state={
             databaseEntries: [],
+            receipts: [],
             enableAnimation: false,
             animationStyle: {
                 animationName: heightAni, 
@@ -101,10 +102,10 @@ class LastReceipt extends React.Component {
         this.wrapper = React.createRef(); 
         this.websocket = React.createRef();
         this.scrollContainer = React.createRef(); 
+        this.lastReceiptIndex = 0; 
     }
 
-    render() {
-        let receipts = this.processCurrentPayload();
+    render() {;
         let actions = this.getActions();
         let wrapperStyle = this.state.enableAnimation ? [styles.wrapContainer, this.state.animationStyle] : styles.wrapContainer; 
         return (
@@ -118,7 +119,7 @@ class LastReceipt extends React.Component {
                 </div>
                 <div ref={this.wrapper} style={wrapperStyle} onAnimationEnd={this.onWrapperAnimationEnd.bind(this)}>   
                     <div ref={this.receiptContainer} style={[styles.scrollContainer]}>
-                        {receipts}
+                        {this.state.receipts}
                     </div>
                 </div>
             </div>
@@ -126,26 +127,34 @@ class LastReceipt extends React.Component {
     }
 
     componentDidMount() {
-       // As soon as the component is mounted, request for messages. 
-       this.pullLastMessage(); 
+       // As soon as the component is mounted, gather all the messages from the database.
+       this.queryDatabase(); 
     }
 
-    processCurrentPayload() {
-        return [];
-        // let receipts = [];
-        // for (let a = 0; a < this.state.lastPayload.length; a++) {
-        //     let r = (  
-        //         <div key={a} style={styles.individualReceipt} >
-        //             <Receipt entry={this.state.lastPayload[a]} />
-        //         </div>
-        //     ); 
-        //     receipts.unshift(r); 
-        // }
+    createReceipt(sequence) {
+        // If it's a sequence, we use the local variable, else calculate a random index. 
+        let receiptIdx = sequence ? this.lastReceiptIndex : Math.floor(Math.random(this.state.databaseEntries.length));  
+        let r = (  
+            <div key={this.state.receipts.length} style={styles.individualReceipt} >
+                <Receipt entry={this.state.databaseEntries[receiptIdx]} />
+            </div>
+        ); 
 
-        // return receipts; 
+        let allReceipts = this.state.receipts; 
+        allReceipts.unshift(r); 
+        
+        // Populate the receipt
+        this.setState({
+            receipts: allReceipts
+        }); 
+
+        // Increment if it was a sequence based create receipt
+        this.lastReceiptIndex = sequence ? this.lastReceiptIndex + 1 : this.lastReceiptIndex; 
+
+        console.log('Receipt Index: ' + this.lastReceiptIndex);
     }
 
-    pullLastMessage() {
+    queryDatabase() {
         console.log('Query the entire database of messages.');
         this.websocket.current.readDatabase(); 
     }
@@ -156,6 +165,9 @@ class LastReceipt extends React.Component {
         this.setState({
             databaseEntries: entries
         });
+
+        // Create first receipt.
+        this.createReceipt(true); 
     }
 
     updateHeightAnimation(currentHeight, newHeight) {
@@ -184,6 +196,8 @@ class LastReceipt extends React.Component {
                 animationTimingFunction:'ease-in'
             }
         });
+
+        this.createReceipt(true);
     }
 
     onWrapperAnimationEnd() {
@@ -202,3 +216,15 @@ class LastReceipt extends React.Component {
 export default Radium(LastReceipt);
 
 // , {top: this.state.scrollHeight}
+
+        // let receipts = [];
+        // for (let a = 0; a < this.state.lastPayload.length; a++) {
+        //     let r = (  
+        //         <div key={a} style={styles.individualReceipt} >
+        //             <Receipt entry={this.state.lastPayload[a]} />
+        //         </div>
+        //     ); 
+        //     receipts.unshift(r); 
+        // }
+
+        // return receipts; 
