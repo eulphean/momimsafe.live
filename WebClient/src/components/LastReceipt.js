@@ -1,7 +1,7 @@
 import React from 'react'
 import Radium from 'radium'
 import Receipt from './Receipt.js'
-import { padding } from './CommonStyles.js'
+import { padding, color } from './CommonStyles.js'
 import Websocket from './Websocket.js'
 import { fadeInDown } from 'react-animations'
 
@@ -16,7 +16,7 @@ var heightAni = Radium.keyframes({
 const styles={
     container: {
         display: 'flex',
-        backgroundColor: 'red',
+        backgroundColor: color.pureTeal,
         justifyContent: 'center',
         width: '100vw',
         height: '100vh'
@@ -136,15 +136,21 @@ class LastReceipt extends React.Component {
 
         let allReceipts = this.state.receipts; 
         allReceipts.unshift(r); 
-        
-        // Populate the receipt
-        this.setState({
-            receipts: allReceipts
-        }); 
 
         // Increment if it was a sequence based create receipt. We want to keep track
         // of the index of the last receipt we were on. 
         this.lastReceiptIndex = sequence ? this.lastReceiptIndex + 1 : this.lastReceiptIndex; 
+
+        // Populate the receipt
+        this.setState({
+            receipts: allReceipts
+        }); 
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (!prevState.enableAnimation && this.receipt.current !== null) {
+            this.enableAnimation(); 
+        }
     }
 
     queryDatabase() {
@@ -170,9 +176,7 @@ class LastReceipt extends React.Component {
             }, 'height');
     }
 
-    enableAnimation(event) {
-        event.stopPropagation();
-
+    enableAnimation() {
         // Setup new animation. 
         let curHeight = parseInt(this.wrapper.current.clientHeight, 10);
         let receiptHeight = parseInt(this.receipt.current.clientHeight, 10); 
