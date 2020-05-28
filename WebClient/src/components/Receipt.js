@@ -76,7 +76,7 @@ class Receipt extends React.Component {
     }
 
     componentDidMount() {
-        
+        console.log('Receipt mounted');
     }
 
     render() {

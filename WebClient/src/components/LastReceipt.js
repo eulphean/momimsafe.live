@@ -6,7 +6,7 @@ import Websocket from './Websocket.js'
 import { fadeInDown } from 'react-animations'
 
 
-const fadeInDuration = '2.5s';
+const duration = '1.5s';
 
 var heightAni = Radium.keyframes({
     '0%': {height: '0'},
@@ -31,14 +31,6 @@ const styles={
         zIndex: '0'
     },
 
-    animateWrapper: {
-        animationName: heightAni, 
-        animationDelay: '1s',
-        animationDuration: '3.5s',
-        animationFillMode: 'forwards',
-        animationTimingFunction:'ease-in'
-    },
-
     scrollContainer: {
         position: 'absolute',
         bottom: '0%',
@@ -47,6 +39,7 @@ const styles={
         flexDirection: 'column',
         width: '100%',
         alignItems: 'center',
+        overflow: 'scroll',
 
         '@media (min-width: 450px) and (orientation: landscape)' : {
             width: 'calc(100%/2 - 4%)'
@@ -93,12 +86,13 @@ class LastReceipt extends React.Component {
             enableAnimation: false,
             animationStyle: {
                 animationName: heightAni, 
-                animationDuration: '2.5s',
+                animationDuration: duration,
                 animationFillMode: 'forwards',
                 animationTimingFunction:'ease-in'
             }
         };
 
+        this.receipt = React.createRef(); 
         this.wrapper = React.createRef(); 
         this.websocket = React.createRef();
         this.scrollContainer = React.createRef(); 
@@ -133,9 +127,9 @@ class LastReceipt extends React.Component {
 
     createReceipt(sequence) {
         // If it's a sequence, we use the local variable, else calculate a random index. 
-        let receiptIdx = sequence ? this.lastReceiptIndex : Math.floor(Math.random(this.state.databaseEntries.length));  
+        let receiptIdx = sequence ? this.lastReceiptIndex : Math.floor(Math.random(this.lastReceiptIndex, this.state.databaseEntries.length));  
         let r = (  
-            <div key={this.state.receipts.length} style={styles.individualReceipt} >
+            <div ref={this.receipt} key={this.state.receipts.length} style={styles.individualReceipt} >
                 <Receipt entry={this.state.databaseEntries[receiptIdx]} />
             </div>
         ); 
@@ -148,10 +142,9 @@ class LastReceipt extends React.Component {
             receipts: allReceipts
         }); 
 
-        // Increment if it was a sequence based create receipt
+        // Increment if it was a sequence based create receipt. We want to keep track
+        // of the index of the last receipt we were on. 
         this.lastReceiptIndex = sequence ? this.lastReceiptIndex + 1 : this.lastReceiptIndex; 
-
-        console.log('Receipt Index: ' + this.lastReceiptIndex);
     }
 
     queryDatabase() {
@@ -182,7 +175,8 @@ class LastReceipt extends React.Component {
 
         // Setup new animation. 
         let curHeight = parseInt(this.wrapper.current.clientHeight, 10);
-        let finalHeight = curHeight + parseInt(200, 10); 
+        let receiptHeight = parseInt(this.receipt.current.clientHeight, 10); 
+        let finalHeight = curHeight + receiptHeight; 
         console.log('enableAnimation: ' + curHeight + ', ' + finalHeight);
 
         this.updateHeightAnimation(curHeight, finalHeight); 
@@ -191,7 +185,7 @@ class LastReceipt extends React.Component {
             enableAnimation: true,
             animationStyle: {
                 animationName: heightAni,
-                animationDuration: '2.5s',
+                animationDuration: duration,
                 animationFillMode: 'forwards',
                 animationTimingFunction:'ease-in'
             }
@@ -214,17 +208,3 @@ class LastReceipt extends React.Component {
 }
 
 export default Radium(LastReceipt);
-
-// , {top: this.state.scrollHeight}
-
-        // let receipts = [];
-        // for (let a = 0; a < this.state.lastPayload.length; a++) {
-        //     let r = (  
-        //         <div key={a} style={styles.individualReceipt} >
-        //             <Receipt entry={this.state.lastPayload[a]} />
-        //         </div>
-        //     ); 
-        //     receipts.unshift(r); 
-        // }
-
-        // return receipts; 
