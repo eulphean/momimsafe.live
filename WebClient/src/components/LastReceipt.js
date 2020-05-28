@@ -28,8 +28,7 @@ const styles={
         height: '0px',
         justifyContent: 'center',
         display: 'flex',
-        zIndex: '0',
-        backfaceVisibility:'hidden'
+        zIndex: '0'
     },
 
     animateWrapper: {
@@ -89,7 +88,7 @@ class LastReceipt extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            lastPayload: [],
+            databaseEntries: [],
             enableAnimation: false,
             animationStyle: {
                 animationName: heightAni, 
@@ -112,9 +111,11 @@ class LastReceipt extends React.Component {
             <div style={styles.container}>
                 <Websocket 
                     ref={this.websocket}
-                    processEntries={this.entriesReceived.bind(this)}
+                    processDatabase={this.processDatabase.bind(this)}
                 /> 
-                {actions}
+                <div style={styles.actionBar}>
+                    {actions}
+                </div>
                 <div ref={this.wrapper} style={wrapperStyle} onAnimationEnd={this.onWrapperAnimationEnd.bind(this)}>   
                     <div ref={this.receiptContainer} style={[styles.scrollContainer]}>
                         {receipts}
@@ -125,39 +126,36 @@ class LastReceipt extends React.Component {
     }
 
     componentDidMount() {
-       // Get the last message. 
-       this.requestRandomMessages(); 
-    }
-
-    onWrapperAnimationEnd() {
-        console.log('Animation ending'); 
-        // this.setState({
-        //     enableAnimation: false
-        // });
-    }
-
-    getActions() {
-        return (
-            <div style={styles.actionBar}>
-                <button onClick={this.enableAnimation.bind(this)}>
-                    PULL
-                </button>
-            </div>
-        ); 
+       // As soon as the component is mounted, request for messages. 
+       this.pullLastMessage(); 
     }
 
     processCurrentPayload() {
-        let receipts = [];
-        for (let a = 0; a < this.state.lastPayload.length; a++) {
-            let r = (  
-                <div key={a} style={styles.individualReceipt} >
-                    <Receipt entry={this.state.lastPayload[a]} />
-                </div>
-            ); 
-            receipts.unshift(r); 
-        }
+        return [];
+        // let receipts = [];
+        // for (let a = 0; a < this.state.lastPayload.length; a++) {
+        //     let r = (  
+        //         <div key={a} style={styles.individualReceipt} >
+        //             <Receipt entry={this.state.lastPayload[a]} />
+        //         </div>
+        //     ); 
+        //     receipts.unshift(r); 
+        // }
 
-        return receipts; 
+        // return receipts; 
+    }
+
+    pullLastMessage() {
+        console.log('Query the entire database of messages.');
+        this.websocket.current.readDatabase(); 
+    }
+
+    // Callback from the Websocket with the last message payload. 
+    processDatabase(entries) {
+        console.log('Entire database received with ' + entries.length + ' entries.'); 
+        this.setState({
+            databaseEntries: entries
+        });
     }
 
     updateHeightAnimation(currentHeight, newHeight) {
@@ -170,7 +168,7 @@ class LastReceipt extends React.Component {
     enableAnimation(event) {
         event.stopPropagation();
 
-        // Calculate the current height
+        // Setup new animation. 
         let curHeight = parseInt(this.wrapper.current.clientHeight, 10);
         let finalHeight = curHeight + parseInt(200, 10); 
         console.log('enableAnimation: ' + curHeight + ', ' + finalHeight);
@@ -188,33 +186,16 @@ class LastReceipt extends React.Component {
         });
     }
 
-    requestRandomMessages() {
-        console.log('Pulling random messages'); 
-        this.websocket.current.requestData(); 
+    onWrapperAnimationEnd() {
+        console.log('Animation ending'); 
     }
 
-    entriesReceived(payload) {
-        console.log('Received random messages');
-        console.log(payload);
-        this.setState({
-            lastPayload: payload
-        }); 
-    }
-
-    pullLastMessage() {
-        console.log('Trying to pull the last message');
-        this.websocket.current.requestLastMessage(); 
-    }
-
-    processLastMessage(payload) {
-        console.log('Last Message received'); 
-
-        let currentPayload = this.state.lastPayload; 
-        currentPayload.push(payload); 
-
-        this.setState({
-            lastPayload: currentPayload
-        });
+    getActions() {
+        return (
+            <button onClick={this.enableAnimation.bind(this)}>
+                PULL
+            </button>
+        ); 
     }
 }
 

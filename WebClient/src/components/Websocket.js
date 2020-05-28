@@ -33,7 +33,7 @@ class Websocket extends React.Component {
         this.socket.on('time', this.logTime.bind(this)); 
         this.socket.on('disconnect', this.disconnect.bind(this));
         this.socket.on('receiveRandomEntries', this.receiveEntries.bind(this)); 
-        this.socket.on('lastEntry', this.receiveLastEntry.bind(this)); 
+        this.socket.on('receiveDatabaseEntries', this.receiveDatabaseRentries.bind(this)); 
     }
 
     disconnect() {
@@ -69,15 +69,15 @@ class Websocket extends React.Component {
     }
 
     // Send function and callback function. 
-    requestLastMessage(callback) {
+    readDatabase() {
         console.log('Request received');
-        this.socket.emit('readLastMessage'); 
-        this.lastCallback = callback; 
+        // Always read in descending order. 
+        this.socket.emit('readDatabase', {order: 'DESC'}); 
     }
 
-    receiveLastEntry(payload) {
-        console.log('Entry received');
-        this.props.processLastMessage(payload); 
+    receiveDatabaseRentries(payload) {
+        console.log('Entries received');
+        this.props.processDatabase(payload); 
     }
 }
 

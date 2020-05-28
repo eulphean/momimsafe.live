@@ -59,7 +59,9 @@ const styles={
         fontSize: fontSize.small,
         marginBottom: padding.big,
         overflowWrap: 'anywhere',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        paddingLeft: padding.small,
+        paddingRight: padding.small
     }
 }
 
