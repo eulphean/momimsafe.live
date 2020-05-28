@@ -69,9 +69,10 @@ class Websocket extends React.Component {
     }
 
     // Send function and callback function. 
-    requestLastMessage() {
+    requestLastMessage(callback) {
         console.log('Request received');
         this.socket.emit('readLastMessage'); 
+        this.lastCallback = callback; 
     }
 
     receiveLastEntry(payload) {

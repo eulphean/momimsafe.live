@@ -47,7 +47,8 @@ class App extends React.Component {
       imageSrc: '',
       popupType: PopupType.About,
       showButtons: true,
-      receipts: {}
+      receipts: {},
+      lastReceipt: ''
     };
 
     this.websocket = React.createRef(); 
@@ -60,7 +61,6 @@ class App extends React.Component {
     let content = this.getContent(); 
     return (
       <div onClick={this.onTouch.bind(this)} onTouchStart={this.onTouch.bind(this)} style={styles.container}>
-     
         <Router basename={process.env.PUBLIC_URL}>
           <Switch>
             <Route path="/last"><LastReceipt /></Route>

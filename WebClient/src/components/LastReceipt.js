@@ -8,6 +8,11 @@ import { fadeInDown } from 'react-animations'
 
 const fadeInDuration = '2.5s';
 
+var heightAni = Radium.keyframes({
+    '0%': {height: '0'},
+    '100%': {height: '200px'},
+  }, 'height');
+
 const styles={
     container: {
         display: 'flex',
@@ -17,12 +22,32 @@ const styles={
         height: '100vh'
     },
 
-    content: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+    wrapContainer: {
+        position: 'absolute',
+        width: '100%',
+        height: '0px',
         justifyContent: 'center',
-        position: 'fixed',
+        display: 'flex',
+        zIndex: '0',
+        backfaceVisibility:'hidden'
+    },
+
+    animateWrapper: {
+        animationName: heightAni, 
+        animationDelay: '1s',
+        animationDuration: '3.5s',
+        animationFillMode: 'forwards',
+        animationTimingFunction:'ease-in'
+    },
+
+    scrollContainer: {
+        position: 'absolute',
+        bottom: '0%',
+        display: 'flex',
+        backgroundColor: 'green',
+        flexDirection: 'column',
+        width: '100%',
+        alignItems: 'center',
 
         '@media (min-width: 450px) and (orientation: landscape)' : {
             width: 'calc(100%/2 - 4%)'
@@ -45,17 +70,6 @@ const styles={
         },
     },
 
-    scrollContainer: {
-        display: 'flex',
-        backgroundColor: 'green',
-        flexDirection: 'column',
-        overflow: 'scroll',
-        maxHeight: '100vh',
-        width: '100%',
-
-        alignItems: 'center'
-    },
-
     individualReceipt: {
         display: 'flex',    
         flexDirection: 'column',
@@ -63,39 +77,46 @@ const styles={
     },
 
     actionBar: {
-        display: 'flex',
-        alignSelf: 'center'
-    },
-
-    fadeInDown: {
-        animationName: Radium.keyframes(fadeInDown, 'fadeInDown'),
-        animationDuration: fadeInDuration,
-        animationTimingFunction: 'ease-in'
-    },
+        zIndex: '1',
+        position: 'fixed',
+        left: '0%',
+        backgroundColor: 'blue',
+        color: 'white'
+    }
 }
 
 class LastReceipt extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            lastPayload: []
+            lastPayload: [],
+            enableAnimation: false,
+            animationStyle: {
+                animationName: heightAni, 
+                animationDuration: '2.5s',
+                animationFillMode: 'forwards',
+                animationTimingFunction:'ease-in'
+            }
         };
 
+        this.wrapper = React.createRef(); 
         this.websocket = React.createRef();
+        this.scrollContainer = React.createRef(); 
     }
 
     render() {
         let receipts = this.processCurrentPayload();
-        let actions = this.getActions(); 
+        let actions = this.getActions();
+        let wrapperStyle = this.state.enableAnimation ? [styles.wrapContainer, this.state.animationStyle] : styles.wrapContainer; 
         return (
             <div style={styles.container}>
                 <Websocket 
                     ref={this.websocket}
-                    processLastMessage={this.processLastMessage.bind(this)}
+                    processEntries={this.entriesReceived.bind(this)}
                 /> 
-                <div style={styles.content}>
-                    {actions}
-                    <div style={styles.scrollContainer}>
+                {actions}
+                <div ref={this.wrapper} style={wrapperStyle} onAnimationEnd={this.onWrapperAnimationEnd.bind(this)}>   
+                    <div ref={this.receiptContainer} style={[styles.scrollContainer]}>
                         {receipts}
                     </div>
                 </div>
@@ -104,13 +125,21 @@ class LastReceipt extends React.Component {
     }
 
     componentDidMount() {
-       this.pullLastMessage(); 
+       // Get the last message. 
+       this.requestRandomMessages(); 
+    }
+
+    onWrapperAnimationEnd() {
+        console.log('Animation ending'); 
+        // this.setState({
+        //     enableAnimation: false
+        // });
     }
 
     getActions() {
         return (
-            <div style={styles.actionContainer}>
-                <button onClick={this.pullLastMessage.bind(this)}>
+            <div style={styles.actionBar}>
+                <button onClick={this.enableAnimation.bind(this)}>
                     PULL
                 </button>
             </div>
@@ -118,20 +147,58 @@ class LastReceipt extends React.Component {
     }
 
     processCurrentPayload() {
-        let receipts = []; 
+        let receipts = [];
         for (let a = 0; a < this.state.lastPayload.length; a++) {
-            let receiptStyle = [styles.individualReceipt]; 
-            if (a<1) {
-                receiptStyle= [styles.individualReceipt, styles.fadeInDown]; 
-            }
             let r = (  
-                <div key={a} style={receiptStyle} >
+                <div key={a} style={styles.individualReceipt} >
                     <Receipt entry={this.state.lastPayload[a]} />
                 </div>
             ); 
             receipts.unshift(r); 
         }
+
         return receipts; 
+    }
+
+    updateHeightAnimation(currentHeight, newHeight) {
+        heightAni = Radium.keyframes({
+            '0%': {height: currentHeight + 'px'},
+            '100%': {height: newHeight + 'px'},
+            }, 'height');
+    }
+
+    enableAnimation(event) {
+        event.stopPropagation();
+
+        // Calculate the current height
+        let curHeight = parseInt(this.wrapper.current.clientHeight, 10);
+        let finalHeight = curHeight + parseInt(200, 10); 
+        console.log('enableAnimation: ' + curHeight + ', ' + finalHeight);
+
+        this.updateHeightAnimation(curHeight, finalHeight); 
+        console.log('Animation begin');
+        this.setState({
+            enableAnimation: true,
+            animationStyle: {
+                animationName: heightAni,
+                animationDuration: '2.5s',
+                animationFillMode: 'forwards',
+                animationTimingFunction:'ease-in'
+            }
+        });
+    }
+
+    requestRandomMessages() {
+        console.log('Pulling random messages'); 
+        this.websocket.current.requestData(); 
+    }
+
+    entriesReceived(payload) {
+        console.log('Received random messages');
+        console.log(payload);
+        this.setState({
+            lastPayload: payload
+        }); 
     }
 
     pullLastMessage() {
@@ -152,3 +219,5 @@ class LastReceipt extends React.Component {
 }
 
 export default Radium(LastReceipt);
+
+// , {top: this.state.scrollHeight}
