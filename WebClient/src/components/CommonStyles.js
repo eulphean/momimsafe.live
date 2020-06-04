@@ -6,7 +6,8 @@ const color = {
     disabled: '#7E8A90',
     link: '#F7C98C',
     white: '#FFFFFF',
-    black: '#000000'
+    black: '#000000',
+    bodyGrey: '#595959'
 };
 
 const fontSize = {
@@ -69,10 +70,8 @@ const fontFamily = {
     thermal: 'thermalregular'
 };
 
-// These are styles that are common across all the description
-// of the works. 
-const commonWorkStyles = {  
-
+const boxShadow = {
+    dark: '0px 2px 4px ' + color.black,
 }
 
-export { color, fontSize, fontFamily, padding, commonWorkStyles };
+export { color, fontSize, fontFamily, padding, boxShadow };

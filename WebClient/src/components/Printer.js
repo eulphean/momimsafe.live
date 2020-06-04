@@ -4,7 +4,7 @@ import Receipt from './Receipt.js'
 import { padding, color } from './CommonStyles.js'
 import Websocket from './Websocket.js'
 import { fadeInDown } from 'react-animations'
-
+import Body from './Body.js'
 
 const duration = '1.5s';
 
@@ -108,14 +108,15 @@ class LastReceipt extends React.Component {
                     ref={this.websocket}
                     processDatabase={this.processDatabase.bind(this)}
                 /> 
-                <div style={styles.actionBar}>
+                <Body />
+                {/* <div style={styles.actionBar}>
                     {actions}
-                </div>
-                <div ref={this.wrapper} style={wrapperStyle} onAnimationEnd={this.onWrapperAnimationEnd.bind(this)}>   
+                </div> */}
+                {/* <div ref={this.wrapper} style={wrapperStyle} onAnimationEnd={this.onWrapperAnimationEnd.bind(this)}>   
                     <div ref={this.receiptContainer} style={[styles.scrollContainer]}>
                         {this.state.receipts}
                     </div>
-                </div>
+                </div> */}
             </div>
         );
     }

@@ -7,7 +7,7 @@ import Popup, {PopupType} from './Popup.js'
 import VideoStream from './VideoStream.js'
 import { withOrientationChange } from 'react-device-detect'
 import Websocket from './Websocket.js'
-import LastReceipt from './LastReceipt.js'
+import LastReceipt from './Printer.js'
 
 const styles = {
   container: {
@@ -47,8 +47,7 @@ class App extends React.Component {
       imageSrc: '',
       popupType: PopupType.About,
       showButtons: true,
-      receipts: {},
-      lastReceipt: ''
+      receipts: {}
     };
 
     this.websocket = React.createRef(); 
