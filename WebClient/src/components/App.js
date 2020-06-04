@@ -63,7 +63,7 @@ class App extends React.Component {
       <div onClick={this.onTouch.bind(this)} onTouchStart={this.onTouch.bind(this)} style={styles.container}>
         <Router basename={process.env.PUBLIC_URL}>
           <Switch>
-            <Route path="/last"><LastReceipt /></Route>
+            <Route path="/printer"><LastReceipt /></Route>
             <Route path="/">{content}</Route>
           </Switch>
         </Router>

@@ -48,6 +48,10 @@ function onWebClient(socket) {
     socket.on('readRandomEntries', () => {
         onReadRandomEntries(socket);
     });
+    socket.on('readDatabase', ({ order }) => {
+        onReadDatabase(order, socket); 
+    }); 
+
     socket.on('disconnect', () => console.log('Web client ' + socket.id + ' disconnected')); 
 }
 
@@ -61,6 +65,26 @@ function onCentralClient(socket) {
     socket.on('readEntries', onReadEntries); 
     socket.on('deleteTestEntries', onDeleteTestEntries)
     socket.on('disconnect', () => console.log('Central Web client ' + socket.id + ' diconnected'));
+}
+
+function onReadDatabase(order, socket) {
+    console.log('Requesting for some random entries with order ' + order);
+    var queryText = 'SELECT * FROM entries ORDER BY date ' + order + ', time ' + order + ';'; 
+    pool.query(queryText, (error, results) => {
+        sqlReadDatabaseCallback(error, results, socket)
+    });
+}
+
+function sqlReadDatabaseCallback(error, results, socket) {
+    if (error) {
+        throw error;
+    }
+    
+    // Format the results somehow. 
+    var entries = results.rows; 
+
+    console.log('Sending entire database entries: ' + entries.length);
+    socket.emit('receiveDatabaseEntries', entries);
 }
 
 function onReadRandomEntries(socket) {
