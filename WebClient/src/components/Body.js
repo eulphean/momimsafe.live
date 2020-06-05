@@ -141,6 +141,8 @@ class Body extends React.Component {
         this.state={
            
         };
+
+        this.paperRoll = React.createRef();
     }
 
     render() {
@@ -159,7 +161,7 @@ class Body extends React.Component {
                 </div>
                 <div style={styles.mouthContainer}>
                     <div style={styles.upperMouth}></div>
-                    <PaperRoll database={this.props.database} />
+                    <PaperRoll ref={this.paperRoll} database={this.props.database} />
                     <div style={styles.lowerMouth}></div>
                 </div>
             </div>
@@ -187,13 +189,13 @@ class Body extends React.Component {
                     <div style={styles.title}>
                         PRINT
                     </div>
-                    <div style={styles.button}></div>
+                    <div onClick={this.onPrint.bind(this)} style={styles.button}></div>
                 </div>
                 <div style={styles.btnContainer}>
                     <div style={styles.title}>
                         SHUFFLE
                     </div>
-                    <div style={styles.button}></div>
+                    <div onClick={this.onShuffle.bind(this)} style={styles.button}></div>
                 </div>
             </div>
         );
@@ -210,6 +212,16 @@ class Body extends React.Component {
                 MOMIMSAFE.LIVE
             </a>
         );
+    }
+
+    onPrint(event) {
+        event.stopPropagation();
+        console.log('Print Print')
+        this.paperRoll.current.createReceipt(true);
+    }
+
+    onShuffle(event) {
+        event.stopPropagation(); 
     }
 }
 

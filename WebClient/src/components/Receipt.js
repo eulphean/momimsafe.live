@@ -62,6 +62,10 @@ const styles={
         flexWrap: 'wrap',
         paddingLeft: padding.small,
         paddingRight: padding.small
+    },
+
+    topPadding: {
+        paddingTop: '10px'
     }
 }
 
@@ -81,10 +85,11 @@ class Receipt extends React.Component {
 
     render() {
         let websiteStyle = [styles.title, styles.website]; 
+        let containerStyle = this.props.topPadding ? [styles.container, styles.topPadding] : styles.container; 
         // Date
         let d = this.beautifyDate();
         return (
-            <div style={styles.container}>
+            <div style={containerStyle}>
                 <div style={styles.title}>{' MOMIMSAFE '}</div>
                 <div style={websiteStyle}>
                     momimsafe.live

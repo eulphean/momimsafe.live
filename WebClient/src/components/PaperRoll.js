@@ -18,7 +18,6 @@ const styles={
         height: '0px',
         justifyContent: 'center',
         display: 'flex',
-        backgroundColor: 'red',
         zIndex: '0'
     },
 
@@ -26,7 +25,6 @@ const styles={
         position: 'absolute',
         bottom: '0%',
         display: 'flex',
-        backgroundColor: 'green',
         flexDirection: 'column',
         width: '100%',
         alignItems: 'center',
@@ -56,13 +54,7 @@ const styles={
         display: 'flex',    
         flexDirection: 'column',
         width: '100%'
-    },
-
-    testReceipt: {
-        width: '100%',
-        height: '60px'
-    },
-
+    }
 }
 
 class PaperRoll extends React.Component {
@@ -70,7 +62,7 @@ class PaperRoll extends React.Component {
         super(props);
         this.state={    
             receipts: [],
-            enableAnimation: false,
+            enableAnimation: true,
             animationStyle: {
                 animationName: heightAni, 
                 animationDuration: duration,
@@ -106,10 +98,10 @@ class PaperRoll extends React.Component {
         let receiptIdx = isOrdered ? this.state.lastReceiptIndex : Math.floor(Math.random(this.state.lastReceiptIndex, this.props.databaseEntries.length));  
         
         let r = (
-            <div ref={this.receipt} key={this.state.receipts.length} style={styles.testReceipt}>
-
+            <div ref={this.receipt} key={this.state.receipts.length} style={styles.individualReceipt} >
+                <Receipt topPadding={true} entry={this.props.database[receiptIdx]} />
             </div>
-        )
+        );
 
         // Push a receipt on top of the current one. 
         let allReceipts = this.state.receipts; 
@@ -122,19 +114,20 @@ class PaperRoll extends React.Component {
         // New receipts - Also new lastReceiptIdx
         this.setState({
             receipts: allReceipts,
-            lastReceiptIndex: lastIdx,
-            enableAnimation: true
+            lastReceiptIndex: lastIdx
         }); 
     }
 
     componentDidUpdate(prevProps, prevState) {
+        // Finally got the database. 
         if (this.props.database !== prevProps.database ) {
             console.log('Creating first receipt');
             this.createReceipt(true); 
         }
-        // if (!prevState.enableAnimation && this.receipt.current !== null) {
-        //     this.enableAnimation(); 
-        // }
+
+        if (this.state.lastReceiptIndex !== prevState.lastReceiptIndex) {
+            this.resetAnimation();
+        }
     }
 
     updateHeightAnimation(currentHeight, newHeight) {
@@ -144,17 +137,16 @@ class PaperRoll extends React.Component {
             }, 'height');
     }
 
-    enableAnimation() {
+    resetAnimation() {
         // Setup new animation. 
         let curHeight = parseInt(this.wrapper.current.clientHeight, 10);
         let receiptHeight = parseInt(this.receipt.current.clientHeight, 10); 
-        let finalHeight = curHeight + receiptHeight; 
-        console.log('enableAnimation: ' + curHeight + ', ' + finalHeight);
+        let finalHeight = curHeight + receiptHeight; // Little Extra Receipt
+        console.log('resetAnimation: ' + curHeight + ', ' + finalHeight);
 
         this.updateHeightAnimation(curHeight, finalHeight); 
         console.log('Animation begin');
         this.setState({
-            enableAnimation: true,
             animationStyle: {
                 animationName: heightAni,
                 animationDuration: duration,
@@ -162,8 +154,6 @@ class PaperRoll extends React.Component {
                 animationTimingFunction:'ease-in'
             }
         });
-
-        this.createReceipt(true);
     }
 
     onWrapperAnimationEnd() {
@@ -172,23 +162,3 @@ class PaperRoll extends React.Component {
 }
 
 export default Radium(PaperRoll);
-
-// let r = (  
-//     <div ref={this.receipt} key={this.state.receipts.length} style={styles.individualReceipt} >
-//         <Receipt entry={this.props.database[receiptIdx]} />
-//     </div>
-// ); 
-
-// container: {
-//     display: 'flex',
-//     alignItems: 'center',
-//     flexDirection: 'column',
-//     textAlign: 'center',
-//     background: color.white,
-//     color: color.black,
-//     fontFamily: fontFamily.thermal,
-//     width: '100%',
-//     height: '100%',
-//     border: 'none',
-//     backfaceVisibility: 'hidden'
-// },

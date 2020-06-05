@@ -11,7 +11,8 @@ const styles={
         backgroundColor: color.pureTeal,
         justifyContent: 'center',
         padding: '12px',
-        height: '100vh'
+        height: '100vh',
+        zIndex: '2'
     }
 }
 
