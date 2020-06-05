@@ -130,7 +130,9 @@ class Body extends React.Component {
                         {website}
                     </div>
                     <div style={styles.division}></div>
-                    <div style={styles.mouth}></div>
+                    <div style={styles.mouth}>
+                        <PaperRoll database={this.props.database} />
+                    </div>
                 </div>
             </div>
         );

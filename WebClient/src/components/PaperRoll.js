@@ -1,6 +1,6 @@
 import React from 'react'
 import Radium from 'radium'
-import { color, fontFamily } from './CommonStyles.js'
+import { color, fontFamily, padding } from './CommonStyles.js'
 import Receipt from './Receipt.js'
 
 const duration = '1.5s';
@@ -11,30 +11,20 @@ var heightAni = Radium.keyframes({
   }, 'height');
 
 const styles={
-    container: {
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        textAlign: 'center',
-        background: color.white,
-        color: color.black,
-        fontFamily: fontFamily.thermal,
-        width: '100%',
-        height: '100%',
-        border: 'none',
-        backfaceVisibility: 'hidden'
-    },
-
-    wrapContainer: {
-        position: 'absolute',
+    animatingContainer: {
+        position: 'relative',
+        marginLeft: padding.small,
+        marginRight: padding.small,
+        marginTop: '30px',
         width: '100%',
         height: '0px',
         justifyContent: 'center',
         display: 'flex',
-        zIndex: '0'
+        zIndex: '0',
+        backgroundColor: 'red'
     },
 
-    scrollContainer: {
+    paperRollContainer: {
         position: 'absolute',
         bottom: '0%',
         display: 'flex',
@@ -42,7 +32,6 @@ const styles={
         flexDirection: 'column',
         width: '100%',
         alignItems: 'center',
-        overflow: 'scroll',
 
         '@media (min-width: 450px) and (orientation: landscape)' : {
             width: 'calc(100%/2 - 4%)'
@@ -62,7 +51,7 @@ const styles={
     
         '@media (min-width: 1400px)' : {
             width: 'calc(100%/4 - 2%)'
-        },
+        }
     },
 
     individualReceipt: {
@@ -70,6 +59,11 @@ const styles={
         flexDirection: 'column',
         width: '100%'
     },
+
+    testReceipt: {
+        width: '100%',
+        height: '30px'
+    }
 
 }
 
@@ -84,56 +78,68 @@ class PaperRoll extends React.Component {
                 animationDuration: duration,
                 animationFillMode: 'forwards',
                 animationTimingFunction:'ease-in'
-            }
+            },
+            lastReceiptIndex: 0
         };
 
+        // Instances. 
         this.receipt = React.createRef(); 
         this.wrapper = React.createRef(); 
         this.scrollContainer = React.createRef(); 
-        this.lastReceiptIndex = 0; 
     }
 
     componentDidMount() {
-        console.log('Receipt mounted');
+        console.log('Paper Roll Mount');
+        // this.createReceipt(true); 
+        // Create the first receipt right here. 
+        // With the database props that I receive through the printer -> body -> paperRoll. 
     }
 
     render() {
-        let wrapperStyle = this.state.enableAnimation ? [styles.wrapContainer, this.state.  animationStyle] : styles.wrapContainer; 
+        let animatingStyle = this.state.enableAnimation ? [styles.animatingContainer, this.state.  animationStyle] : styles.animatingContainer; 
         return (
-            <div ref={this.wrapper} style={wrapperStyle} onAnimationEnd={this.onWrapperAnimationEnd.bind(this)}>   
-                <div ref={this.receiptContainer} style={[styles.scrollContainer]}>
+            <div ref={this.wrapper} style={animatingStyle} onAnimationEnd={this.onWrapperAnimationEnd.bind(this)}>   
+                <div ref={this.receiptContainer} style={[styles.paperRollContainer]}>
                     {this.state.receipts}
                 </div>
             </div>
         );
     }
 
-    createReceipt(sequence) {
-        // If it's a sequence, we use the local variable, else calculate a random index. 
-        let receiptIdx = sequence ? this.lastReceiptIndex : Math.floor(Math.random(this.lastReceiptIndex, this.state.databaseEntries.length));  
-        let r = (  
-            <div ref={this.receipt} key={this.state.receipts.length} style={styles.individualReceipt} >
-                <Receipt entry={this.state.databaseEntries[receiptIdx]} />
-            </div>
-        ); 
+    createReceipt(isOrdered) {
+        // If it's in order, we use the local variable, else calculate a random index. 
+        let receiptIdx = isOrdered ? this.state.lastReceiptIndex : Math.floor(Math.random(this.state.lastReceiptIndex, this.props.databaseEntries.length));  
+        
+        let r = (
+            <div ref={this.receipt} key={this.state.receipts.length} style={styles.testReceipt}>
 
+            </div>
+        )
+
+        // Push a receipt on top of the current one. 
         let allReceipts = this.state.receipts; 
         allReceipts.unshift(r); 
 
-        // Increment if it was a sequence based create receipt. We want to keep track
+        // Increment if it was created in order based. We want to keep track
         // of the index of the last receipt we were on. 
-        this.lastReceiptIndex = sequence ? this.lastReceiptIndex + 1 : this.lastReceiptIndex; 
-
-        // Populate the receipt
+        let lastIdx = isOrdered ? this.state.lastReceiptIndex + 1 : this.state.lastReceiptIndex; 
+        
+        // New receipts - Also new lastReceiptIdx
         this.setState({
-            receipts: allReceipts
+            receipts: allReceipts,
+            lastReceiptIndex: lastIdx,
+            enableAnimation: true
         }); 
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (!prevState.enableAnimation && this.receipt.current !== null) {
-            this.enableAnimation(); 
+        if (this.props.database !== prevProps.database ) {
+            console.log('Creating first receipt');
+            this.createReceipt(true); 
         }
+        // if (!prevState.enableAnimation && this.receipt.current !== null) {
+        //     this.enableAnimation(); 
+        // }
     }
 
     updateHeightAnimation(currentHeight, newHeight) {
@@ -171,3 +177,23 @@ class PaperRoll extends React.Component {
 }
 
 export default Radium(PaperRoll);
+
+// let r = (  
+//     <div ref={this.receipt} key={this.state.receipts.length} style={styles.individualReceipt} >
+//         <Receipt entry={this.props.database[receiptIdx]} />
+//     </div>
+// ); 
+
+// container: {
+//     display: 'flex',
+//     alignItems: 'center',
+//     flexDirection: 'column',
+//     textAlign: 'center',
+//     background: color.white,
+//     color: color.black,
+//     fontFamily: fontFamily.thermal,
+//     width: '100%',
+//     height: '100%',
+//     border: 'none',
+//     backfaceVisibility: 'hidden'
+// },

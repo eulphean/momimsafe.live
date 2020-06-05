@@ -32,7 +32,7 @@ class LastReceipt extends React.Component {
                     ref={this.websocket}
                     processDatabase={this.processDatabase.bind(this)}
                 /> 
-                <Body database={this.state.database} />
+                <Body database={this.state.databaseEntries} />
             </div>
         );
     }
