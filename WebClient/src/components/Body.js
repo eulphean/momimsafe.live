@@ -86,6 +86,25 @@ const styles={
         fontFamily: fontFamily.bebas, 
         fontSize: fontSize.small,
         letterSpacing: '1.5px'
+    },
+
+    division: {
+        display: 'flex',
+        width: '100%',
+        height: '1.5px',
+        backgroundColor: color.black,
+        marginTop: padding.big,
+        boxShadow: boxShadow.darkButton
+    },
+
+    mouth: {
+        display: 'flex',
+        width: '80%',
+        height: '60px',
+        borderRadius: '12px',
+        backgroundColor: color.faceGrey,
+        marginTop: padding.big,
+        boxShadow: boxShadow.darkButton
     }
 } 
 
@@ -109,6 +128,8 @@ class Body extends React.Component {
                         {buttons}
                         {website}
                     </div>
+                    <div style={styles.division}></div>
+                    <div style={styles.mouth}></div>
                 </div>
             </div>
         );

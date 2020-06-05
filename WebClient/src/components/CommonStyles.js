@@ -7,7 +7,8 @@ const color = {
     link: '#F7C98C',
     white: '#FFFFFF',
     black: '#000000',
-    bodyGrey: '#595959'
+    bodyGrey: '#595959',
+    faceGrey: '#232122'
 };
 
 const fontSize = {
@@ -35,6 +36,7 @@ const fontSize = {
 };
 
 const padding = {
+    tiny: '2px',
     // Increments of 4
     extraSmall: '4px',
     verySmall: '8px',
