@@ -1,6 +1,7 @@
 import React from 'react'
 import Radium from 'radium'
 import { color, padding, boxShadow, fontSize, fontFamily } from './CommonStyles.js'
+import PaperRoll from './PaperRoll.js'
 
 
 const styles={
