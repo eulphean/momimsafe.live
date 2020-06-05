@@ -10,7 +10,7 @@ const styles={
         display: 'flex',
         backgroundColor: color.pureTeal,
         justifyContent: 'center',
-        width: '100vw',
+        padding: '12px',
         height: '100vh'
     }
 }

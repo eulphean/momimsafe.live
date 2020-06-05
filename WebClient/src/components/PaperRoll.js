@@ -15,11 +15,11 @@ const styles={
         position: 'relative',
         marginLeft: padding.small,
         marginRight: padding.small,
-        width: '100%',
         height: '0px',
         justifyContent: 'center',
         display: 'flex',
         backgroundColor: 'red',
+        opacity: '0.5',
         zIndex: '0'
     },
 
@@ -71,7 +71,6 @@ const styles={
         height: '100px',
         top: '-100px',
         backgroundColor: 'blue',
-        zIndex: '3'
     }
 
 }

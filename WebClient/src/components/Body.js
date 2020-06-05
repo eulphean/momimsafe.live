@@ -7,22 +7,26 @@ import PaperRoll from './PaperRoll.js'
 const styles={
     container: {
         display: 'flex',
-        flexDirection: 'row',
-        width: '100%',
-        padding: padding.small
-    },
-
-    innerContainer: {
-        display: 'flex',
+        width: '100vw',
         flexDirection: 'column',
         alignItems: 'center',
         height: '50vh',
-        width: '100%',
-        borderRadius: fontSize.big,
         backgroundColor: color.bodyGrey,
-        boxShadow: boxShadow.dark
+        boxShadow: boxShadow.dark,
+        borderRadius: '25px',
+    },
+
+    upperBodyContainer: {
+        zIndex: '2', // Abstracts the receipt getting printed in the lower body
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundColor: color.bodyGrey,
+        borderRadius: 'inherit'
     },
     
+    // With Amay Kataria websit
     header: {
         display: 'flex',
         color: color.link,
@@ -47,7 +51,8 @@ const styles={
         marginLeft: padding.small,
         marginRight: padding.small,
         width: '100%',
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-evenly',
+        zIndex: '1'
     },
     
     buttonCollection: {
@@ -98,14 +103,29 @@ const styles={
         boxShadow: boxShadow.darkButton
     },
 
-    mouth: {
+    mouthContainer: {
+        position: 'relative',
         display: 'flex',
-        width: '80%',
-        height: '60px',
-        borderRadius: '12px',
-        backgroundColor: color.faceGrey,
-        marginTop: padding.big,
-        boxShadow: boxShadow.darkButton
+        flexDirection: 'column',
+        zIndex: '1',
+        width: '100%'
+    },
+
+    upperMouth: {
+        position: 'relative',
+        backgroundColor: 'purple',
+        zIndex: '1',
+        height: '40px',
+    },
+
+    lowerMouth: {
+        position: 'absolute',  
+        left: '0%',
+        right: '0%',
+        backgroundColor: 'teal',
+        height: '40px',
+        marginTop: '40px',
+        zIndex: '-1',
     }
 } 
 
@@ -123,15 +143,21 @@ class Body extends React.Component {
         const website = this.getWebsite();  
         return (
             <div style={styles.container}>
-                <div style={styles.innerContainer}>
+                <div style={styles.upperBodyContainer}>
                     {header}
                     <div style={styles.infoContainer}>
                         {buttons}
                         {website}
                     </div>
                     <div style={styles.division}></div>
-                    <div style={styles.mouth}>
-                        <PaperRoll database={this.props.database} />
+                </div>
+                <div style={styles.mouthContainer}>
+                    <div style={styles.upperMouth}>
+                        Mouth1
+                    </div>
+                    <PaperRoll database={this.props.database} />
+                    <div style={styles.lowerMouth}>
+                        Mouth2
                     </div>
                 </div>
             </div>
