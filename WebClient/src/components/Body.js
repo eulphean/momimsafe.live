@@ -23,7 +23,8 @@ const styles={
         flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: color.bodyGrey,
-        borderRadius: 'inherit'
+        borderRadius: '25px 25px 0px 0px',
+        paddingBottom: padding.big
     },
     
     // With Amay Kataria websit
@@ -104,28 +105,33 @@ const styles={
     },
 
     mouthContainer: {
-        position: 'relative',
         display: 'flex',
         flexDirection: 'column',
-        zIndex: '1',
-        width: '100%'
+        position: 'relative',
+        backgroundColor: color.bodyGrey,
+        width: '90%',
+        zIndex: '1', // Abstract the receipt,
     },
 
     upperMouth: {
         position: 'relative',
-        backgroundColor: 'purple',
-        zIndex: '1',
+        backgroundColor: color.faceGrey,
+        zIndex: '1', // Abstract the receipt
         height: '40px',
+        borderRadius: '10px 10px 0 0',
+        boxShadow: boxShadow.dark
     },
 
     lowerMouth: {
         position: 'absolute',  
         left: '0%',
         right: '0%',
-        backgroundColor: 'teal',
+        backgroundColor: color.faceGrey,
         height: '40px',
         marginTop: '40px',
-        zIndex: '-1',
+        borderRadius: '0px 0px 10px 10px',
+        zIndex: '-1', // Let the receipt show,
+        boxShadow: boxShadow.darkButton
     }
 } 
 
@@ -152,13 +158,9 @@ class Body extends React.Component {
                     <div style={styles.division}></div>
                 </div>
                 <div style={styles.mouthContainer}>
-                    <div style={styles.upperMouth}>
-                        Mouth1
-                    </div>
+                    <div style={styles.upperMouth}></div>
                     <PaperRoll database={this.props.database} />
-                    <div style={styles.lowerMouth}>
-                        Mouth2
-                    </div>
+                    <div style={styles.lowerMouth}></div>
                 </div>
             </div>
         );

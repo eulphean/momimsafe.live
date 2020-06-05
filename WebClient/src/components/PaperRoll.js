@@ -19,7 +19,6 @@ const styles={
         justifyContent: 'center',
         display: 'flex',
         backgroundColor: 'red',
-        opacity: '0.5',
         zIndex: '0'
     },
 
@@ -63,15 +62,6 @@ const styles={
         width: '100%',
         height: '60px'
     },
-
-    testDiv: {
-        display: 'flex',
-        position: 'relative',
-        width: '100%',
-        height: '100px',
-        top: '-100px',
-        backgroundColor: 'blue',
-    }
 
 }
 

@@ -8,7 +8,7 @@ const color = {
     white: '#FFFFFF',
     black: '#000000',
     bodyGrey: '#595959',
-    faceGrey: '#232122'
+    faceGrey: '#2D2C2C'
 };
 
 const fontSize = {
