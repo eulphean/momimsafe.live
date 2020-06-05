@@ -1,6 +1,6 @@
 import React from 'react'
 import Radium from 'radium'
-import { color, fontFamily, padding } from './CommonStyles.js'
+import { padding } from './CommonStyles.js'
 import Receipt from './Receipt.js'
 
 const duration = '1.5s';
@@ -69,13 +69,14 @@ class PaperRoll extends React.Component {
                 animationFillMode: 'forwards',
                 animationTimingFunction:'ease-in'
             },
-            lastReceiptIndex: 0
+            currentReceiptIdx: 0
         };
 
         // Instances. 
         this.receipt = React.createRef(); 
         this.wrapper = React.createRef(); 
         this.scrollContainer = React.createRef(); 
+        this.lastReceiptIdx = 0; 
     }
 
     componentDidMount() {
@@ -95,7 +96,9 @@ class PaperRoll extends React.Component {
 
     createReceipt(isOrdered) {
         // If it's in order, we use the local variable, else calculate a random index. 
-        let receiptIdx = isOrdered ? this.state.lastReceiptIndex : Math.floor(Math.random(this.state.lastReceiptIndex, this.props.databaseEntries.length));  
+        let receiptIdx = isOrdered ? this.lastReceiptIdx : Math.floor(Math.random() * this.props.database.length) + this.lastReceiptIdx;  
+
+        console.log("Receipt: " + receiptIdx);
         
         let r = (
             <div ref={this.receipt} key={this.state.receipts.length} style={styles.individualReceipt} >
@@ -109,12 +112,13 @@ class PaperRoll extends React.Component {
 
         // Increment if it was created in order based. We want to keep track
         // of the index of the last receipt we were on. 
-        let lastIdx = isOrdered ? this.state.lastReceiptIndex + 1 : this.state.lastReceiptIndex; 
+        let currentIdx = isOrdered ? this.lastReceiptIdx + 1 : receiptIdx; 
+        this.lastReceiptIdx = isOrdered ? currentIdx : this.lastReceiptIdx; 
         
         // New receipts - Also new lastReceiptIdx
         this.setState({
             receipts: allReceipts,
-            lastReceiptIndex: lastIdx
+            currentReceiptIdx: currentIdx
         }); 
     }
 
@@ -125,7 +129,7 @@ class PaperRoll extends React.Component {
             this.createReceipt(true); 
         }
 
-        if (this.state.lastReceiptIndex !== prevState.lastReceiptIndex) {
+        if (this.state.currentReceiptIdx !== prevState.currentReceiptIdx) {
             this.resetAnimation();
         }
     }

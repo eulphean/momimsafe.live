@@ -216,12 +216,14 @@ class Body extends React.Component {
 
     onPrint(event) {
         event.stopPropagation();
-        console.log('Print Print')
+        console.log('Ordered Print'); 
         this.paperRoll.current.createReceipt(true);
     }
 
     onShuffle(event) {
         event.stopPropagation(); 
+        console.log('Shuffle print'); 
+        this.paperRoll.current.createReceipt(false);
     }
 }
 

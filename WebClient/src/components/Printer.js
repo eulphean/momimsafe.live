@@ -1,7 +1,6 @@
 import React from 'react'
 import Radium from 'radium'
-import Receipt from './Receipt.js'
-import { padding, color } from './CommonStyles.js'
+import { color } from './CommonStyles.js'
 import Websocket from './Websocket.js'
 import Body from './Body.js'
 
@@ -11,7 +10,17 @@ const styles={
         backgroundColor: color.pureTeal,
         justifyContent: 'center',
         padding: '12px',
-        height: '100vh',
+        height: '100vh'
+    },
+
+    // Extra Div to hide the receipt from the top. 
+    hidingDiv: {
+        backgroundColor: color.black,
+        position: 'fixed',
+        top: '0%',
+        height: '12px',
+        width: '100%',
+        backgroundColor: color.pureTeal,
         zIndex: '2'
     }
 }
@@ -33,6 +42,8 @@ class LastReceipt extends React.Component {
                     ref={this.websocket}
                     processDatabase={this.processDatabase.bind(this)}
                 /> 
+                <div style={styles.hidingDiv}>
+                </div>
                 <Body database={this.state.databaseEntries} />
             </div>
         );
