@@ -7,7 +7,7 @@ const duration = '1.5s';
 
 var heightAni = Radium.keyframes({
     '0%': {height: '0'},
-    '100%': {height: '200px'},
+    '100%': {height: '60px'},
   }, 'height');
 
 const styles={
@@ -15,13 +15,12 @@ const styles={
         position: 'relative',
         marginLeft: padding.small,
         marginRight: padding.small,
-        marginTop: '30px',
         width: '100%',
         height: '0px',
         justifyContent: 'center',
         display: 'flex',
-        zIndex: '0',
-        backgroundColor: 'red'
+        backgroundColor: 'red',
+        zIndex: '0'
     },
 
     paperRollContainer: {
@@ -62,7 +61,17 @@ const styles={
 
     testReceipt: {
         width: '100%',
-        height: '30px'
+        height: '60px'
+    },
+
+    testDiv: {
+        display: 'flex',
+        position: 'relative',
+        width: '100%',
+        height: '100px',
+        top: '-100px',
+        backgroundColor: 'blue',
+        zIndex: '3'
     }
 
 }
@@ -89,16 +98,13 @@ class PaperRoll extends React.Component {
     }
 
     componentDidMount() {
-        console.log('Paper Roll Mount');
-        // this.createReceipt(true); 
-        // Create the first receipt right here. 
-        // With the database props that I receive through the printer -> body -> paperRoll. 
+        console.log('Paper Roll Mount'); 
     }
 
     render() {
         let animatingStyle = this.state.enableAnimation ? [styles.animatingContainer, this.state.  animationStyle] : styles.animatingContainer; 
         return (
-            <div ref={this.wrapper} style={animatingStyle} onAnimationEnd={this.onWrapperAnimationEnd.bind(this)}>   
+            <div ref={this.wrapper} style={animatingStyle} onAnimationEnd={this.onWrapperAnimationEnd.bind(this)}>  
                 <div ref={this.receiptContainer} style={[styles.paperRollContainer]}>
                     {this.state.receipts}
                 </div>
