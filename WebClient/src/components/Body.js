@@ -75,7 +75,24 @@ const styles={
         fontFamily: fontFamily.bebas, 
         fontSize: fontSize.verySmall,
         marginTop: padding.verySmall,
-        letterSpacing: '1.5px'
+        letterSpacing: '1.5px',
+
+        '@media (min-width: 450px)': {  
+            // no change.
+        },
+
+        '@media (min-width: 600px)': {  
+            fontSize: fontSize.small,
+        },
+
+        '@media (min-width: 750px) and (orientation: portrait)': {  
+            // no change.
+            fontSize: fontSize.big
+        },
+
+        '@media (min-width: 900px) and (orientation: portrait)': {  
+            fontSize: fontSize.veryBig
+        }
     },
 
     infoContainer: {
@@ -107,7 +124,24 @@ const styles={
         color: color.sunLight,
         fontFamily: fontFamily.bebas, 
         fontSize: fontSize.small,
-        letterSpacing: '1.5px'
+        letterSpacing: '1.5px',
+        
+        '@media (min-width: 450px)': {  
+            // no change.
+        },
+
+        '@media (min-width: 600px)': {  
+            fontSize: fontSize.big,
+        },
+
+        '@media (min-width: 750px) and (orientation: portrait)': {  
+            // no change.
+            fontSize: fontSize.big
+        },
+
+        '@media (min-width: 900px) and (orientation: portrait)': {  
+            fontSize: fontSize.veryBig
+        }
     },
 
     button: {
@@ -125,7 +159,24 @@ const styles={
         color: color.link,
         fontFamily: fontFamily.bebas, 
         fontSize: fontSize.small,
-        letterSpacing: '1.5px'
+        letterSpacing: '1.5px',
+
+        '@media (min-width: 450px)': {  
+            // no change.
+        },
+
+        '@media (min-width: 600px)': {  
+            fontSize: fontSize.big,
+        },
+
+        '@media (min-width: 750px) and (orientation: portrait)': {  
+            // no change.
+            fontSize: fontSize.big
+        },
+
+        '@media (min-width: 900px) and (orientation: portrait)': {  
+            fontSize: fontSize.veryBig
+        }
     },
 
     division: {
