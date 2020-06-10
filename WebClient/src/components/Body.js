@@ -10,7 +10,7 @@ const styles={
         width: '100vw',
         flexDirection: 'column',
         alignItems: 'center',
-        height: '80vw',
+        height: '50vh',
         backgroundColor: color.bodyGrey,
         boxShadow: boxShadow.dark,
         borderRadius: '25px',
@@ -58,6 +58,7 @@ const styles={
     },
 
     upperBodyContainer: {
+        position: 'relative',
         zIndex: '2', // Abstracts the receipt getting printed in the lower body
         width: '100%',
         display: 'flex',
@@ -87,11 +88,12 @@ const styles={
 
         '@media (min-width: 750px) and (orientation: portrait)': {  
             // no change.
-            fontSize: fontSize.big
+            fontSize: fontSize.small
         },
 
-        '@media (min-width: 900px) and (orientation: portrait)': {  
-            fontSize: fontSize.veryBig
+        '@media (min-width: 900)': {  
+            // no change.
+            fontSize: fontSize.big
         },
 
         ':hover': {
@@ -210,6 +212,10 @@ const styles={
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
+        top: '0%',
+        bottom: '0%',
+        left: '0%', 
+        right: '0%',
         // backgroundColor: color.bodyGrey,
         width: '90%',
         zIndex: '1', // Abstract the receipt,
@@ -226,8 +232,6 @@ const styles={
 
     lowerMouth: {
         position: 'absolute',  
-        top: '0%',
-        bottom: '0%',
         left: '0%',
         right: '0%',
         backgroundColor: color.faceGrey,

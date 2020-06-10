@@ -57,7 +57,7 @@ const styles={
         alignSelf: 'center',
         marginTop: padding.small,
         fontSize: fontSize.small,
-        marginBottom: padding.small,
+        // marginBottom: padding.small,
         overflowWrap: 'anywhere',
         flexWrap: 'wrap',
         paddingLeft: padding.small,

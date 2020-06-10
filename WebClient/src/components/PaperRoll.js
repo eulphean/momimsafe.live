@@ -12,7 +12,12 @@ var heightAni = Radium.keyframes({
 
 const styles={
     animatingContainer: {
-        position: 'relative',
+        position: 'absolute',
+        top:'0%',
+        bottom: '0%',
+        left: '0%',
+        right: '0%',
+        marginTop: padding.small,
         marginLeft: padding.small,
         marginRight: padding.small,
         height: '0px',
@@ -110,7 +115,7 @@ class PaperRoll extends React.Component {
         }
 
         if (this.state.currentReceiptIdx !== prevState.currentReceiptIdx) {
-            this.resetAnimation();
+            setTimeout(this.resetAnimation(), 500); // Give it some time to render before enabling animation. 
         }
     }
 
