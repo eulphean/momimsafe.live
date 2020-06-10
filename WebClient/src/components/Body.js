@@ -125,7 +125,7 @@ const styles={
         fontFamily: fontFamily.bebas, 
         fontSize: fontSize.small,
         letterSpacing: '1.5px',
-        
+
         '@media (min-width: 450px)': {  
             // no change.
         },
@@ -150,7 +150,8 @@ const styles={
         height: '20px',
         border: '1.4px solid black',
         borderRadius: '15px',
-        boxShadow: boxShadow.darkButton
+        boxShadow: boxShadow.darkButton,
+        cursor: 'pointer'
     },
 
     website: {
