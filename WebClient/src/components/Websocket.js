@@ -3,8 +3,8 @@ import Radium from 'radium'
 import io  from 'socket.io-client'
 import moment from 'moment-timezone'
 
-const localhostURL = "http://localhost:5000/app"
-//const herokuURL = "https://blooming-refuge-71111.herokuapp.com/app";
+//const localhostURL = "http://localhost:5000/app"
+const herokuURL = "https://blooming-refuge-71111.herokuapp.com/app";
 class Websocket extends React.Component {
     constructor(props) {
         super(props);
@@ -12,7 +12,7 @@ class Websocket extends React.Component {
             
         };
 
-        this.socket = io(localhostURL, { 
+        this.socket = io(herokuURL, { 
             reconnection: true, 
             reconnectionDelay: 500, 
             reconnectionAttempts: Infinity

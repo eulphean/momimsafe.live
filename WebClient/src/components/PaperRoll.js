@@ -76,7 +76,7 @@ class PaperRoll extends React.Component {
 
     createReceipt(isOrdered) {
         // If it's in order, we use the local variable, else calculate a random index. 
-        let receiptIdx = isOrdered ? this.lastReceiptIdx : Math.floor(Math.random() * this.props.database.length) + this.lastReceiptIdx;  
+        let receiptIdx = isOrdered ? this.lastReceiptIdx : Math.floor(Math.random() * this.props.database.length);  
 
         console.log("Receipt: " + receiptIdx);
         
@@ -142,6 +142,7 @@ class PaperRoll extends React.Component {
 
     onWrapperAnimationEnd() {
         console.log('Animation ending'); 
+        this.props.onAnimationEnd();
     }
 }
 

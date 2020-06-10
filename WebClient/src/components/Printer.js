@@ -20,7 +20,6 @@ const styles={
     // NOTE: Do not touch. 
     // Extra Div to hide the receipt from the top. 
     hidingDiv: {
-        backgroundColor: color.black,
         position: 'fixed',
         top: '0%',
         height: '12px',

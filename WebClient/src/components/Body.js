@@ -71,7 +71,7 @@ const styles={
     // With Amay Kataria websit
     header: {
         display: 'flex',
-        color: color.link,
+        color: color.sunLight,
         fontFamily: fontFamily.bebas, 
         fontSize: fontSize.verySmall,
         marginTop: padding.verySmall,
@@ -92,6 +92,10 @@ const styles={
 
         '@media (min-width: 900px) and (orientation: portrait)': {  
             fontSize: fontSize.veryBig
+        },
+
+        ':hover': {
+            color: color.link
         }
     },
 
@@ -159,13 +163,21 @@ const styles={
         boxShadow: boxShadow.darkButtonBig
     },
 
+    buttonDisabled: {
+        backgroundColor: color.disabled
+    }, 
+
     website: {
         display: 'flex',
         alignItems: 'flex-end',
-        color: color.link,
+        color: color.sunLight,
         fontFamily: fontFamily.bebas, 
         fontSize: fontSize.small,
         letterSpacing: '1.5px',
+
+        ':hover': {
+            color: color.link
+        },
 
         '@media (min-width: 450px)': {  
             // no change.
@@ -230,7 +242,8 @@ class Body extends React.Component {
         super(props);
         this.state={
            isPrintHovering: false,
-           isShuffleHovering: false
+           isShuffleHovering: false,
+           isDisabled: true
         };
 
         this.paperRoll = React.createRef();
@@ -252,7 +265,7 @@ class Body extends React.Component {
                 </div>
                 <div style={styles.mouthContainer}>
                     <div style={styles.upperMouth}></div>
-                    <PaperRoll ref={this.paperRoll} database={this.props.database} />
+                    <PaperRoll ref={this.paperRoll} database={this.props.database} onAnimationEnd={this.onReceiptAnimationEnd.bind(this)} />
                     <div style={styles.lowerMouth}></div>
                 </div>
             </div>
@@ -263,6 +276,7 @@ class Body extends React.Component {
         const website = 'https://amaykataria.com';
         return (
             <a 
+                key={'amaykataria'}
                 style={styles.header} 
                 target='_blank' 
                 rel="noopener noreferrer" 
@@ -275,20 +289,22 @@ class Body extends React.Component {
 
     getButtons() {
         let printButtonStyle = this.state.isPrintHovering ? [styles.button, styles.buttonHover] : [styles.button]; 
+        printButtonStyle = this.state.isDisabled ? [printButtonStyle, styles.buttonDisabled] : printButtonStyle; 
         let shuffleButtonStyle = this.state.isShuffleHovering ? [styles.button, styles.buttonHover] : [styles.button];
+        shuffleButtonStyle = this.state.isDisabled ? [shuffleButtonStyle, styles.buttonDisabled] : shuffleButtonStyle; 
         return (
             <div style={styles.buttonCollection}>
                 <div style={styles.btnContainer}>
                     <div style={styles.title}>
                         PRINT
                     </div>
-                    <div onMouseEnter={this.onPrintHover.bind(this)} onMouseLeave={this.onResetPrintHover.bind(this)} onClick={this.onPrint.bind(this)} style={printButtonStyle}></div>
+                    <div onMouseEnter={this.onPrintHover.bind(this)} onMouseLeave={this.onResetPrintHover.bind(this)} onClick={this.onPrint.bind(this)} style={printButtonStyle} disabled={this.state.isDisabled}></div>
                 </div>
                 <div style={styles.btnContainer}>
                     <div style={styles.title}>
                         SHUFFLE
                     </div>
-                    <div onMouseEnter={this.onShuffleHover.bind(this)} onMouseLeave={this.onResetShuffleHover.bind(this)} onClick={this.onShuffle.bind(this)} style={shuffleButtonStyle}></div>
+                    <div onMouseEnter={this.onShuffleHover.bind(this)} onMouseLeave={this.onResetShuffleHover.bind(this)} onClick={this.onShuffle.bind(this)} style={shuffleButtonStyle} disabled={this.state.isDisabled}></div>
                 </div>
             </div>
         );
@@ -297,6 +313,7 @@ class Body extends React.Component {
     getWebsite() {
         return (
             <a 
+                key={'momimsafe'}
                 style={styles.website} 
                 target='_blank' 
                 rel="noopener noreferrer" 
@@ -307,14 +324,30 @@ class Body extends React.Component {
         );
     }
 
+    onReceiptAnimationEnd() {
+        this.setState({
+            isDisabled: false
+        });
+    }
+
     onPrint(event) {
         event.stopPropagation();
-        this.paperRoll.current.createReceipt(true);
+        if (!this.state.isDisabled) {
+            this.paperRoll.current.createReceipt(true);
+            this.setState({
+                isDisabled: true
+            }); 
+        }
     }
 
     onShuffle(event) {
         event.stopPropagation(); 
-        this.paperRoll.current.createReceipt(false);
+        if (!this.state.isDisabled) {
+            this.paperRoll.current.createReceipt(false);
+            this.setState({
+                isDisabled: true
+            }); 
+        }
     }
 
     onPrintHover(event) {
