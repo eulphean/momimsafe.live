@@ -17,7 +17,7 @@ const styles={
         bottom: '0%',
         left: '0%',
         right: '0%',
-        marginTop: padding.small,
+        marginTop: padding.veryBig,
         marginLeft: padding.small,
         marginRight: padding.small,
         height: '0px',
@@ -69,7 +69,7 @@ class PaperRoll extends React.Component {
     }
 
     render() {
-        let animatingStyle = this.state.enableAnimation ? [styles.animatingContainer, this.state.  animationStyle] : styles.animatingContainer; 
+        let animatingStyle = this.state.enableAnimation ? [styles.animatingContainer, this.state.animationStyle] : styles.animatingContainer; 
         return (
             <div ref={this.wrapper} style={animatingStyle} onAnimationEnd={this.onWrapperAnimationEnd.bind(this)}>  
                 <div ref={this.receiptContainer} style={[styles.paperRollContainer]}>
@@ -128,8 +128,8 @@ class PaperRoll extends React.Component {
 
     resetAnimation() {
         // Setup new animation. 
-        let curHeight = parseInt(this.wrapper.current.clientHeight, 10);
-        let receiptHeight = parseInt(this.receipt.current.clientHeight, 10); 
+        let curHeight = parseInt(this.wrapper.current.clientHeight);
+        let receiptHeight = parseInt(this.receipt.current.clientHeight); 
         let finalHeight = curHeight + receiptHeight; // Little Extra Receipt
         console.log('resetAnimation: ' + curHeight + ', ' + finalHeight);
 
