@@ -7,7 +7,7 @@ import Popup, {PopupType} from './Popup.js'
 import VideoStream from './VideoStream.js'
 import { withOrientationChange } from 'react-device-detect'
 import Websocket from './Websocket.js'
-import LastReceipt from './Printer.js'
+import Printer from './Printer.js'
 
 const styles = {
   container: {
@@ -62,7 +62,7 @@ class App extends React.Component {
       <div onClick={this.onTouch.bind(this)} onTouchStart={this.onTouch.bind(this)} style={styles.container}>
         <Router basename={process.env.PUBLIC_URL}>
           <Switch>
-            <Route path="/printer"><LastReceipt /></Route>
+            <Route path="/printer"><Printer /></Route>
             <Route path="/">{content}</Route>
           </Switch>
         </Router>

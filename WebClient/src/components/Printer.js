@@ -25,7 +25,7 @@ const styles={
     }
 }
 
-class LastReceipt extends React.Component {
+class Printer extends React.Component {
     constructor(props) {
         super(props);
         this.state={
@@ -65,10 +65,7 @@ class LastReceipt extends React.Component {
         this.setState({
             databaseEntries: entries
         });
-
-        // Create first receipt.
-        // this.createReceipt(true); 
     }
 }
 
-export default Radium(LastReceipt);
+export default Radium(Printer);

@@ -108,7 +108,7 @@ const styles={
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
-        backgroundColor: color.bodyGrey,
+        // backgroundColor: color.bodyGrey,
         width: '90%',
         zIndex: '1', // Abstract the receipt,
     },
