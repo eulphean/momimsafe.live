@@ -5,14 +5,19 @@ import Websocket from './Websocket.js'
 import Body from './Body.js'
 
 const styles={
+    outerContainer: {
+    }, 
+
     container: {
         display: 'flex',
         backgroundColor: color.pureTeal,
         justifyContent: 'center',
         padding: '12px',
-        height: '100vh'
+        height: '100vh',
+        overflow: 'scroll'
     },
 
+    // NOTE: Do not touch. 
     // Extra Div to hide the receipt from the top. 
     hidingDiv: {
         backgroundColor: color.black,
@@ -37,7 +42,8 @@ class Printer extends React.Component {
 
     render() {;
         return (
-            <div style={styles.container}>
+            <div style={styles.outerContainer}>
+                <div style={styles.container}>
                 <Websocket 
                     ref={this.websocket}
                     processDatabase={this.processDatabase.bind(this)}
@@ -45,6 +51,7 @@ class Printer extends React.Component {
                 <div style={styles.hidingDiv}>
                 </div>
                 <Body database={this.state.databaseEntries} />
+            </div>
             </div>
         );
     }

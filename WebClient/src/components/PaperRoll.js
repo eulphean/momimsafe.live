@@ -27,27 +27,7 @@ const styles={
         display: 'flex',
         flexDirection: 'column',
         width: '100%',
-        alignItems: 'center',
-
-        '@media (min-width: 450px) and (orientation: landscape)' : {
-            width: 'calc(100%/2 - 4%)'
-        },
-    
-        '@media (min-width: 750px)' : {
-            width: 'calc(100%/2 - 3%)'
-        },
-    
-        '@media (min-width: 900px)' : {
-            width: 'calc(100%/2 - 2%)'
-        },
-    
-        '@media (min-width: 1200px)' : {
-            width: 'calc(100%/3 - 2%)'
-        },
-    
-        '@media (min-width: 1400px)' : {
-            width: 'calc(100%/4 - 2%)'
-        }
+        alignItems: 'center'
     },
 
     individualReceipt: {

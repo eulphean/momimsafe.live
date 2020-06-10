@@ -10,10 +10,51 @@ const styles={
         width: '100vw',
         flexDirection: 'column',
         alignItems: 'center',
-        height: '50vh',
+        height: '80vw',
         backgroundColor: color.bodyGrey,
         boxShadow: boxShadow.dark,
         borderRadius: '25px',
+
+        // IPAD classic
+        '@media (min-width: 450px) and (orientation: landscape)': {  
+            width: '90vw',
+            height: '80vh'
+        },
+
+        // IPAD classic
+        '@media (min-width: 750px) and (orientation: portrait)': {  
+            width: '60vw',
+            height: '35vh'
+        },
+
+        '@media (min-width: 750px)': {  
+            width: '60vw',
+            height: '35vh'
+        },
+
+        // IPAD Pro
+        '@media (min-width: 900px) and (orientation: portrait)': {  
+            width: '55vw',
+            height: '30vh'
+        },
+
+        // Classic laptop.
+        '@media (min-width: 900px)': {  
+            width: '55vw',
+            height: '30vh'
+        },
+
+        // Slightly bigger laptop. 
+        '@media (min-width: 1200px)': {  
+            width: '40vw',
+            height: '30vh'
+        },
+
+        // Slightly bigger laptop.
+        '@media (min-width: 1400px)': {  
+            width: '35vw',
+            height: '30vh'
+        }
     },
 
     upperBodyContainer: {
@@ -34,15 +75,7 @@ const styles={
         fontFamily: fontFamily.bebas, 
         fontSize: fontSize.verySmall,
         marginTop: padding.verySmall,
-        letterSpacing: '1.5px',
-
-        '@media (min-width: 750px)': {  
-            fontSize: fontSize.small,
-        },
-
-        '@media (min-width: 1200px)' : {
-            fontSize: fontSize.big
-        }
+        letterSpacing: '1.5px'
     },
 
     infoContainer: {
