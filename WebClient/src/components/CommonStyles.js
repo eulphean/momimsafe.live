@@ -74,7 +74,9 @@ const fontFamily = {
 
 const boxShadow = {
     dark: '0px 2px 4px ' + color.black,
-    darkButton: '0px 0px 3px' + color.black
+    darkButton: '0px 0px 3px' + color.black,
+    darkButtonBig: '0px 1px 5px' + color.black
+
 }
 
 export { color, fontSize, fontFamily, padding, boxShadow };

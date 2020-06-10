@@ -57,11 +57,12 @@ const styles={
         alignSelf: 'center',
         marginTop: padding.small,
         fontSize: fontSize.small,
-        marginBottom: padding.big,
+        marginBottom: padding.small,
         overflowWrap: 'anywhere',
         flexWrap: 'wrap',
         paddingLeft: padding.small,
-        paddingRight: padding.small
+        paddingRight: padding.small,
+        paddingBottom: padding.small
     },
 
     topPadding: {

@@ -154,6 +154,11 @@ const styles={
         cursor: 'pointer'
     },
 
+    buttonHover: {
+        backgroundColor: color.faceGrey,
+        boxShadow: boxShadow.darkButtonBig
+    },
+
     website: {
         display: 'flex',
         alignItems: 'flex-end',
@@ -224,7 +229,8 @@ class Body extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-           
+           isPrintHovering: false,
+           isShuffleHovering: false
         };
 
         this.paperRoll = React.createRef();
@@ -268,19 +274,21 @@ class Body extends React.Component {
     }
 
     getButtons() {
+        let printButtonStyle = this.state.isPrintHovering ? [styles.button, styles.buttonHover] : [styles.button]; 
+        let shuffleButtonStyle = this.state.isShuffleHovering ? [styles.button, styles.buttonHover] : [styles.button];
         return (
             <div style={styles.buttonCollection}>
                 <div style={styles.btnContainer}>
                     <div style={styles.title}>
                         PRINT
                     </div>
-                    <div onClick={this.onPrint.bind(this)} style={styles.button}></div>
+                    <div onMouseEnter={this.onPrintHover.bind(this)} onMouseLeave={this.onResetPrintHover.bind(this)} onClick={this.onPrint.bind(this)} style={printButtonStyle}></div>
                 </div>
                 <div style={styles.btnContainer}>
                     <div style={styles.title}>
                         SHUFFLE
                     </div>
-                    <div onClick={this.onShuffle.bind(this)} style={styles.button}></div>
+                    <div onMouseEnter={this.onShuffleHover.bind(this)} onMouseLeave={this.onResetShuffleHover.bind(this)} onClick={this.onShuffle.bind(this)} style={shuffleButtonStyle}></div>
                 </div>
             </div>
         );
@@ -301,14 +309,40 @@ class Body extends React.Component {
 
     onPrint(event) {
         event.stopPropagation();
-        console.log('Ordered Print'); 
         this.paperRoll.current.createReceipt(true);
     }
 
     onShuffle(event) {
         event.stopPropagation(); 
-        console.log('Shuffle print'); 
         this.paperRoll.current.createReceipt(false);
+    }
+
+    onPrintHover(event) {
+        event.stopPropagation(); 
+        this.setState({
+            isPrintHovering: true
+        });
+    }
+
+    onShuffleHover(event) {
+        event.stopPropagation();
+        this.setState({
+            isShuffleHovering: true
+        });
+    }
+
+    onResetPrintHover(event) {
+        event.stopPropagation();
+        this.setState({
+            isPrintHovering: false
+        }); 
+    }
+
+    onResetShuffleHover(event) {
+        event.stopPropagation();
+        this.setState({
+            isShuffleHovering: false
+        }); 
     }
 }
 
