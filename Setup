@@ -87,3 +87,10 @@ Printer Changes Left:
 - Add sound.
 - Make it responsive for all the screen sizes.
 - Add a hook from Webserver to print consequently.
+
+Capture and Download db (Need to do it from Central->Server) since there the credentials are stored. 
+heroku pg:backups:capture
+heroku pg:backups:download
+
+Restoring a Database onto the Local db
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -d mumimsafe_dev backup.2020.06.14
