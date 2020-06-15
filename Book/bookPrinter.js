@@ -21,29 +21,33 @@ printer.flush();
 let i = 0; 
 
 module.exports = {
-    printMessages: function(messages) {
+    printMessages: async function(messages) {
         console.log('Printer: Printing entries.');
 
         // For each message, print the message. 
         try {
-            device.open(function(){
+            device.open(async function(){
                 // [NOTE] Don't put console.log in here.
                 // It really fucks up the flow. 
-                let payload = messages[0]; 
-                var date = payload['date']; 
-                var time = payload['time']; 
-                var message = payload['message'];
+                for (var m in messages) {
+                    let payload = messages[m]; 
+                    var date = payload['date']; 
+                    var time = payload['time']; 
+                    var message = payload['message'];
 
-                printer.encode('UTF-8');
-                generateHeader(date, time); 
-                printer.spacing(); 
-                printer.newLine(); 
-                generateMessage(message); 
+                    printer.encode('UTF-8');
+                    generateHeader(date, time); 
+                    printer.spacing(); 
+                    printer.newLine(); 
+                    generateMessage(message); 
+                    printer.newLine();
 
-                // Final cut of the receipt. 
-                printer.feed(3);
-                printer.flush();
-                console.log('leaving device:' + i++);
+                    // Final cut of the receipt. 
+                    printer.feed(3);
+                    printer.flush(); 
+
+                    await sleep(2000);
+                }
             });
         } catch(e) {
             console.log('Failure while printing: Check if we have run out of paper.');
@@ -67,6 +71,13 @@ module.exports = {
         }
     }
 }
+
+
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+} 
 
 
 // function printMessages (payload) {

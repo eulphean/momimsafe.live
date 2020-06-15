@@ -51,7 +51,7 @@ function onCutPaper(socket) {
 
 function onPrintRandomEntries(socket) {
     console.log('Requesting to print some random entries.');
-    var queryText = 'SELECT * FROM entries ORDER BY random() limit 5;'; 
+    var queryText = 'SELECT * FROM entries ORDER BY random() limit 20;'; 
     pool.query(queryText, (error, results) => {
         sqlReadRandomCallback(error, results, socket)
     });
