@@ -29,7 +29,7 @@ const styles={
 
         '@media (min-width: 750px)': {  
             width: '60vw',
-            height: '35vh'
+            height: '40vh'
         },
 
         // IPAD Pro
@@ -41,13 +41,13 @@ const styles={
         // Classic laptop.
         '@media (min-width: 900px)': {  
             width: '55vw',
-            height: '30vh'
+            height: '35vh'
         },
 
         // Slightly bigger laptop. 
         '@media (min-width: 1200px)': {  
             width: '40vw',
-            height: '30vh'
+            height: '35vh'
         },
 
         // Slightly bigger laptop.
