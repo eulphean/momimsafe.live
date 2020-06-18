@@ -55,7 +55,7 @@ module.exports = {
                     printer.newLine();
 
                     // Final cut of the receipt. 
-                    printer.feed(3);
+                    printer.feed(1);
                     printer.flush(); 
 
                     await sleep(2000);
@@ -73,7 +73,7 @@ module.exports = {
         try {
             device.open(function() {
                 // Cut routine.
-                printer.feed(1);
+                //printer.feed(1);
                 printer.cut(0, 5);
                 printer.flush();
             });
@@ -96,7 +96,7 @@ function generateHeader(date, time) {
     // Defualt spacing for header section 
     printer.spacing(); 
     printer.lineSpace(); 
-    printer.align('ct'); 
+    printer.align('CT'); 
 
     // ------------- Title -------------- // 
 
@@ -108,7 +108,7 @@ function generateHeader(date, time) {
     printer.setReverseColors(false);
     printer.newLine(); 
     printer.setReverseColors(true); 
-    printer.text(' momimsafe.live '); 
+    printer.text(' https://momimsafe.live '); 
 
     // ------------- Date, Time ---------- // 
     
@@ -118,17 +118,55 @@ function generateHeader(date, time) {
     printer.style('b'); 
     printer.size(1, 1); 
 
-    printer.text('CHICAGO, USA'); 
-    var t = date + ' ' + time; 
+    printer.text('CHICAGO, USA');
+    let o = beautifyDate(date, time);  
+    var t = o.date + ' ' + o.time; 
     printer.text(t);
 }
 
 function generateMessage(message) {
     // ------------- Message -------------- // 
     printer.setReverseColors(false); 
-    // printer.spacing(0); 
-    // printer.lineSpace(0);
-    printer.align('ct'); 
+    printer.align('CT'); 
     printer.size(2, 2);
-    printer.text(message);
+    
+    let lines = message.split('\n'); 
+    for (var i = 0; i < lines.length; i++) {
+        linePrint(lines[i]); 
+    }
+}
+
+function linePrint(line) {
+    let words = line.split(' '); 
+    let curLine = ''; // Empty string. 
+    for (var i = 0; i < words.length; i++){
+        let curWord = words[i];
+        let curNewLine = curLine + curWord + ' '; 
+        if (curNewLine.length <= 24) {
+            curLine = curNewLine;  
+        } else {
+            curLine.trim(); // Trim the white white space. 
+            printer.println(curLine); 
+            curLine = curWord + ' '; // Reset current Line
+        }
+    }
+    
+    if (curLine.length > 0) {
+        curLine.trim(); // Trim white space. 
+        // Print the remaining character. 
+        printer.println(curLine);
+    }
+}
+
+function beautifyDate(date, time) {
+    let d = date.toString().split("T")[0]; 
+    let t = time.toString().split(':');
+    var dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    d = d.split('-');
+    d = new Date(d[0], d[1]-1, d[2], t[0], t[1], t[2]); 
+    var obj = {
+        date: d.toLocaleDateString('en-US', dateOptions),
+        time: d.toLocaleTimeString('en-US')
+    }
+    return obj;
 }
