@@ -21,9 +21,21 @@ printer.flush();
 let i = 0; 
 
 module.exports = {
-    printMessages: async function(messages) {
-        console.log('Printer: Printing entries.');
+    printDumb: async function(message) {
+        try {
+            device.open(async function() {
+                printer.encode('UTF-8');
+                printer.text(message);
+                printer.feed(3);
+                printer.flush(); 
+            });
+        } catch (e) {
+            console.log('Failure while printing.');
+            console.log(e);
+        }
+    },
 
+    printMessages: async function(messages) {
         // For each message, print the message. 
         try {
             device.open(async function(){
@@ -79,30 +91,6 @@ function sleep(ms) {
   });
 } 
 
-
-// function printMessages (payload) {
-//     console.log('New Print Payload Received'); 
-
-
-//     try {
-//         // Printer commands to generate a receipt. 
-//         device.open(function() {
-//             // Set basic styles. 
-//             printer.encode('UTF-8');
-//             generateHeader(date, time); 
-//             printer.spacing(); 
-//             printer.newLine(); 
-//             generateMessage(message);
-//             // End routine. 
-//             //printer.cut(0, 5);
-//             printer.feed(1);
-//             printer.flush(); 
-//         });
-//     } catch (e) {
-//         console.log('Failure while printing: Check if we have run out of paper.');
-//         console.log(e); 
-//     }; 
-// }
 
 function generateHeader(date, time) {
     // Defualt spacing for header section 

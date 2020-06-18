@@ -85,11 +85,13 @@ function onNext() {
 }
 
 function onShow() {
-  socket.emit('show', { entry : allEntries[curEntryIndex] });
+  let curEntry = allEntries[curEntryIndex];
+  socket.emit('show', { entry : curEntry });
 }
 
 function onPrint() {
-  socket.emit('print', { entry : allEntries[curEntryIndex] });
+  let curEntry = allEntries[curEntryIndex];
+  socket.emit('print', { entry : curEntry });
 }
 
 // function onPrintEntries() {
@@ -121,4 +123,3 @@ function setupCurrentEntryTable() {
   binaryCell.innerHTML = 'Message';
   binaryCell.width = '50%';
 }
-

@@ -60,12 +60,19 @@ function onBookClient(socket) {
 }
 
 function onShowEntry(entry) {
+    entry['message'] = cleanMessage(entry['message']);
     console.log(entry);
 }
 
 function onPrintEntry(entry) {
+    entry['message'] = cleanMessage(entry['message']);
     printer.printMessages([entry]);
 }
+
+function cleanMessage(msg) {
+    let cleanedMsg = msg.replace(/(\r\n|\n|\r)/gm,"\n");
+    return cleanedMsg; 
+}  
 
 function onCutPaper(socket) {
     console.log('Requesting to cut paper.'); 
