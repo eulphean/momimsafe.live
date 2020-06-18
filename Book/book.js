@@ -39,9 +39,32 @@ function alive() {
 
 function onBookClient(socket) {
     console.log('New Book Web Client connection: ' + socket.id); 
+    
+    socket.on('print', ({ entry }) => {
+        onPrintEntry(entry);
+    });
+    
+    socket.on('show', ({ entry }) => {
+        onShowEntry(entry);
+    });
+
     socket.on('printRandom', onPrintRandomEntries); 
+    
+    socket.on('loadDatabase', ({ order }) => {
+        onLoadDatabase(order); 
+    }); 
+    
     socket.on('cutPaper', onCutPaper);
+    
     socket.on('disconnect', () => console.log('Book Web client ' + socket.id + ' diconnected'));
+}
+
+function onShowEntry(entry) {
+    console.log(entry);
+}
+
+function onPrintEntry(entry) {
+    printer.printMessages([entry]);
 }
 
 function onCutPaper(socket) {
@@ -69,4 +92,24 @@ function sqlReadRandomCallback(error, results, socket) {
     // Keep it around here if I want to put these entries on the screen for the artist book. 
     // console.log('Sending random entries');
     // socket.emit('receiveRandomEntries', entries);
+}
+
+function onLoadDatabase(order) {
+    console.log('Requesting for some random entries with order ' + order);
+    var queryText = 'SELECT * FROM entries ORDER BY date ' + order + ', time ' + order + ';'; 
+    pool.query(queryText, (error, results) => {
+        sqlReadDatabaseCallback(error, results)
+    });
+}
+
+function sqlReadDatabaseCallback(error, results) {
+    if (error) {
+        throw error;
+    }
+    
+    // Format the results somehow. 
+    var entries = results.rows; 
+
+    console.log('Sending entire database entries: ' + entries.length);
+    bookClient.emit('databaseEntries', entries);
 }

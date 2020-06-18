@@ -6,9 +6,51 @@
     <title>Artist Book Setup</title>
     <style> 
       body {
-        padding: 0; margin: 0;
+        padding: 10px; margin: 0;
         font-family: Arial, Helvetica, sans-serif;
         font-size: 15px; 
+      }
+
+      .load {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10px;
+        align-items: center;
+      }
+
+      #numEntries {
+        margin-left: 5px;
+        font-weight: 600;
+        font-size: 18px;
+      }
+
+      button {
+        margin: 5px;
+      }
+
+      .print {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10px;
+      }
+
+      .move {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 15px;
+      }
+
+      .entry {
+        margin-bottom: 20px;
+      }
+
+      table, td {
+        font-size: 15px;
+        border: 1px solid black;
+        table-layout: fixed;
+        text-align: center;
+        box-sizing: border-box;
+        word-wrap: break-word
       }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
@@ -20,9 +62,28 @@
     <div class=container>
         <div class='input'>
             <h2>MOMIMSAFE (Artist Book)</h2>
-            <div class='buttons'>
-              <button onclick="onPrintEntries()">PRINT ENTRIES</button>
-              <button onclick="onCut()">CUT PAPER</button>
+            <div class="load">
+              <button onClick="onLoadEntries()">LOAD ENTRIES</button>
+              <div id="numEntries">Num Entries</div>
+            </div>
+            <div class="entry">
+              <table id="curEntry">
+                <tr>
+                  <td id="index" width="5%"></td>
+                  <td id="date" width="10%"></td>
+                  <td id="time" width="8%"></td>
+                  <td id="message" width="50%"></td>
+                </tr>
+              </table>
+            </div>
+            <div class="move">
+              <button onClick="onPrevious()">PREVIOUS</button>
+              <button onClick="onNext()">NEXT</button>
+            </div>
+            <div class='print'>
+              <button onClick="onShow()">SHOW</button>
+              <button onclick="onPrint()">PRINT</button>
+              <button onclick="onCut()">CUT</button>
             </div>
         </div>
     </div>
