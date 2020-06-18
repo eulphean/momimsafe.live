@@ -9,6 +9,7 @@ var express = require('express');
 var socket = require('socket.io');
 var Pool = require('pg').Pool; 
 var printer = require('./bookPrinter.js');
+var emoji = require('node-emoji'); 
 
 // ------------------ postgresql database ---------------------- // 
 const connString = process.env['DATABASE_URL'];
@@ -70,7 +71,8 @@ function onPrintEntry(entry) {
 }
 
 function cleanMessage(msg) {
-    let cleanedMsg = msg.replace(/(\r\n|\n|\r)/gm,"\n");
+    let m = emoji.unemojify(msg); // Replace any emoji.
+    let cleanedMsg = m.replace(/(\r\n|\n|\r)/gm,"\n");
     return cleanedMsg; 
 }  
 
