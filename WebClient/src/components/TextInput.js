@@ -65,7 +65,7 @@ class TextInput extends React.Component {
                     ref={this.textArea}
                     style={styles.textArea} 
                     outline='none' 
-                    maxLength='500' 
+                    maxLength='200' 
                     value={this.state.value}
                     onChange={this.onChange.bind(this)}
                     placeholder='Type your message...' />

@@ -53,7 +53,7 @@ const styles={
     },
 
     message: {
-        display: 'flex',
+        // display: 'flex',
         alignSelf: 'center',
         marginTop: padding.small,
         fontSize: fontSize.small,
@@ -89,15 +89,23 @@ class Receipt extends React.Component {
         let containerStyle = this.props.topPadding ? [styles.container, styles.topPadding] : styles.container; 
         // Date
         let d = this.beautifyDate();
+
+        // Add the space to the messages. 
+        let msg = this.props.entry.message; 
+        let m = (
+            msg.split('\n').map((item, key) => {
+            return <span key={key}>{item}<br/></span>
+          })); 
+
         return (
             <div style={containerStyle}>
                 <div style={styles.title}>{' MOMIMSAFE '}</div>
                 <div style={websiteStyle}>
                     momimsafe.live
                 </div>
-                {/* <div style={styles.city}>
+                <div style={styles.city}>
                     CHICAGO, USA
-                </div> */}
+                </div>
                 <div style={styles.dateTimeContainer}>
                     <div style={styles.dateTime}>
                         {d.date}
@@ -107,7 +115,7 @@ class Receipt extends React.Component {
                     </div>
                 </div>
                 <div style={styles.message}>
-                        {this.props.entry.message}
+                        {m}
                 </div>
             </div>
         );
