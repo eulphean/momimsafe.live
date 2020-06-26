@@ -383,6 +383,14 @@ class Body extends React.Component {
             isShuffleHovering: false
         }); 
     }
+
+    getCurrentReceiptIdx() {
+        return this.paperRoll.current.state.currentReceiptIdx; 
+    }
+
+    createReceipt() {
+        this.paperRoll.current.createReceipt(true); 
+    }
 }
 
 export default Radium(Body);

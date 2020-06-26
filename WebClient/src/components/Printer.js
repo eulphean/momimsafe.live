@@ -34,6 +34,7 @@ class Printer extends React.Component {
         };
 
         this.websocket = React.createRef();
+        this.body = React.createRef();
     }
 
     render() {;
@@ -42,10 +43,13 @@ class Printer extends React.Component {
                 <Websocket 
                     ref={this.websocket}
                     processDatabase={this.processDatabase.bind(this)}
+                    appendDatabase={this.appendDatabase.bind(this)}
                 /> 
                 <div style={styles.hidingDiv}>
                 </div>
-                <Body database={this.state.databaseEntries} />
+                <Body 
+                    ref={this.body}
+                    database={this.state.databaseEntries} />
             </div>
         );
     }
@@ -67,6 +71,20 @@ class Printer extends React.Component {
             databaseEntries: entries
         });
     }
+
+    appendDatabase(entry) {
+        console.log('Add a new entry to the dabatase'); 
+        let currentReceiptIdx = this.body.current.getCurrentReceiptIdx(); 
+        // Add the element at that index. 
+        let currentDb = this.state.databaseEntries;
+        currentDb.splice(currentReceiptIdx, 0, entry); 
+        this.setState({
+            databaseEntries: currentDb
+        }); 
+        this.body.current.createReceipt(); 
+    }
+
+
 }
 
 export default Radium(Printer);

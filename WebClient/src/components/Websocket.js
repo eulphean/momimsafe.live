@@ -3,8 +3,8 @@ import Radium from 'radium'
 import io  from 'socket.io-client'
 import moment from 'moment-timezone'
 
-//const localhostURL = "http://localhost:5000/app"
-const herokuURL = "https://blooming-refuge-71111.herokuapp.com/app";
+const localhostURL = "http://localhost:5000/app"
+//const herokuURL = "https://blooming-refuge-71111.herokuapp.com/app";
 class Websocket extends React.Component {
     constructor(props) {
         super(props);
@@ -12,7 +12,7 @@ class Websocket extends React.Component {
             
         };
 
-        this.socket = io(herokuURL, { 
+        this.socket = io(localhostURL, { 
             reconnection: true, 
             reconnectionDelay: 500, 
             reconnectionAttempts: Infinity
@@ -34,6 +34,7 @@ class Websocket extends React.Component {
         this.socket.on('disconnect', this.disconnect.bind(this));
         this.socket.on('receiveRandomEntries', this.receiveEntries.bind(this)); 
         this.socket.on('receiveDatabaseEntries', this.receiveDatabaseRentries.bind(this)); 
+        this.socket.on('printPayload', this.printPayload.bind(this));
     }
 
     disconnect() {
@@ -78,6 +79,13 @@ class Websocket extends React.Component {
     receiveDatabaseRentries(payload) {
         console.log('Entries received');
         this.props.processDatabase(payload); 
+    }
+
+    printPayload(payload) {
+        console.log('Payload received'); 
+        if (this.props.appendDatabase) {
+            this.props.appendDatabase(payload);
+        }
     }
 }
 

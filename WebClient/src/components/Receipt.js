@@ -122,7 +122,19 @@ class Receipt extends React.Component {
     }
 
     beautifyDate() {
-        let d = this.props.entry.date.toString().split("T")[0]; 
+        let d = this.props.entry.date.toString().split("T"); 
+        // Already coming in the right format. So accept it as it is. 
+        if (d.length === 1) {
+            var ob = {
+                date: this.props.entry.date,
+                time: this.props.entry.time
+            }
+            return ob; 
+        }
+
+        // Get the split part and work forth on beautification. 
+        d = d[0]; 
+
         let t = this.props.entry.time.toString().split(':');
         var dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
         d = d.split('-');
