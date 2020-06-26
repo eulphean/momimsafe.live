@@ -81,7 +81,10 @@ class Printer extends React.Component {
         this.setState({
             databaseEntries: currentDb
         }); 
-        this.body.current.createReceipt(); 
+        // Before creating receipt, check if things are already printing. 
+        if (!this.body.current.state.isDisabled) {
+            this.body.current.createReceipt(); 
+        }
     }
 
 
