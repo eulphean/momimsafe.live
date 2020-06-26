@@ -94,3 +94,5 @@ heroku pg:backups:download
 
 Restoring a Database onto the Local db
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -d mumimsafe_dev backup.2020.06.14
+
+DELETE FROM entries WHERE time = '%15:06:42%'

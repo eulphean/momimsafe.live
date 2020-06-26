@@ -120,6 +120,9 @@ function onTextPayload(payload) {
     
     // Emit this payload to be printed on the receipt printer. 
     receiptSocket.emit('printPayload', payload); 
+    // Also send this payload back to the website, so the printer can
+    // print this message. 
+    appSocket.emit('printPayload', payload);
 }
 
 // Store the entries into the database. 
@@ -175,7 +178,8 @@ function onReadEntries(data) {
         queryText = 'SELECT * FROM entries WHERE date <= $1 ORDER BY date ASC'; 
         pool.query(queryText, [data.to], sqlQueryCallback); 
     } else {
-        queryText = 'SELECT * FROM entries ORDER BY date ASC'; 
+        var order = 'ASC';
+        queryText = 'SELECT * FROM entries ORDER BY date ' + order + ', time ' + order + ';';
         pool.query(queryText, sqlQueryCallback); 
     }
 }

@@ -41,6 +41,7 @@ function onPayload (payload) {
     var date = payload['date']; 
     var time = payload['time']; 
     var message = payload['message'];
+    message = cleanMessage(message); 
 
     try {
         // Printer commands to generate a receipt. 
@@ -62,6 +63,11 @@ function onPayload (payload) {
         console.log(e); 
     }; 
 }
+
+function cleanMessage(msg) {
+    let m = emoji.unemojify(msg); // Replace any emoji.
+    return m; 
+}  
 
 function generateHeader(date, time) {
     // Defualt spacing for header section 

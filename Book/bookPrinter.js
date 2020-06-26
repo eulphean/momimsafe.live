@@ -8,15 +8,15 @@
 var escpos = require('escpos'); 
 
 var device, printer; 
-device = new escpos.Serial('/dev/tty.Repleo-PL2303-00001014', {
-    autoOpen: true,
-    baudRate: 38400, 
-});
-printer = new escpos.Printer(device); 
+// device = new escpos.Serial('/dev/tty.Repleo-PL2303-00001014', {
+//     autoOpen: true,
+//     baudRate: 38400, 
+// });
+// printer = new escpos.Printer(device); 
 
-printer.feed(1); 
-printer.cut(0, 5);
-printer.flush();
+// printer.feed(1); 
+// printer.cut(0, 5);
+// printer.flush();
 
 let i = 0; 
 
