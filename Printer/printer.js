@@ -1,7 +1,7 @@
 var io = require('socket.io-client'); 
 var localhostURL = "http://localhost:5000/receipt"
 var herokuURL = "https://blooming-refuge-71111.herokuapp.com/receipt";
-
+var emoji = require('node-emoji');
 
 var socket = io.connect(herokuURL, {
     reconnection: true, 
@@ -14,7 +14,7 @@ var escpos = require('escpos');
 // '/dev/cu.Repleo-PL2303-00002014'
 
 var device, printer; 
-device = new escpos.Serial('/dev/tty.Repleo-PL2303-00001014', {
+device = new escpos.Serial('/dev/ttyUSB0', {
     autoOpen: true,
     baudRate: 38400, 
 });
@@ -52,7 +52,7 @@ function onPayload (payload) {
             printer.spacing(); 
             printer.newLine(); 
             generateMessage(message);
-            // printer.newLine();
+            printer.newLine();
             // End routine. 
             //printer.cut(0, 5);
             printer.feed(1);
@@ -107,5 +107,31 @@ function generateMessage(message) {
     // printer.lineSpace(0);
     printer.align('ct'); 
     printer.size(2, 2);
-    printer.text(message);
+
+    let lines = message.split('\n'); 
+    for (var i = 0; i < lines.length; i++) {
+        linePrint(lines[i]); 
+    }
+}
+
+function linePrint(line) {
+    let words = line.split(' '); 
+    let curLine = ''; // Empty string. 
+    for (var i = 0; i < words.length; i++){
+        let curWord = words[i];
+        let curNewLine = curLine + curWord + ' '; 
+        if (curNewLine.length <= 24) {
+            curLine = curNewLine;  
+        } else {
+            curLine.trim(); // Trim the white white space. 
+            printer.println(curLine); 
+            curLine = curWord + ' '; // Reset current Line
+        }
+    }
+    
+    if (curLine.length > 0) {
+        curLine.trim(); // Trim white space. 
+        // Print the remaining character. 
+        printer.println(curLine);
+    }
 }
