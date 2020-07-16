@@ -94,14 +94,20 @@ function onPrint() {
   socket.emit('print', { entry : curEntry });
 }
 
-// function onPrintEntries() {
-//   socket.emit('printRandom'); 
-//   console.log('Emitting a printRandom event.');
-// }
-
 function onCut(){
   socket.emit('cutPaper');
   console.log('Emitting a cutPaper event. ')
+}
+
+function onPrintCont() {
+  // Use the current entry index as the starting point
+  let messages = [];
+  let startIdx = curEntryIndex; 
+  let maxMessages = 50; 
+  for (var i = startIdx; i < startIdx + maxMessages; i++) {
+    messages.push(allEntries[i]); 
+  }
+  socket.emit('printEntries', {entries: messages}); 
 }
 
 function setupCurrentEntryTable() {

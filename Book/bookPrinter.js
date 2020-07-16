@@ -8,15 +8,15 @@
 var escpos = require('escpos'); 
 
 var device, printer; 
-// device = new escpos.Serial('/dev/tty.Repleo-PL2303-00001014', {
-//     autoOpen: true,
-//     baudRate: 38400, 
-// });
-// printer = new escpos.Printer(device); 
+device = new escpos.Serial('/dev/tty.Repleo-PL2303-00002014', {
+    autoOpen: true,
+    baudRate: 38400, 
+});
+printer = new escpos.Printer(device); 
 
-// printer.feed(1); 
-// printer.cut(0, 5);
-// printer.flush();
+printer.feed(1); 
+printer.cut(0, 5);
+printer.flush();
 
 let i = 0; 
 
@@ -35,7 +35,7 @@ module.exports = {
         }
     },
 
-    printMessages: async function(messages) {
+    printMessages: async function(messages, shouldCut = false) {
         // For each message, print the message. 
         try {
             device.open(async function(){
@@ -52,11 +52,14 @@ module.exports = {
                     printer.spacing(); 
                     printer.newLine(); 
                     generateMessage(message); 
-                    printer.newLine();
+                    // printer.newLine();
 
-                    // Final cut of the receipt. 
                     printer.feed(1);
                     printer.flush(); 
+
+                    if (shouldCut) {
+                        printer.cut(0, 5); 
+                    }
 
                     await sleep(2000);
                 }

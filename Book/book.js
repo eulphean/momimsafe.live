@@ -44,6 +44,10 @@ function onBookClient(socket) {
     socket.on('print', ({ entry }) => {
         onPrintEntry(entry);
     });
+
+    socket.on('printEntries', ({ entries }) => {
+        onPrintEntries(entries);
+    }); 
     
     socket.on('show', ({ entry }) => {
         onShowEntry(entry);
@@ -63,6 +67,15 @@ function onBookClient(socket) {
 function onShowEntry(entry) {
     entry['message'] = cleanMessage(entry['message']);
     console.log(entry);
+}
+
+function onPrintEntries(entries) {
+    for (var i = 0; i < entries.length; i++) {
+        let entry = entries[i]; // Get the entry. 
+        entry['message'] = cleanMessage(entry['message']); // Clean it
+        entries[i] = entry; // Reassign it. 
+    }
+    printer.printMessages(entries, true); 
 }
 
 function onPrintEntry(entry) {
