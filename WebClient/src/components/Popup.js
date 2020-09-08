@@ -342,6 +342,10 @@ const styles={
         }
     },
 
+    simpleLink: {
+        color: color.link
+    },
+
     receiptsContainer: {
         display: 'flex',
         flexDirection: 'row',
@@ -380,7 +384,18 @@ const styles={
 
 const aboutBody="momimsafe is an active live-stream of my home studio space, where I spend the majority of my time in this post-covid era. It was developed in response to the COVID-19 lockdown, with an urgent need in mind; to be visually and physically accessible to all my friends and family globally; especially my mom, who has been concerned about my safety and health during this time. It's a twisted take on communication, which is personal and can exist for an extended period of time. To bridge your virtual space with my physical space, you can send me messages that are archived and printed in my space in real-time.";
 
-const sendBody='There may be times when you see me working in my studio, or you may not. But you can leave me a message by typing in the textbox above and hitting the send button. Your messages will be printed by a receipt printer in my studio, which is situated on the left side of my desk. These messages arrive in real-time and are anonymous. So leave a trace in my space, be honest, and send some love. Below are some of the receipts produced already.';
+const sendBodyA='There may be times when you see me working in my studio, or you may not. But you can leave me a message by typing in the textbox above and hitting the send button. Your messages will be printed by a receipt printer in my studio, which is situated on the left side of my desk. These messages arrive in real-time and are anonymous. So leave a trace in my space, be honest, and send some love. Also, you can access a ';
+
+const printer = 'https://momimsafe.live/#/printer';
+const link = (<a 
+    style={styles.simpleLink} 
+    target='_blank' 
+    rel="noopener noreferrer" 
+    href={printer}>
+    virtual printer
+</a>); 
+
+const sendBodyB=', where you can see all the messages received since the beginning. Below are some of the receipts produced already.'; 
 
 class Popup extends React.Component {
     constructor(props) {
@@ -526,7 +541,7 @@ class Popup extends React.Component {
                         </button>
                     </div>
                     <div style={bodyStyle}>
-                        {sendBody}
+                        {sendBodyA}{link}{sendBodyB}
                     </div>
                     <div style={styles.receiptsContainer}>
                         {receipts}
@@ -567,7 +582,7 @@ class Popup extends React.Component {
     }
 
     hidePopup(event) {
-        event.stopPropagation(); 
+        event.stopPropagation();
 
         this.setState({
             popupState: PopupState.Close
