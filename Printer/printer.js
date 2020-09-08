@@ -14,7 +14,7 @@ var escpos = require('escpos');
 // '/dev/cu.Repleo-PL2303-00002014'
 
 var device, printer; 
-device = new escpos.Serial('/dev/ttyUSB0', {
+device = new escpos.Serial('/dev/tty.Repleo-PL2303-00002014', {
     autoOpen: true,
     baudRate: 38400, 
 });

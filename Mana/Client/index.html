@@ -134,7 +134,7 @@
     </div>
   </body>
   <script>
-    var time = 5; // minutes
+    var time = 1; // minutes
     var stream; var recordedChunks = []; var mediaRecorder; 
     var options = { mimeType: 'video/webm; codecs=vp9' };
     var canvas = document.getElementById('video-canvas');
@@ -176,7 +176,7 @@
       console.log('MediaRecorder started', mediaRecorder);
       startButton.innerHTML = 'Stop Recording'
 
-      setTimeout(stopRecording, time*60*1000); // After number of seconds. 
+      setTimeout(stopRecording, time*20*1000); // After number of seconds. 
     } 
 
     function download() {
