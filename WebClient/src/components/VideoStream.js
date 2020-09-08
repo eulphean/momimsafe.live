@@ -67,7 +67,7 @@ class VideoStream extends React.Component {
             <div style={containerStyle} ref={this.container}>
                 <div style={styles.overlay}>
                 </div>
-                <video style={styles.canvas} src={docVideo} autoPlay loop>
+                <video style={styles.canvas} src={docVideo} type='video/mp4' autoPlay loop>
                 </video>
                 {/* <canvas style={styles.canvas} ref={this.canvas}></canvas> */}
             </div>
