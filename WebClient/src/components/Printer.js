@@ -10,6 +10,7 @@ const styles={
         backgroundColor: color.pureTeal,
         justifyContent: 'center',
         padding: '12px',
+        paddingBottom: '0px',
         height: '100vh',
         overflow: 'scroll'
     },

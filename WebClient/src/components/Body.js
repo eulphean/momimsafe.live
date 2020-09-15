@@ -249,6 +249,7 @@ class Body extends React.Component {
         this.state={
            isPrintHovering: false,
            isShuffleHovering: false,
+           isReloadHovering: false,
            isDisabled: true
         };
 
@@ -298,6 +299,8 @@ class Body extends React.Component {
         printButtonStyle = this.state.isDisabled ? [printButtonStyle, styles.buttonDisabled] : printButtonStyle; 
         let shuffleButtonStyle = this.state.isShuffleHovering ? [styles.button, styles.buttonHover] : [styles.button];
         shuffleButtonStyle = this.state.isDisabled ? [shuffleButtonStyle, styles.buttonDisabled] : shuffleButtonStyle; 
+        let reloadButtonStyle = this.state.isReloadHovering ? [styles.button, styles.buttonHover] : [styles.button];
+        reloadButtonStyle = this.state.isDisabled ? [reloadButtonStyle, styles.buttonDisabled] : reloadButtonStyle; 
         return (
             <div style={styles.buttonCollection}>
                 <div style={styles.btnContainer}>
@@ -311,6 +314,12 @@ class Body extends React.Component {
                         SHUFFLE
                     </div>
                     <div onMouseEnter={this.onShuffleHover.bind(this)} onMouseLeave={this.onResetShuffleHover.bind(this)} onClick={this.onShuffle.bind(this)} style={shuffleButtonStyle} disabled={this.state.isDisabled}></div>
+                </div>
+                <div style={styles.btnContainer}>
+                    <div style={styles.title}>
+                        RELOAD
+                    </div>
+                    <div onMouseEnter={this.onReloadHover.bind(this)} onMouseLeave={this.onResetReloadHover.bind(this)} onClick={this.onReload.bind(this)} style={shuffleButtonStyle} disabled={this.state.isDisabled}></div>
                 </div>
             </div>
         );
@@ -356,6 +365,13 @@ class Body extends React.Component {
         }
     }
 
+    onReload(event) {
+        event.stopPropagation();
+        if (!this.state.isDisabled) {
+            window.location.reload();
+        }
+    }
+
     onPrintHover(event) {
         event.stopPropagation(); 
         this.setState({
@@ -370,10 +386,17 @@ class Body extends React.Component {
         });
     }
 
-    onResetPrintHover(event) {
+    onReloadHover(event) {
         event.stopPropagation();
         this.setState({
-            isPrintHovering: false
+            isReloadHovering: true
+        });
+    }
+
+    onResetReloadHover(event) {
+        event.stopPropagation();
+        this.setState({
+            isReloadHovering: false
         }); 
     }
 
@@ -381,6 +404,13 @@ class Body extends React.Component {
         event.stopPropagation();
         this.setState({
             isShuffleHovering: false
+        }); 
+    }
+
+    onResetPrintHover(event) {
+        event.stopPropagation();
+        this.setState({
+            isPrintHovering: false
         }); 
     }
 
