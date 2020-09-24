@@ -11,6 +11,7 @@
   "dependencies": {
     "node-emoji": "^1.10.0",
     "escpos": "^2.5.2",
+    "escpos-upside": "^3.0.3",
     "serialport": "^8.0.5",
     "socket.io-client": "^2.2.0",
     "pg": "^8.3.3"

@@ -2,6 +2,8 @@ var io = require('socket.io-client');
 var localhostURL = "http://localhost:5000/receipt"
 var herokuURL = "https://blooming-refuge-71111.herokuapp.com/receipt";
 var emoji = require('node-emoji');
+var Pool = require('pg').Pool; 
+var printer = require('./bulkPrinter.js');
 
 var socket = io.connect(localhostURL, {
     reconnection: true, 
@@ -10,151 +12,80 @@ var socket = io.connect(localhostURL, {
 }); 
 
 var escpos = require('escpos');
-// Setup device and printer with the baudrate. 
-// '/dev/cu.Repleo-PL2303-00002014'
 
-var device, printer; 
-device = new escpos.Serial('/dev/tty.usbserial-1410', {
-    autoOpen: true,
-    baudRate: 38400, 
-});
-printer = new escpos.Printer(device); 
+// Should we print these entries? 
+var printEntries = true; 
 
-// Clean Printer Routine (don't mess with this)
-printer.feed(1);
-printer.cut(0, 5);
-printer.flush();
+// ------------------ postgresql database ---------------------- // 
+//const connString = process.env['DATABASE_URL'];
+// This is the connection string for the heroku database with all the strings. 
+const connString = 'postgres://oowxohfdjkkatl:c9e29b00a0a8d7f1b886c1e719db22a8219600ed9b6af58289ca8fcf4a54249b@ec2-3-223-21-106.compute-1.amazonaws.com:5432/d2l4pnkodvnivv';
+console.log('Database Connection String: ' + connString); 
+const pool = new Pool({
+    connectionString: connString,
+    ssl: {
+        rejectUnauthorized: false
+    }
+}); 
 
 // BUG: Be aware this needs to be selected as ONCE here. 
 socket.once('connect', () => {
     console.log('Connected'); 
+    console.log('Loading Heroku database in memory.'); 
+    // Load everthing in the database. 
+    onLoadDatabase('ASC');
+    // Load entire database
+    // Show total messages in the db. 
     socket.on('printPayload', onPayload);
     socket.on('time', logTime); 
-})
+});
 
 function logTime(time) {
     console.log('Socket Connection Alive: ' + time); 
 }
 
+// New Message Received
+// Print seperately. 
 function onPayload (payload) {
     console.log('New Print Payload Received'); 
-    var date = payload['date']; 
-    var time = payload['time']; 
-    var message = payload['message'];
-    message = cleanMessage(message); 
+    printer.printPayload(payload)
+}
 
-    try {
-        // Printer commands to generate a receipt. 
-        device.open(function() {
-            // Set basic styles. 
-            printer.encode('UTF-8');
-            printer.setUpsideDown(true); 
-            generateMessage(message);
+function onLoadDatabase(order) {
+    console.log('Requesting for some random entries with order ' + order);
+    var queryText = 'SELECT * FROM entries ORDER BY date ' + order + ', time ' + order + ' LIMIT 2' + ';'; 
+    pool.query(queryText, (error, results) => {
+        sqlReadDatabaseCallback(error, results)
+    });
+}
 
-            printer.newLine();
+function sqlReadDatabaseCallback(error, results) {
+    if (error) {
+        throw error;
+    }
+    
+    // Format the results somehow. 
+    var entries = results.rows; 
 
-            generateHeader(date, time); 
+    if (printEntries) {
+        onPrintEntries(entries); 
+    }
 
-            printer.newLine(); 
-            // End routine. 
-            //printer.cut(0, 5);
+    console.log('Total entries in the DB ' + entries.length);
+}
 
-            printer.feed(1);
-            printer.flush(); 
-        });
-    } catch (e) {
-        console.log('Failure while printing: Check if we have run out of paper.');
-        console.log(e); 
-    }; 
+function onPrintEntries(entries) {
+    for (var i = 0; i < entries.length; i++) {
+        let entry = entries[i]; // Get the entry. 
+        entry['message'] = cleanMessage(entry['message']); // Clean it
+        entries[i] = entry; // Reassign it. 
+    }
+
+    printer.printMessages(entries, true); 
 }
 
 function cleanMessage(msg) {
     let m = emoji.unemojify(msg); // Replace any emoji.
-    return m; 
+    let cleanedMsg = m.replace(/(\r\n|\n|\r)/gm,"\n");
+    return cleanedMsg; 
 }  
-
-function generateHeader(date, time) {
-    // Defualt spacing for header section 
-    // printer.spacing(); 
-    // printer.lineSpace(); 
-    printer.align('ct'); 
-
-    // ------------- Date, Time ---------- // 
-    
-    // Font style. 
-    printer.setReverseColors(false); 
-    printer.font('a'); 
-    printer.style('b'); 
-    printer.size(1, 1); 
-
-    printer.text('CHICAGO, USA'); 
-    var t = date + ' ' + time; 
-    printer.text(t);
-
-    // Website
-
-    printer.size(1, 1); 
-    printer.setReverseColors(false);
-    printer.setReverseColors(true); 
-    printer.text(' momimsafe.live '); 
-
-    // ------------- Title -------------- // 
-
-
-    // Font style. 
-    printer.size(2, 2); 
-    printer.setReverseColors(true); 
-    printer.newLine(); 
-    printer.text(' MOMIMSAFE '); 
-}
-
-function generateMessage(message) {
-    // ------------- Message -------------- // 
-    printer.setReverseColors(false); 
-    // printer.spacing(0); 
-    // printer.lineSpace(0);
-    printer.align('ct'); 
-    printer.size(2, 2);
-
-    let lines = message.split('\n'); 
-    for (var i = lines.length-1; i >= 0; i--) {
-        console.log('Printing: ' + lines[i]);
-        linePrint(lines[i]); 
-    }
-}
-
-function linePrint(line) {
-    let words = line.split(' '); 
-    let curLine = ''; // Empty string. 
-    let lines = []; 
-    for (var i = 0; i < words.length; i++){
-        let curWord = words[i];
-        let curNewLine = curLine + curWord + ' '; 
-        if (curNewLine.length <= 24) {
-            curLine = curNewLine;  
-        } else {
-            curLine.trim(); // Trim the white white space. 
-            //printer.println(curLine); 
-            lines.push(curLine); 
-            curLine = curWord + ' '; // Reset current Line
-        }
-    }
-    
-    if (curLine.length > 0) {
-        curLine.trim(); // Trim white space. 
-        // Print the remaining character. 
-        //printer.println(curLine);
-        lines.push(curLine);
-    }
-
-    // For upside-down printing, we collect all the lines and then
-    // print them from end to start. 
-    for (var i = lines.length-1; i>=0; i--) {
-        printer.println(lines[i]);
-    }
-}
-
-// Read pg database (how will I do that?)
-// How will I read the pg datbase starting off with node. 
-// Read from database and then spit out all the receipts and then become active
-// Because first
