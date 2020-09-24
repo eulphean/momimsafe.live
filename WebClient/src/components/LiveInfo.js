@@ -113,9 +113,9 @@ class LiveInfo extends React.Component {
         let infoTextStyle=[styles.textStyle, styles.infoColor];
         return (
             <div style={styles.container}>
-                {/* <div style={[styles.labelContainer, styles.textStyle, styles.fadeIn]}>
+                <div style={[styles.labelContainer, styles.textStyle, styles.fadeIn]}>
                     {label}
-                </div> */}
+                </div>
                 <div style={styles.infoContainer}>
                     <div style={[styles.smallMargin, infoTextStyle, styles.fadeIn]}>
                         {location}
