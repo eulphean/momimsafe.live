@@ -80,6 +80,7 @@ function onPrintEntries(entries) {
 
 function onPrintEntry(entry) {
     entry['message'] = cleanMessage(entry['message']);
+    console.log('Printing: ' + entry['message']);
     printer.printMessages([entry]);
 }
 

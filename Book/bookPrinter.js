@@ -8,7 +8,7 @@
 var escpos = require('escpos'); 
 
 var device, printer; 
-device = new escpos.Serial('/dev/tty.Repleo-PL2303-00002014', {
+device = new escpos.Serial('/dev/tty.usbserial-1420', {
     autoOpen: true,
     baudRate: 38400, 
 });
@@ -54,7 +54,7 @@ module.exports = {
                     generateMessage(message); 
                     // printer.newLine();
 
-                    printer.feed(1);
+                    printer.feed(2);
                     printer.flush(); 
 
                     if (shouldCut) {
