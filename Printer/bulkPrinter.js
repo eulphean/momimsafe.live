@@ -5,9 +5,10 @@
 // Inspured by the book printer that I wrote. This will be printing things upside down. 
 
 var escpos = require('escpos'); 
+var emoji = require('node-emoji');
 
 var device, printer; 
-device = new escpos.Serial('/dev/tty.usbserial-1420', {
+device = new escpos.Serial('/dev/tty.usbserial-1410', {
     autoOpen: true,
     baudRate: 38400, 
 });
@@ -52,7 +53,6 @@ module.exports = {
                     generateMessage(message);
                     printer.newLine();
                     generateHeader(date, time); 
-                    printer.newLine(); 
 
                     printer.feed(2);
                     printer.flush(); 
@@ -75,7 +75,7 @@ module.exports = {
         var date = payload['date']; 
         var time = payload['time']; 
         var message = payload['message'];
-        message = cleanMessage(message); 
+        message = cleanMessage(message);  
 
         try {
             // Printer commands to generate a receipt. 
@@ -139,30 +139,25 @@ function generateHeader(date, time) {
     printer.size(1, 1); 
 
     printer.text('CHICAGO, USA'); 
-    let o = beautifyDate(date, time);  
-    var t = o.date + ' ' + o.time; 
+    var t = date + ' ' + time; 
     printer.text(t);
+    printer.newLine();
 
     // Website
     printer.size(1, 1); 
-    printer.setReverseColors(false);
-    printer.setReverseColors(true); 
-    printer.text(' momimsafe.live '); 
-
+    printer.setReverseColors(false); 
+    printer.text(' https://momimsafe.live '); 
     // ------------- Title -------------- // 
 
     // Font style. 
     printer.size(2, 2); 
     printer.setReverseColors(true); 
-    printer.newLine(); 
     printer.text(' MOMIMSAFE '); 
 }
 
 function generateMessage(message) {
      // ------------- Message -------------- // 
-     printer.setReverseColors(false); 
-     // printer.spacing(0); 
-     // printer.lineSpace(0);
+     printer.setReverseColors(true); 
      printer.align('ct'); 
      printer.size(2, 2);
  
@@ -202,19 +197,6 @@ function linePrint(line) {
     for (var i = lines.length-1; i>=0; i--) {
         printer.println(lines[i]);
     }
-}
-
-function beautifyDate(date, time) {
-    let d = date.toString().split("T")[0]; 
-    let t = time.toString().split(':');
-    var dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    d = d.split('-');
-    d = new Date(d[0], d[1]-1, d[2], t[0], t[1], t[2]); 
-    var obj = {
-        date: d.toLocaleDateString('en-US', dateOptions),
-        time: d.toLocaleTimeString('en-US')
-    }
-    return obj;
 }
 
 function cleanMessage(msg) {

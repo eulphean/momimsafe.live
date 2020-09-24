@@ -11,7 +11,6 @@ var socket = io.connect(localhostURL, {
     reconnectionAttempts: Infinity 
 }); 
 
-var escpos = require('escpos');
 
 // Should we print these entries? 
 var printEntries = true; 
@@ -48,6 +47,10 @@ function logTime(time) {
 // Print seperately. 
 function onPayload (payload) {
     console.log('New Print Payload Received'); 
+    console.log(payload);
+    let o = beautifyDate(payload['date'], payload['time']);
+    payload['date'] = o.date; 
+    payload['time'] = o.time; 
     printer.printPayload(payload)
 }
 
@@ -79,9 +82,12 @@ function onPrintEntries(entries) {
         let entry = entries[i]; // Get the entry. 
         entry['message'] = cleanMessage(entry['message']); // Clean it
         entries[i] = entry; // Reassign it. 
+        let o = simpleBeautifyDate(entry['date'], entry['time']);
+        entry['date'] = o.date; 
+        entry['time'] = o.time;
     }
 
-    printer.printMessages(entries, true); 
+    printer.printMessages(entries);
 }
 
 function cleanMessage(msg) {
@@ -89,3 +95,31 @@ function cleanMessage(msg) {
     let cleanedMsg = m.replace(/(\r\n|\n|\r)/gm,"\n");
     return cleanedMsg; 
 }  
+
+// Date is the javascript date format. 
+function simpleBeautifyDate(date, time) {
+    var dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    let t = time.toString().split(':');
+
+    var d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), t[0], t[1], t[2]);
+    var obj = {
+        date: d.toLocaleDateString('en-US', dateOptions),
+        time: d.toLocaleTimeString('en-US')
+    }
+
+    return obj; 
+
+}
+
+function beautifyDate(date, time) {
+    let d = date.toString().split("-"); 
+    let t = time.toString().split(':');
+    var dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    var seconds = t[2].toString().split(' ')[0];
+    d = new Date(d[0], d[1], d[2], t[0], t[1], seconds); 
+    var obj = {
+        date: d.toLocaleDateString('en-US', dateOptions),
+        time: d.toLocaleTimeString('en-US')
+    }
+    return obj;
+}
