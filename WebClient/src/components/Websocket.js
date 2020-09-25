@@ -12,7 +12,7 @@ class Websocket extends React.Component {
             
         };
 
-        this.socket = io(localhostURL, { 
+        this.socket = io(herokuURL, { 
             reconnection: true, 
             reconnectionDelay: 500, 
             reconnectionAttempts: Infinity
