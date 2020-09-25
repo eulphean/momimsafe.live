@@ -5,7 +5,7 @@ var emoji = require('node-emoji');
 var Pool = require('pg').Pool; 
 var printer = require('./bulkPrinter.js');
 
-var socket = io.connect(localhostURL, {
+var socket = io.connect(herokuURL, {
     reconnection: true, 
     reconnectionDelay: 500, 
     reconnectionAttempts: Infinity 
