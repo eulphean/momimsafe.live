@@ -27,8 +27,8 @@ const styles={
     
     canvas: {
         height: '100vh',
-        width: '100vw'
-        // objectFit: 'cover'
+        width: '100vw',
+        objectFit: 'cover'
     },
 
     overlay: {
