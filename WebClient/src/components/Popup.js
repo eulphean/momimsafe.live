@@ -357,8 +357,8 @@ const styles={
 
     individualReceipt: {
         display: 'flex',
-        // marginLeft: padding.extraSmall,
-        // marginRight: padding.extraSmall,
+        marginLeft: padding.extraSmall,
+        marginRight: padding.extraSmall,
         marginTop: padding.small,
         width: '100%',
 
