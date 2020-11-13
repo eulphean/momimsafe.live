@@ -8,58 +8,41 @@ const styles={
     container: {
         display: 'flex',
         height: '250px',
-        // width: '100vw',
         flexDirection: 'column',
         alignItems: 'center',
-        // height: '30vh',
         backgroundColor: color.bodyGrey,
         boxShadow: boxShadow.dark,
         borderRadius: '25px',
         
-        // '@media (min-width: 375px) and (orientation: portrait)': {  
-        //     height: '40vh'
-        // },
+        // Mobile sizes. 
+        '@media (min-width: 375px) and (orientation: portrait)': {  
+            width: '99%'
+        },
 
-        // // IPAD classic
-        // '@media (min-width: 450px) and (orientation: landscape)': {  
-        //     width: '90vw',
-        //     height: '80vh'
-        // },
+        '@media (min-width: 768px) and (orientation: portrait)': {  
+            width: '70%'
+        },
 
-        // // IPAD classic
-        // '@media (min-width: 750px) and (orientation: portrait)': {  
-        //     width: '60vw',
-        //     height: '35vh'
-        // },
+        '@media (min-width: 1024px) and (orientation: portrait)': {  
+            width: '65%'
+        },
 
-        // '@media (min-width: 750px)': {  
-        //     width: '60vw',
-        //     height: '40vh'
-        // },
+        // Desktop sizes
+        '@media (min-width: 768px)': {  
+            width: '65%'
+        },
 
-        // // IPAD Pro
-        // '@media (min-width: 900px) and (orientation: portrait)': {  
-        //     width: '55vw',
-        //     height: '30vh'
-        // },
+        '@media (min-width: 1024px)': {  
+            width: '55%'
+        },
 
-        // // Classic laptop.
-        // '@media (min-width: 900px)': {  
-        //     width: '55vw',
-        //     height: '35vh'
-        // },
+        '@media (min-width: 1440px)': {  
+            width: '50%'
+        },
 
-        // // Slightly bigger laptop. 
-        // '@media (min-width: 1200px)': {  
-        //     width: '40vw',
-        //     height: '38vh'
-        // },
-
-        // // Slightly bigger laptop.
-        // '@media (min-width: 1400px)': {  
-        //     width: '35vw',
-        //     height: '30vh'
-        // }
+        '@media (min-width: 1024px) and (orientation: landscape)': {  
+            width: '60%'
+        }
     },
 
     upperBodyContainer: {
