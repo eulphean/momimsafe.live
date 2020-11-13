@@ -7,62 +7,59 @@ import PaperRoll from './PaperRoll.js'
 const styles={
     container: {
         display: 'flex',
-        width: '100vw',
+        height: '250px',
+        // width: '100vw',
         flexDirection: 'column',
         alignItems: 'center',
-        height: '42vh',
+        // height: '30vh',
         backgroundColor: color.bodyGrey,
         boxShadow: boxShadow.dark,
         borderRadius: '25px',
         
-        '@media (min-width: 320px) and (orientation: portrait)': {  
-            height: '42vh'
-        },
+        // '@media (min-width: 375px) and (orientation: portrait)': {  
+        //     height: '40vh'
+        // },
 
-        '@media (min-width: 375px) and (orientation: portrait)': {  
-            height: '40vh'
-        },
+        // // IPAD classic
+        // '@media (min-width: 450px) and (orientation: landscape)': {  
+        //     width: '90vw',
+        //     height: '80vh'
+        // },
 
-        // IPAD classic
-        '@media (min-width: 450px) and (orientation: landscape)': {  
-            width: '90vw',
-            height: '80vh'
-        },
+        // // IPAD classic
+        // '@media (min-width: 750px) and (orientation: portrait)': {  
+        //     width: '60vw',
+        //     height: '35vh'
+        // },
 
-        // IPAD classic
-        '@media (min-width: 750px) and (orientation: portrait)': {  
-            width: '60vw',
-            height: '35vh'
-        },
+        // '@media (min-width: 750px)': {  
+        //     width: '60vw',
+        //     height: '40vh'
+        // },
 
-        '@media (min-width: 750px)': {  
-            width: '60vw',
-            height: '40vh'
-        },
+        // // IPAD Pro
+        // '@media (min-width: 900px) and (orientation: portrait)': {  
+        //     width: '55vw',
+        //     height: '30vh'
+        // },
 
-        // IPAD Pro
-        '@media (min-width: 900px) and (orientation: portrait)': {  
-            width: '55vw',
-            height: '30vh'
-        },
+        // // Classic laptop.
+        // '@media (min-width: 900px)': {  
+        //     width: '55vw',
+        //     height: '35vh'
+        // },
 
-        // Classic laptop.
-        '@media (min-width: 900px)': {  
-            width: '55vw',
-            height: '35vh'
-        },
+        // // Slightly bigger laptop. 
+        // '@media (min-width: 1200px)': {  
+        //     width: '40vw',
+        //     height: '38vh'
+        // },
 
-        // Slightly bigger laptop. 
-        '@media (min-width: 1200px)': {  
-            width: '40vw',
-            height: '38vh'
-        },
-
-        // Slightly bigger laptop.
-        '@media (min-width: 1400px)': {  
-            width: '35vw',
-            height: '30vh'
-        }
+        // // Slightly bigger laptop.
+        // '@media (min-width: 1400px)': {  
+        //     width: '35vw',
+        //     height: '30vh'
+        // }
     },
 
     upperBodyContainer: {
