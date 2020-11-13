@@ -351,14 +351,16 @@ const styles={
         flexDirection: 'row',
         flexWrap: 'wrap',
         marginTop: padding.small,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width: '100%'
     },
 
     individualReceipt: {
         display: 'flex',
-        marginLeft: padding.extraSmall,
-        marginRight: padding.extraSmall,
+        // marginLeft: padding.extraSmall,
+        // marginRight: padding.extraSmall,
         marginTop: padding.small,
+        width: '100%',
 
         '@media (min-width: 450px) and (orientation: landscape)' : {
             width: 'calc(100%/2 - 4%)'
