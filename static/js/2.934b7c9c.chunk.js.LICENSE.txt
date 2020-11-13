@@ -26,12 +26,6 @@ object-assign
  * Licensed under MIT License
  */
 
-/*! 
- * @cycjimmy/jsmpeg-player v5.0.0
- * Homepage: https://github.com/cycjimmy/jsmpeg-player#readme
- * Released under the MIT License.
- */
-
 /*! https://mths.be/utf8js v2.1.2 by @mathias */
 
 /** @license React v0.19.1
