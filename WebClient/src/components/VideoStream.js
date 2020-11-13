@@ -1,10 +1,10 @@
 import React from 'react'
 import Radium from 'radium'
-import JSMpeg from '@cycjimmy/jsmpeg-player'
+// import JSMpeg from '@cycjimmy/jsmpeg-player'
 import { fadeInLeft } from 'react-animations'
 import docVideo from './momimsafe.mp4'
 
-const url="momimsafe.mp4";
+// const url="momimsafe.mp4";
 // const url="wss://radiant-oasis-49153.herokuapp.com/";
 const fadeInDuration = '3s'
 

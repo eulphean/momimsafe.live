@@ -17,10 +17,8 @@ const styles={
         bottom: '0%',
         left: '0%',
         right: '0%',
-        marginTop: padding.veryBig,
         marginLeft: padding.small,
         marginRight: padding.small,
-        height: '0px',
         justifyContent: 'center',
         display: 'flex',
         zIndex: '0'
@@ -47,13 +45,8 @@ class PaperRoll extends React.Component {
         super(props);
         this.state={    
             receipts: [],
-            enableAnimation: true,
-            animationStyle: {
-                animationName: heightAni, 
-                animationDuration: duration,
-                animationFillMode: 'forwards',
-                animationTimingFunction:'ease-in'
-            },
+            enableAnimation: false,
+            animationStyle: {},
             currentReceiptIdx: 0
         };
 
@@ -72,7 +65,7 @@ class PaperRoll extends React.Component {
         let animatingStyle = this.state.enableAnimation ? [styles.animatingContainer, this.state.animationStyle] : styles.animatingContainer; 
         return (
             <div ref={this.wrapper} style={animatingStyle} onAnimationEnd={this.onWrapperAnimationEnd.bind(this)}>  
-                <div ref={this.receiptContainer} style={[styles.paperRollContainer]}>
+                <div ref={this.receiptContainer} style={styles.paperRollContainer}>
                     {this.state.receipts}
                 </div>
             </div>
@@ -109,13 +102,15 @@ class PaperRoll extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         // Finally got the database. 
-        if (this.props.database !== prevProps.database ) {
+        if (this.props.database !== prevProps.database) {
             console.log('Creating first receipt');
             this.createReceipt(true); 
         }
 
         if (this.state.currentReceiptIdx !== prevState.currentReceiptIdx) {
-            setTimeout(this.resetAnimation(), 500); // Give it some time to render before enabling animation. 
+            setTimeout(() => {
+                this.resetAnimation();
+            }, 500); // Give it some time to render before enabling animation. 
         }
     }
 
@@ -128,8 +123,8 @@ class PaperRoll extends React.Component {
 
     resetAnimation() {
         // Setup new animation. 
-        let curHeight = parseInt(this.wrapper.current.clientHeight);
-        let receiptHeight = parseInt(this.receipt.current.clientHeight); 
+        let curHeight = parseInt(this.wrapper.current.offsetHeight);
+        let receiptHeight = parseInt(this.receipt.current.offsetHeight); 
         let finalHeight = curHeight + receiptHeight; // Little Extra Receipt
         console.log('resetAnimation: ' + curHeight + ', ' + finalHeight);
 
@@ -140,8 +135,9 @@ class PaperRoll extends React.Component {
                 animationName: heightAni,
                 animationDuration: duration,
                 animationFillMode: 'forwards',
-                animationTimingFunction:'ease-in'
-            }
+                animationTimingFunction:'linear'
+            },
+            enableAnimation: true
         });
     }
 

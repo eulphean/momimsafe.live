@@ -94,7 +94,7 @@ const styles={
 
 }
 
-const label='LIVE'; 
+// const label='LIVE'; 
 const location='CHICAGO, USA'; 
 
 class LiveInfo extends React.Component {

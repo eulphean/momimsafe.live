@@ -24,7 +24,7 @@ const styles={
         paddingBottom: padding.extraSmall,
         paddingLeft: padding.verySmall,
         paddingRight: padding.verySmall,
-        marginTop: padding.veryBig,
+        marginTop: padding.small,
         background: color.black,
         color: color.white,
     },

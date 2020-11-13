@@ -3,17 +3,21 @@ import Radium from 'radium'
 import { color } from './CommonStyles.js'
 import Websocket from './Websocket.js'
 import Body from './Body.js'
+import { isMobile } from 'react-device-detect'
 
 const styles={
     container: {
         display: 'flex',
         backgroundColor: color.pureTeal,
         justifyContent: 'center',
-        padding: '12px',
-        paddingBottom: '0px',
+        padding: '12px 12px 12px 0px',
         height: '100vh',
         overflow: 'scroll'
     },
+
+    desktop: {
+        width: '100vw'
+    }, 
 
     // NOTE: Do not touch. 
     // Extra Div to hide the receipt from the top. 
@@ -38,16 +42,16 @@ class Printer extends React.Component {
         this.body = React.createRef();
     }
 
-    render() {;
+    render() {
+        let containerStyles = isMobile ? styles.container : [styles.container, styles.desktop];
         return (
-            <div style={styles.container}>
+            <div style={containerStyles}>
                 <Websocket 
                     ref={this.websocket}
                     processDatabase={this.processDatabase.bind(this)}
                     appendDatabase={this.appendDatabase.bind(this)}
                 /> 
-                <div style={styles.hidingDiv}>
-                </div>
+                <div style={styles.hidingDiv} />
                 <Body 
                     ref={this.body}
                     database={this.state.databaseEntries} />

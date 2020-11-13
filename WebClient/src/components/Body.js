@@ -10,10 +10,14 @@ const styles={
         width: '100vw',
         flexDirection: 'column',
         alignItems: 'center',
-        height: '50vh',
+        height: '42vh',
         backgroundColor: color.bodyGrey,
         boxShadow: boxShadow.dark,
         borderRadius: '25px',
+
+        '@media (min-width: 375px) and (orientation: portrait)': {  
+            height: '35vh'
+        },
 
         // IPAD classic
         '@media (min-width: 450px) and (orientation: landscape)': {  
@@ -47,7 +51,7 @@ const styles={
         // Slightly bigger laptop. 
         '@media (min-width: 1200px)': {  
             width: '40vw',
-            height: '35vh'
+            height: '38vh'
         },
 
         // Slightly bigger laptop.
@@ -218,7 +222,7 @@ const styles={
         right: '0%',
         // backgroundColor: color.bodyGrey,
         width: '90%',
-        zIndex: '1', // Abstract the receipt,
+        zIndex: '1' // Abstract the receipt,
     },
 
     upperMouth: {
@@ -272,7 +276,7 @@ class Body extends React.Component {
                 </div>
                 <div style={styles.mouthContainer}>
                     <div style={styles.upperMouth}></div>
-                    <PaperRoll ref={this.paperRoll} database={this.props.database} onAnimationEnd={this.onReceiptAnimationEnd.bind(this)} />
+                        <PaperRoll ref={this.paperRoll} database={this.props.database} onAnimationEnd={this.onReceiptAnimationEnd.bind(this)} />
                     <div style={styles.lowerMouth}></div>
                 </div>
             </div>
@@ -319,7 +323,7 @@ class Body extends React.Component {
                     <div style={styles.title}>
                         RELOAD
                     </div>
-                    <div onMouseEnter={this.onReloadHover.bind(this)} onMouseLeave={this.onResetReloadHover.bind(this)} onClick={this.onReload.bind(this)} style={shuffleButtonStyle} disabled={this.state.isDisabled}></div>
+                    <div onMouseEnter={this.onReloadHover.bind(this)} onMouseLeave={this.onResetReloadHover.bind(this)} onClick={this.onReload.bind(this)} style={reloadButtonStyle} disabled={this.state.isDisabled}></div>
                 </div>
             </div>
         );
