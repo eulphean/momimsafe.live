@@ -14,9 +14,13 @@ const styles={
         backgroundColor: color.bodyGrey,
         boxShadow: boxShadow.dark,
         borderRadius: '25px',
+        
+        '@media (min-width: 320px) and (orientation: portrait)': {  
+            height: '42vh'
+        },
 
         '@media (min-width: 375px) and (orientation: portrait)': {  
-            height: '35vh'
+            height: '40vh'
         },
 
         // IPAD classic
