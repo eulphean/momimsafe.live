@@ -60,8 +60,8 @@ const styles={
         // marginBottom: padding.small,
         overflowWrap: 'anywhere',
         flexWrap: 'wrap',
-        paddingLeft: padding.small,
-        paddingRight: padding.small,
+        marginLeft: padding.small,
+        marginRight: padding.small,
         paddingBottom: padding.small
     },
 
