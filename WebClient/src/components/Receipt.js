@@ -54,12 +54,12 @@ const styles={
 
     message: {
         // display: 'flex',
-        alignSelf: 'center',
+        // alignSelf: 'center',
         marginTop: padding.small,
         fontSize: fontSize.small,
         // marginBottom: padding.small,
         overflowWrap: 'anywhere',
-        flexWrap: 'wrap',
+        // flexWrap: 'wrap',
         marginLeft: padding.small,
         marginRight: padding.small,
         paddingBottom: padding.small
