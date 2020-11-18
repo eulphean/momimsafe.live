@@ -13,7 +13,20 @@ const styles={
         backgroundColor: color.bodyGrey,
         boxShadow: boxShadow.dark,
         borderRadius: '25px',
-        
+
+        // Desktop sizes
+        '@media (min-width: 768px)': {  
+            width: '65%'
+        },
+
+        '@media (min-width: 1024px)': {  
+            width: '30%'
+        },
+
+        '@media (min-width: 1440px)': {  
+            width: '35%'
+        },
+
         // Mobile sizes. 
         '@media (min-width: 375px) and (orientation: portrait)': {  
             width: '99%'
@@ -27,22 +40,9 @@ const styles={
             width: '65%'
         },
 
-        // Desktop sizes
-        '@media (min-width: 768px)': {  
-            width: '65%'
-        },
-
-        '@media (min-width: 1024px)': {  
-            width: '55%'
-        },
-
-        '@media (min-width: 1440px)': {  
-            width: '50%'
-        },
-
         '@media (min-width: 1024px) and (orientation: landscape)': {  
-            width: '60%'
-        }
+            width: '40%'
+        },
     },
 
     upperBodyContainer: {
