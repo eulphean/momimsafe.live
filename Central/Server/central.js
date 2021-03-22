@@ -10,7 +10,6 @@ var express = require('express');
 var socket = require('socket.io');
 var cors = require('cors');
 var Pool = require('pg').Pool; 
-const { triggerAsyncId } = require('async_hooks');
 
 // ------------------ postgresql database ---------------------- // 
 const connString = process.env['DATABASE_URL'];
@@ -21,18 +20,8 @@ const pool = new Pool({
 
 // ------------------ Express webserver ------------------------ //
 var app = express(); 
-// app.use(cors({ origin: 'http://localhost:3000', credentials: true}));
-
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
-
-app.get('/', function (req, res) {
-    res.send('Hello World');
- });
-
+app.use(cors());
+app.use(express.static('./Client')); 
 var server = require('http').createServer(app); 
 // ------------------ Websocket ------------------------ //
 var io = socket(server, {
@@ -56,7 +45,6 @@ var centralClientSocket = io.of('/central').on('connection', onCentralClient); /
 setInterval(alive, 1000);
 
 function alive() {
-    console.log('Time');
     var t = new Date().toTimeString(); 
     appSocket.emit('time', t); 
     receiptSocket.emit('time', t);

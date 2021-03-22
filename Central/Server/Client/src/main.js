@@ -3,7 +3,7 @@
 var socket; 
 var table;
 
-var localhostURL = "http://localhost:5000/central"
+//var localhostURL = "http://localhost:5000/central"
 var herokuURL = "https://blooming-refuge-71111.herokuapp.com/central";
 
 function setup(){
