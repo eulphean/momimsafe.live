@@ -10,6 +10,7 @@ var express = require('express');
 var socket = require('socket.io');
 var cors = require('cors');
 var Pool = require('pg').Pool; 
+const { triggerAsyncId } = require('async_hooks');
 
 // ------------------ postgresql database ---------------------- // 
 const connString = process.env['DATABASE_URL'];
@@ -20,19 +21,31 @@ const pool = new Pool({
 
 // ------------------ Express webserver ------------------------ //
 var app = express(); 
-var server = app.listen(process.env.PORT || 5000, function() {
-    console.log('Central server successfully started'); 
-});
-// app.use(cors());
-app.use(express.static('./Client')); 
+// app.use(cors({ origin: 'http://localhost:3000', credentials: true}));
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
+app.get('/', function (req, res) {
+    res.send('Hello World');
+ });
+
+var server = require('http').createServer(app); 
 // ------------------ Websocket ------------------------ //
-// Enable CORS
 var io = socket(server, {
     cors: {
-        origin: '*',
-      }
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST", "PUT", "OPTIONS", "DELETE"],
+        credentials: true
+    }
 }); 
+
+server.listen(process.env.PORT || 5000, function() {
+    console.log('Central server successfully started'); 
+});
 
 var appSocket = io.of('/app').on('connection', onWebClient); // Connects all web instance to this. 
 var receiptSocket = io.of('/receipt').on('connection', onReceiptClient); // Connects receipt server to this. 
@@ -43,6 +56,7 @@ var centralClientSocket = io.of('/central').on('connection', onCentralClient); /
 setInterval(alive, 1000);
 
 function alive() {
+    console.log('Time');
     var t = new Date().toTimeString(); 
     appSocket.emit('time', t); 
     receiptSocket.emit('time', t);
@@ -198,4 +212,3 @@ function showEntriesCallback(error, results) {
     }
     centralClientSocket.emit('showEntries', results.rows); 
 }
-

@@ -15,11 +15,19 @@ class Websocket extends React.Component {
         this.socket = io(localhostURL, { 
             reconnection: true, 
             reconnectionDelay: 500, 
-            reconnectionAttempts: Infinity,
-            rejectUnauthorized: false
+            reconnectionAttempts: Infinity
         }); 
 
         this.socket.once('connect', this.subscribe.bind(this)); 
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                console.log(request.responseText);
+            }
+        }
+        request.open('GET', 'http://localhost:5000/');
+        request.send();
+
     }
 
     // Return an empty div. 
@@ -61,7 +69,7 @@ class Websocket extends React.Component {
 
     // Send function and callback function. 
     requestData() {
-        this.socket.emit('readRandomEntries'); 
+       this.socket.emit('readRandomEntries'); 
     }
 
 
