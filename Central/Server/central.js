@@ -8,6 +8,7 @@
 
 var express = require('express'); 
 var socket = require('socket.io');
+var cors = require('cors');
 var Pool = require('pg').Pool; 
 
 // ------------------ postgresql database ---------------------- // 
@@ -22,10 +23,17 @@ var app = express();
 var server = app.listen(process.env.PORT || 5000, function() {
     console.log('Central server successfully started'); 
 });
+// app.use(cors());
 app.use(express.static('./Client')); 
 
 // ------------------ Websocket ------------------------ //
-var io = socket(server); 
+// Enable CORS
+var io = socket(server, {
+    cors: {
+        origin: '*',
+      }
+}); 
+
 var appSocket = io.of('/app').on('connection', onWebClient); // Connects all web instance to this. 
 var receiptSocket = io.of('/receipt').on('connection', onReceiptClient); // Connects receipt server to this. 
 var centralClientSocket = io.of('/central').on('connection', onCentralClient); // Connects the web instance of central server to read data. 

@@ -10,9 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "pg": "^7.12.1",
-    "socket.io": "^2.2.0",
-    "websocket": "^1.0.29"
+    "pg": "^8.5.1",
+    "socket.io": "^4.0.0",
+    "websocket": "^1.0.33"
   }
 }
