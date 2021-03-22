@@ -19,15 +19,6 @@ class Websocket extends React.Component {
         }); 
 
         this.socket.once('connect', this.subscribe.bind(this)); 
-        var request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if (this.readyState === 4 && this.status === 200) {
-                console.log(request.responseText);
-            }
-        }
-        request.open('GET', 'http://localhost:5000/');
-        request.send();
-
     }
 
     // Return an empty div. 

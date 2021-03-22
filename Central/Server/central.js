@@ -26,7 +26,7 @@ var server = require('http').createServer(app);
 // ------------------ Websocket ------------------------ //
 var io = socket(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "*:*",
         methods: ["GET", "POST", "PUT", "OPTIONS", "DELETE"],
         credentials: true
     }
