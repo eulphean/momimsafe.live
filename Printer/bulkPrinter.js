@@ -8,7 +8,7 @@ var escpos = require('escpos');
 var emoji = require('node-emoji');
 
 var device, printer; 
-device = new escpos.Serial('/dev/tty.usbserial-1410', {
+device = new escpos.Serial('/dev/cu.usbserial-1140', {
     autoOpen: true,
     baudRate: 38400, 
 });
@@ -49,7 +49,7 @@ module.exports = {
                     var message = payload['message'];
 
                     printer.encode('UTF-8');
-                    printer.setUpsideDown(true); 
+                    // printer.setUpsideDown(true); 
                     generateMessage(message);
                     printer.newLine();
                     generateHeader(date, time); 
@@ -82,7 +82,7 @@ module.exports = {
             device.open(function() {
                 // Set basic styles. 
                 printer.encode('UTF-8');
-                printer.setUpsideDown(true); 
+                // printer.setUpsideDown(true); 
                 generateMessage(message);
                 printer.newLine();
                 generateHeader(date, time); 

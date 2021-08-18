@@ -8,7 +8,7 @@
 var escpos = require('escpos'); 
 
 var device, printer; 
-device = new escpos.Serial('/dev/tty.usbserial-1410', {
+device = new escpos.Serial('/dev/cu.usbserial-130', {
     autoOpen: true,
     baudRate: 38400, 
 });

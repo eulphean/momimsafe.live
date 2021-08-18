@@ -28,7 +28,7 @@ var io = socket(server, {
     cors: {
         origin: "*",
         methods: ["GET", "POST", "PUT", "OPTIONS", "DELETE"],
-        credentials: true
+        credentials: false
     }
 }); 
 
