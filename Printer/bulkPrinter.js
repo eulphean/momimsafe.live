@@ -4,11 +4,12 @@
 // Description: New module that abstracts all the printing into its own sub-module
 // Inspured by the book printer that I wrote. This will be printing things upside down. 
 
-var escpos = require('escpos'); 
+var escpos = require('escpos-custom'); 
+escpos.SerialPort = require('escpos-serialport');
 var emoji = require('node-emoji');
 
 var device, printer; 
-device = new escpos.Serial('/dev/cu.usbserial-1140', {
+device = new escpos.SerialPort('/dev/cu.usbserial-1140', {
     autoOpen: true,
     baudRate: 38400, 
 });
@@ -49,7 +50,7 @@ module.exports = {
                     var message = payload['message'];
 
                     printer.encode('UTF-8');
-                    // printer.setUpsideDown(true); 
+                    printer.setUpsideDown(true); 
                     generateMessage(message);
                     printer.newLine();
                     generateHeader(date, time); 
@@ -82,7 +83,7 @@ module.exports = {
             device.open(function() {
                 // Set basic styles. 
                 printer.encode('UTF-8');
-                // printer.setUpsideDown(true); 
+                printer.setUpsideDown(true); 
                 generateMessage(message);
                 printer.newLine();
                 generateHeader(date, time); 

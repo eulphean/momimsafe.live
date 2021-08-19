@@ -9,11 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "escpos-serialport": "^3.0.0-alpha.4",
+    "escpos-custom": "^3.0.0-alpha.7",
     "node-emoji": "^1.10.0",
-    "escpos": "^2.5.2",
-    "escpos-upside": "^3.0.3",
+    "pg": "^8.3.3",
     "serialport": "^8.0.5",
-    "socket.io-client": "^4.0.0",
-    "pg": "^8.3.3"
+    "socket.io-client": "^4.0.0"
   }
 }
