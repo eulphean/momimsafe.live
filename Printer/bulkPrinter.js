@@ -9,7 +9,7 @@ escpos.SerialPort = require('escpos-serialport');
 var emoji = require('node-emoji');
 
 var device, printer; 
-device = new escpos.SerialPort('/dev/cu.usbserial-1140', {
+device = new escpos.SerialPort('/dev/cu.usbserial-140', {
     autoOpen: true,
     baudRate: 38400, 
 });
@@ -76,7 +76,6 @@ module.exports = {
         var date = payload['date']; 
         var time = payload['time']; 
         var message = payload['message'];
-        message = cleanMessage(message);  
 
         try {
             // Printer commands to generate a receipt. 
@@ -137,7 +136,7 @@ function generateHeader(date, time) {
     printer.setReverseColors(false); 
     printer.font('a'); 
     printer.style('b'); 
-    printer.size(1, 1); 
+    printer.size(0, 0); 
 
     printer.text('CHICAGO, USA'); 
     var t = date + ' ' + time; 
@@ -145,14 +144,14 @@ function generateHeader(date, time) {
     printer.newLine();
 
     // Website
-    printer.size(1, 1); 
+    printer.size(0, 0); 
     printer.setReverseColors(false); 
     printer.text(' https://momimsafe.live '); 
     // ------------- Title -------------- // 
 
     // Font style. 
-    printer.size(2, 2); 
-    printer.setReverseColors(true); 
+    printer.size(1, 1); 
+    printer.setReverseColors(false); 
     printer.text(' MOMIMSAFE '); 
 }
 
@@ -160,7 +159,7 @@ function generateMessage(message) {
      // ------------- Message -------------- // 
      printer.setReverseColors(true); 
      printer.align('ct'); 
-     printer.size(2, 2);
+     printer.size(1, 1);
  
      let lines = message.split('\n'); 
      for (var i = lines.length-1; i >= 0; i--) {

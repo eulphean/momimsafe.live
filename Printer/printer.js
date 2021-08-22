@@ -12,18 +12,21 @@ var socket = io.connect(localhostURL, {
 }); 
 
 //  Should we print everything? No, don't print. 
-var printEntries = false; 
+var printEntries = true; 
 
 // // ------------------ postgresql database ---------------------- // 
-const connString = process.env['DATABASE_URL'];
+// Use this for local testing. 
+// const connString = process.env['DATABASE_URL'];
+
+// Set this for the actual installation. 
 // This is the connection string for the heroku database with all the strings. 
-// const connString = 'postgres://oowxohfdjkkatl:c9e29b00a0a8d7f1b886c1e719db22a8219600ed9b6af58289ca8fcf4a54249b@ec2-3-223-21-106.compute-1.amazonaws.com:5432/d2l4pnkodvnivv';
+const connString = 'postgres://oowxohfdjkkatl:c9e29b00a0a8d7f1b886c1e719db22a8219600ed9b6af58289ca8fcf4a54249b@ec2-3-223-21-106.compute-1.amazonaws.com:5432/d2l4pnkodvnivv';
 console.log('Database Connection String: ' + connString); 
 const pool = new Pool({
     connectionString: connString,
-    ssl: {
+    ssl: { // Remove this for local testing. 
         rejectUnauthorized: false
-    }
+    }  
 }); 
 
 // BUG: Be aware this needs to be selected as ONCE here. 
@@ -31,7 +34,7 @@ socket.once('connect', () => {
     console.log('Connected'); 
     console.log('Loading Heroku database in memory.'); 
     // Load everthing in the database (when we are doing bulk printing, turn this on)
-    // onLoadDatabase('ASC');
+    onLoadDatabase('ASC');
     // Load entire database
     // Show total messages in the db. 
     socket.on('printPayload', onPayload);
@@ -47,6 +50,7 @@ function logTime(time) {
 function onPayload (payload) {
     console.log('New Print Payload Received'); 
     console.log(payload);
+    payload['message'] = ' ' + cleanMessage(payload['message']); // Clean it
     let o = beautifyDate(payload['date'], payload['time']);
     payload['date'] = o.date; 
     payload['time'] = o.time; 
@@ -79,7 +83,7 @@ function sqlReadDatabaseCallback(error, results) {
 function onPrintEntries(entries) {
     for (var i = 0; i < entries.length; i++) {
         let entry = entries[i]; // Get the entry. 
-        entry['message'] = cleanMessage(entry['message']); // Clean it
+        entry['message'] = ' ' + cleanMessage(entry['message']); // Clean it
         entries[i] = entry; // Reassign it. 
         let o = simpleBeautifyDate(entry['date'], entry['time']);
         entry['date'] = o.date; 
