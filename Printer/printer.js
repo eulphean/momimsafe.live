@@ -5,6 +5,8 @@ var emoji = require('node-emoji');
 var Pool = require('pg').Pool; 
 var printer = require('./bulkPrinter.js');
 
+var arguments = process.argv; 
+
 var socket = io.connect(localhostURL, {
     reconnection: true, 
     reconnectionDelay: 500, 
@@ -12,7 +14,7 @@ var socket = io.connect(localhostURL, {
 }); 
 
 //  Should we print everything? No, don't print. 
-var printEntries = true; 
+var printEntries = arguments[2] === 1; 
 
 // // ------------------ postgresql database ---------------------- // 
 // Use this for local testing. 
@@ -59,7 +61,7 @@ function onPayload (payload) {
 
 function onLoadDatabase(order) {
     console.log('Requesting for some random entries with order ' + order);
-    var queryText = 'SELECT * FROM entries ORDER BY date ' + order + ', time ' + order + ' LIMIT 2' + ';'; 
+    var queryText = 'SELECT * FROM entries ORDER BY date ' + order + ', time ' + order + ';'; 
     pool.query(queryText, (error, results) => {
         sqlReadDatabaseCallback(error, results)
     });
