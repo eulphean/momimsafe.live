@@ -1,11 +1,11 @@
 var io = require('socket.io-client'); 
-// var localhostURL = "http://localhost:5000/receipt"
+//var localhostURL = "http://localhost:5000/receipt"
 var herokuURL = "https://blooming-refuge-71111.herokuapp.com/receipt";
 var emoji = require('node-emoji');
 var Pool = require('pg').Pool; 
 var printer = require('./bulkPrinter.js');
 
-var arguments = process.argv; 
+var arguments = process.argv;
 
 var socket = io.connect(herokuURL, {
     reconnection: true, 
