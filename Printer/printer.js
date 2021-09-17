@@ -1,20 +1,20 @@
 var io = require('socket.io-client'); 
-var localhostURL = "http://localhost:5000/receipt"
-// var herokuURL = "https://blooming-refuge-71111.herokuapp.com/receipt";
+// var localhostURL = "http://localhost:5000/receipt"
+var herokuURL = "https://blooming-refuge-71111.herokuapp.com/receipt";
 var emoji = require('node-emoji');
 var Pool = require('pg').Pool; 
 var printer = require('./bulkPrinter.js');
 
 var arguments = process.argv; 
 
-var socket = io.connect(localhostURL, {
+var socket = io.connect(herokuURL, {
     reconnection: true, 
     reconnectionDelay: 500, 
     reconnectionAttempts: Infinity 
 }); 
 
 //  Should we print everything? No, don't print. 
-var printEntries = arguments[2] === 1; 
+var printEntries = arguments[2] === '1'; 
 
 // // ------------------ postgresql database ---------------------- // 
 // Use this for local testing. 
@@ -76,6 +76,7 @@ function sqlReadDatabaseCallback(error, results) {
     var entries = results.rows; 
 
     if (printEntries) {
+        console.log('Printer Entries');
         onPrintEntries(entries); 
     }
 
@@ -121,7 +122,7 @@ function beautifyDate(date, time) {
     let t = time.toString().split(':');
     var dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     var seconds = t[2].toString().split(' ')[0];
-    d = new Date(d[0], d[1], d[2], t[0], t[1], seconds); 
+    d = new Date(d[0], d[1] - 1, d[2], t[0], t[1], seconds); 
     var obj = {
         date: d.toLocaleDateString('en-US', dateOptions),
         time: d.toLocaleTimeString('en-US')

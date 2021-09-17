@@ -12,10 +12,19 @@ var printer = require('./bookPrinter.js');
 var emoji = require('node-emoji'); 
 
 // ------------------ postgresql database ---------------------- // 
-const connString = process.env['DATABASE_URL'];
+// const connString = process.env['DATABASE_URL'];
+// console.log('Database Connection String: ' + connString); 
+// const pool = new Pool({
+//     connectionString: connString
+// }); 
+
+const connString = 'postgres://oowxohfdjkkatl:c9e29b00a0a8d7f1b886c1e719db22a8219600ed9b6af58289ca8fcf4a54249b@ec2-3-223-21-106.compute-1.amazonaws.com:5432/d2l4pnkodvnivv';
 console.log('Database Connection String: ' + connString); 
 const pool = new Pool({
-    connectionString: connString
+    connectionString: connString,
+    ssl: { // Remove this for local testing. 
+        rejectUnauthorized: false
+    }  
 }); 
 
 // ------------------ Express webserver ------------------------ //
@@ -72,14 +81,14 @@ function onShowEntry(entry) {
 function onPrintEntries(entries) {
     for (var i = 0; i < entries.length; i++) {
         let entry = entries[i]; // Get the entry. 
-        entry['message'] = cleanMessage(entry['message']); // Clean it
+        entry['message'] = " " + cleanMessage(entry['message']); // Clean it
         entries[i] = entry; // Reassign it. 
     }
     printer.printMessages(entries, true); 
 }
 
 function onPrintEntry(entry) {
-    entry['message'] = cleanMessage(entry['message']);
+    entry['message'] = " " + cleanMessage(entry['message']);
     console.log('Printing: ' + entry['message']);
     printer.printMessages([entry]);
 }
