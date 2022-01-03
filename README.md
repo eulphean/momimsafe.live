@@ -1,2 +1,4 @@
-# momimsafe.live
-This project addresses fear, distance, love, and concern for my family to check on me to make sure I am safe during this COVID-19.
+# MOMIMSAFE
+In the week following March 20th 2020, when Chicago went into a lockdown with other cities throughout the world, Amay Kataria came across some wishful thinking from his mother in New Delhi, India. Her words, “wish I could see you more often, son” strongly resonated with him. This sincere desire packed with a dreadful feeling about the present moment became a point of departure for [Momimsafe](https://momimsafe.live). It became an active live-stream of Amay's home studio space in Chicago, where he was quarantined and spent the majority of his time in the initial months following the rise of the pandemic. This work was created with an urgent need in mind; to be visually and physically accessible to all his friends and family across the globe. 
+
+![(covid 19) Antidote 2](https://user-images.githubusercontent.com/4178424/147968022-7e4af504-6a06-4025-bb2d-31123d00db30.jpg)
