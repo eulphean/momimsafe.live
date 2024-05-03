@@ -1,4 +1,4 @@
-var escpos = require('escpos-custom'); 
+var escpos = require('escpos'); 
 escpos.SerialPort = require('escpos-serialport');
 var emoji = require('node-emoji');
 
