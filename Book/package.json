@@ -10,12 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "escpos": "^2.5.2",
-    "express": "^4.17.1",
-    "node-emoji": "^1.10.0",
-    "pg": "^8.3.3",
-    "serialport": "^8.0.5",
-    "socket.io": "^2.2.0",
-    "websocket": "^1.0.29"
+    "express": "^4.19.2",
+    "node-emoji": "^2.1.3",
+    "pg": "^8.11.5",
+    "serialport": "^12.0.0",
+    "socket.io": "^4.7.5",
+    "websocket": "^1.0.34"
   }
 }

@@ -1,7 +1,7 @@
 // Artist Book Client that helps setup the Artist Book called Antidote. 
 
 var socket; 
-var localhostURL = "http://localhost:5000/book";
+var localhostURL = "http://localhost:3000/book";
 
 var curEntryTable; 
 let numEntriesDiv; 

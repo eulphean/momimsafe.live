@@ -10,6 +10,8 @@ var socket = require('socket.io');
 var Pool = require('pg').Pool; 
 var printer = require('./bookPrinter.js');
 var emoji = require('node-emoji'); 
+var cors = require('cors');
+console.log(cors);
 
 // ------------------ postgresql database ---------------------- // 
 // const connString = process.env['DATABASE_URL'];
@@ -18,7 +20,7 @@ var emoji = require('node-emoji');
 //     connectionString: connString
 // }); 
 
-const connString = 'postgres://oowxohfdjkkatl:c9e29b00a0a8d7f1b886c1e719db22a8219600ed9b6af58289ca8fcf4a54249b@ec2-3-223-21-106.compute-1.amazonaws.com:5432/d2l4pnkodvnivv';
+const connString = 'postgres://dvamvihhlhsqix:7afcb52e12c07ded089685c00d5335c483a30bb36d4c8cd76b3c26066d2b68c3@ec2-52-73-155-171.compute-1.amazonaws.com:5432/d4l4h0ul6hunh7';
 console.log('Database Connection String: ' + connString); 
 const pool = new Pool({
     connectionString: connString,
@@ -29,13 +31,15 @@ const pool = new Pool({
 
 // ------------------ Express webserver ------------------------ //
 var app = express(); 
-var server = app.listen(process.env.PORT || 5000, function() {
-    console.log('Artist Book server successfully started'); 
+const PORT = 3000;
+app.use(cors());
+var server = app.listen(PORT, function() {
+    console.log('Artist Book server successfully started on port: ' + PORT); 
 });
 app.use(express.static('./Client')); 
 
 // ------------------ Websocket ------------------------ //
-var io = socket(server); 
+var io = socket(server) 
 var bookClient = io.of('/book').on('connection', onBookClient); // Connects the web instance of central server to read data. 
 
 // Send an event to all connected clients to keep the Socket Connection Alive. 
