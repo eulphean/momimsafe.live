@@ -1,9 +1,9 @@
-var escpos = require('escpos'); 
+var escpos = require('escpos-custom'); 
 // escpos.SerialPort = require('escpos-serialport');
 var emoji = require('node-emoji');
 
 var device, printer; 
-device = new escpos.Serial('/dev/ttyUSB0', {
+device = new escpos.Serial('/dev/cu.usbserial-130', {
     autoOpen: true,
     baudRate: 38400, 
 });
