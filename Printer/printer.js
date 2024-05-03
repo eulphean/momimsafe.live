@@ -1,4 +1,4 @@
-var io = require('socket.io'); 
+var io = require('socket.io-client'); 
 //var localhostURL = "http://localhost:5000/receipt"
 var herokuURL = "https://blooming-refuge-71111.herokuapp.com/receipt";
 var emoji = require('node-emoji');
@@ -22,7 +22,7 @@ var printEntries = arguments[2] === '1';
 
 // Set this for the actual installation. 
 // This is the connection string for the heroku database with all the strings. 
-const connString = 'postgres://oowxohfdjkkatl:c9e29b00a0a8d7f1b886c1e719db22a8219600ed9b6af58289ca8fcf4a54249b@ec2-3-223-21-106.compute-1.amazonaws.com:5432/d2l4pnkodvnivv';
+const connString = 'postgres://dvamvihhlhsqix:7afcb52e12c07ded089685c00d5335c483a30bb36d4c8cd76b3c26066d2b68c3@ec2-52-73-155-171.compute-1.amazonaws.com:5432/d4l4h0ul6hunh7';
 console.log('Database Connection String: ' + connString); 
 const pool = new Pool({
     connectionString: connString,
@@ -88,7 +88,8 @@ function onPrintEntries(entries) {
         let entry = entries[i]; // Get the entry. 
         entry['message'] = ' ' + cleanMessage(entry['message']); // Clean it
         entries[i] = entry; // Reassign it. 
-        let o = simpleBeautifyDate(entry['date'], entry['time']);
+        // Date is already in the right format. 
+        let o = serverBeautifyDate(entry['date'], entry['time']);
         entry['date'] = o.date; 
         entry['time'] = o.time;
     }
@@ -103,7 +104,7 @@ function cleanMessage(msg) {
 }  
 
 // Date is the javascript date format. 
-function simpleBeautifyDate(date, time) {
+function serverBeautifyDate(date, time) {
     var dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     let t = time.toString().split(':');
 
@@ -118,11 +119,26 @@ function simpleBeautifyDate(date, time) {
 }
 
 function beautifyDate(date, time) {
+    const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    
     let d = date.toString().split("-"); 
-    let t = time.toString().split(':');
-    var dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    var seconds = t[2].toString().split(' ')[0];
-    d = new Date(d[0], d[1] - 1, d[2], t[0], t[1], seconds); 
+    const t = time.toString().split(':');
+    let hours = parseInt(t[0])
+    const mins = t[1]; 
+    
+    // Extract seconds and ampm from this. 
+    const last = t[2].toString().split(' '); 
+    const seconds = last[0];
+    const ampm = last[1]; 
+    
+    if (ampm === 'am' && hours === 12) 
+      hours -= 12;
+    if (ampm === 'pm' && hours !== 12) 
+      hours += 12;
+    
+    // Create the final date.
+    d = new Date(d[0], d[1] - 1, d[2], hours, mins, seconds); 
+    
     var obj = {
         date: d.toLocaleDateString('en-US', dateOptions),
         time: d.toLocaleTimeString('en-US')

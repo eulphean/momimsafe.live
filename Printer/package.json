@@ -10,10 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "escpos-serialport": "^3.0.0-alpha.4",
-    "escpos-custom": "^3.0.0-alpha.7",
+    "escpos": "^2.5.2",
+    "escpos-custom": "^3.0.0-alpha.9",
     "node-emoji": "^2.1.3",
     "pg": "^8.11.5",
     "serialport": "^12.0.0",
-    "socket.io": "^4.7.5"
+    "socket.io-client": "^4.7.5"
   }
 }

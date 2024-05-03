@@ -4,12 +4,11 @@
 // Description: New module that abstracts all the printing into its own sub-module
 // Inspured by the book printer that I wrote. This will be printing things upside down. 
 
-var escpos = require('escpos-custom'); 
-escpos.SerialPort = require('escpos-serialport');
+var escpos = require('escpos'); 
 var emoji = require('node-emoji');
 
 var device, printer; 
-device = new escpos.SerialPort('/dev/cu.usbserial-130', {
+device = new escpos.Serial('/dev/cu.usbserial-140', {
     autoOpen: true,
     baudRate: 38400, 
 });
@@ -62,7 +61,7 @@ module.exports = {
                         printer.cut(0, 5); 
                     }
 
-                    await sleep(10000);
+                    await sleep(5000);
                 }
             });
         } catch(e) {
@@ -90,7 +89,7 @@ module.exports = {
                 // End routine. 
                 //printer.cut(0, 5);
     
-                printer.feed(1);
+                printer.feed(2);
                 printer.flush(); 
             });
         } catch (e) {
@@ -126,40 +125,42 @@ function sleep(ms) {
 
 function generateHeader(date, time) {
     // Defualt spacing for header section 
-    // printer.spacing(); 
-    // printer.lineSpace(); 
     printer.align('ct'); 
+    printer.spacing(); 
+    printer.lineSpace(); 
 
     // ------------- Date, Time ---------- // 
-    
     // Font style. 
     printer.setReverseColors(false); 
     printer.font('a'); 
     printer.style('b'); 
-    printer.size(0, 0); 
+    printer.size(1, 1); 
 
-    printer.text('CHICAGO, USA'); 
+    // Date.
     var t = date + ' ' + time; 
     printer.text(t);
-    printer.newLine();
-
+    // Time
+    printer.text('CHICAGO, USA'); 
+    
     // Website
-    printer.size(0, 0); 
-    printer.setReverseColors(false); 
+    printer.size(1, 1); 
+    printer.setReverseColors(true); 
     printer.text(' https://momimsafe.live '); 
+
     // ------------- Title -------------- // 
 
+    printer.newLine();
     // Font style. 
-    printer.size(1, 1); 
-    printer.setReverseColors(false); 
+    printer.size(2, 2); 
+    printer.setReverseColors(true); 
     printer.text(' MOMIMSAFE '); 
 }
 
 function generateMessage(message) {
      // ------------- Message -------------- // 
-     printer.setReverseColors(true); 
-     printer.align('ct'); 
-     printer.size(1, 1);
+    printer.setReverseColors(false); 
+    printer.align('CT'); 
+    printer.size(2, 2);
  
      let lines = message.split('\n'); 
      for (var i = lines.length-1; i >= 0; i--) {
@@ -198,9 +199,3 @@ function linePrint(line) {
         printer.println(lines[i]);
     }
 }
-
-function cleanMessage(msg) {
-    let m = emoji.unemojify(msg); // Replace any emoji.
-    let cleanedMsg = m.replace(/(\r\n|\n|\r)/gm,"\n");
-    return cleanedMsg; 
-}  

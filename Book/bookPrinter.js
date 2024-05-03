@@ -52,9 +52,9 @@ module.exports = {
                     printer.spacing(); 
                     printer.newLine(); 
                     generateMessage(message); 
-                    // printer.newLine();
+                    //printer.newLine();
 
-                    printer.feed(2);
+                    printer.feed(1);
                     printer.flush(); 
 
                     if (shouldCut) {
