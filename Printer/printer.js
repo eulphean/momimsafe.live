@@ -1,4 +1,4 @@
-var io = require('socket.io-client'); 
+var io = require('socket.io'); 
 //var localhostURL = "http://localhost:5000/receipt"
 var herokuURL = "https://blooming-refuge-71111.herokuapp.com/receipt";
 var emoji = require('node-emoji');
