@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.34bce6de.chunk.css",
-    "main.js": "/static/js/main.de98eefd.chunk.js",
-    "main.js.map": "/static/js/main.de98eefd.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.5c074875.js",
-    "runtime-main.js.map": "/static/js/runtime-main.5c074875.js.map",
-    "static/js/2.ed4a094c.chunk.js": "/static/js/2.ed4a094c.chunk.js",
-    "static/js/2.ed4a094c.chunk.js.map": "/static/js/2.ed4a094c.chunk.js.map",
+    "main.css": "/static/css/main.303e0351.css",
+    "main.js": "/static/js/main.5a2813ea.js",
+    "static/media/momimsafe.mp4": "/static/media/momimsafe.b5fb9107d8589f4df848.mp4",
+    "static/media/merchantcopydoublesize-je7r-webfont.woff": "/static/media/merchantcopydoublesize-je7r-webfont.d14485971bcf74c4a5c4.woff",
+    "static/media/merchantcopydoublesize-je7r-webfont.woff2": "/static/media/merchantcopydoublesize-je7r-webfont.3a37f9a87113e82f324a.woff2",
+    "static/media/bilbo-regular-webfont.woff": "/static/media/bilbo-regular-webfont.918b349d5bd047d2a10b.woff",
+    "static/media/bilbo-regular-webfont.woff2": "/static/media/bilbo-regular-webfont.14b08f12170c2d8f9ae6.woff2",
+    "static/media/opensans-regular-webfont.woff": "/static/media/opensans-regular-webfont.16702be5bd527120dea9.woff",
+    "static/media/opensans-light-webfont.woff": "/static/media/opensans-light-webfont.71f4e0617a760da55691.woff",
+    "static/media/bebasneue-webfont.woff": "/static/media/bebasneue-webfont.8f6a6fbbed550a922a13.woff",
+    "static/media/opensans-regular-webfont.woff2": "/static/media/opensans-regular-webfont.c1edeeb47fff8579cfca.woff2",
+    "static/media/opensans-light-webfont.woff2": "/static/media/opensans-light-webfont.6245f23980717607e2e4.woff2",
+    "static/media/bebasneue-webfont.woff2": "/static/media/bebasneue-webfont.23d8177331e1cf909cf4.woff2",
+    "static/media/close.svg": "/static/media/close.07d98d4281efb3494ceb78f67bf1b7ad.svg",
     "index.html": "/index.html",
-    "precache-manifest.e7a608a3c555388b41ba56ce2ccf96ce.js": "/precache-manifest.e7a608a3c555388b41ba56ce2ccf96ce.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.34bce6de.chunk.css.map": "/static/css/main.34bce6de.chunk.css.map",
-    "static/js/2.ed4a094c.chunk.js.LICENSE.txt": "/static/js/2.ed4a094c.chunk.js.LICENSE.txt",
-    "static/media/stylesheet.css": "/static/media/opensans-regular-webfont.d407a585.woff2",
-    "static/media/close.18445307.svg": "/static/media/close.18445307.svg",
-    "static/media/momimsafe.mp4": "/static/media/momimsafe.df313ec7.mp4"
+    "main.303e0351.css.map": "/static/css/main.303e0351.css.map",
+    "main.5a2813ea.js.map": "/static/js/main.5a2813ea.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.5c074875.js",
-    "static/js/2.ed4a094c.chunk.js",
-    "static/css/main.34bce6de.chunk.css",
-    "static/js/main.de98eefd.chunk.js"
+    "static/css/main.303e0351.css",
+    "static/js/main.5a2813ea.js"
   ]
 }
