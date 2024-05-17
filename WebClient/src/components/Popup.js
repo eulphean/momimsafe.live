@@ -384,9 +384,9 @@ const styles={
     }
 }
 
-const aboutBody="momimsafe is an active live-stream of my home studio space, where I spend the majority of my time in this post-covid era. It was developed in response to the COVID-19 lockdown, with an urgent need in mind; to be visually and physically accessible to all my friends and family globally; especially my mom, who has been concerned about my safety and health during this time. It's a twisted take on communication, which is personal and can exist for an extended period of time. To bridge your virtual space with my physical space, you can send me messages that are archived and printed in my space in real-time.";
+const aboutBody="momimsafe ran as an active live-stream of my home studio space in Chicago, where I spent the majority of my time after the lockdown in 2020. It was developed in response to the COVID-19 lockdown, with an urgent need in mind; to be visually and physically accessible to all my friends and family globally; especially my mom, who was concerned about my safety and health during that time. It's a twisted take on communication, which is personal and can exist for an extended period of time. To bridge this virtual space with the physical space, you can send messages that are archived and printed in real-time on a thermal-printer.";
 
-const sendBodyA='There may be times when you see me working in my studio, or you may not. But you can leave me a message by typing in the textbox above and hitting the send button. Your messages will be printed by a receipt printer in my studio, which is situated on the left side of my desk. These messages arrive in real-time and are anonymous. So leave a trace in my space, be honest, and send some love. Also, you can access a ';
+const sendBodyA='There were times when people could see me working in my studio, or not. But they left their trace in my space by typing in the textbox above and hitting the send button. Previously, these messages were printed by a receipt printer in my home studio; however, for the next 6 months, they will be printed in real-time at the South Asia Institute in Chicago, where this work is currently installed. No data is tracked and your message will be anonymous. So leave a trace in this space, be honest, and send some love. Also, you can access a ';
 
 const printer = 'https://momimsafe.live/#/printer';
 const link = (<a 

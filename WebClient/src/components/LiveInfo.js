@@ -49,7 +49,7 @@ const styles={
     },
 
     labelContainer: {
-        backgroundColor: color.liveRed,
+        backgroundColor: color.pureTeal,
         borderRadius: '5px',
         padding: padding.extraSmall,
         zIndex: index,
@@ -94,7 +94,7 @@ const styles={
 
 }
 
-// const label='LIVE'; 
+const label='TOUCH TO INTERACT'; 
 const location='CHICAGO, USA'; 
 
 class LiveInfo extends React.Component {
@@ -113,9 +113,9 @@ class LiveInfo extends React.Component {
         let infoTextStyle=[styles.textStyle, styles.infoColor];
         return (
             <div style={styles.container}>
-                {/* <div style={[styles.labelContainer, styles.textStyle, styles.fadeIn]}>
+                <div style={[styles.labelContainer, styles.textStyle, styles.fadeIn]}>
                     {label}
-                </div> */}
+                </div>
                 <div style={styles.infoContainer}>
                     <div style={[styles.smallMargin, infoTextStyle, styles.fadeIn]}>
                         {location}
