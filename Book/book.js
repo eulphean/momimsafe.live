@@ -100,6 +100,8 @@ function onPrintEntry(entry) {
 function cleanMessage(msg) {
     let m = emoji.unemojify(msg); // Replace any emoji.
     let cleanedMsg = m.replace(/(\r\n|\n|\r)/gm,"\n");
+    cleanedMsg = cleanedMsg.replace(/'|’/g, "\'");
+    console.log("Clean Message: " + cleanedMsg);
     return cleanedMsg; 
 }  
 

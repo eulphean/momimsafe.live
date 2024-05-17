@@ -73,10 +73,13 @@ function updateCurrentEntry(entry) {
 }
 
 function onPrevious() {
-  if (curEntryIndex > 0) {
+  const length = allEntries.length;
+  if (curEntryIndex === 0) {
+    curEntryIndex = length -1;
+  } else {
     curEntryIndex -= 1;
-    updateCurrentEntry(allEntries[curEntryIndex]); 
   }
+  updateCurrentEntry(allEntries[curEntryIndex]);
 }
 
 function onNext() {
