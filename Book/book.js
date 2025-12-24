@@ -20,6 +20,7 @@ console.log(cors);
 //     connectionString: connString
 // }); 
 
+// NOTE: When using Book.js locally, use the Connection String from Notion Project (Database Migration to Render + Supabase)
 const connString = 'postgres://dvamvihhlhsqix:7afcb52e12c07ded089685c00d5335c483a30bb36d4c8cd76b3c26066d2b68c3@ec2-52-73-155-171.compute-1.amazonaws.com:5432/d4l4h0ul6hunh7';
 console.log('Database Connection String: ' + connString); 
 const pool = new Pool({
