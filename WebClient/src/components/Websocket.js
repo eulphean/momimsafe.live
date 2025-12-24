@@ -3,8 +3,9 @@ import Radium from 'radium'
 import io  from 'socket.io-client'
 import moment from 'moment-timezone'
 
-const localhostURL = "http://localhost:5000/app";
-const herokuURL = "https://blooming-refuge-71111.herokuapp.com/app";
+// NOTE: On 12/24/2026, the backend server has been moved to Render and database to Supabase.
+// const localhostURL = "http://localhost:5000/app";
+const renderURL = "https://momimsafe-live.onrender.com/app";
 class Websocket extends React.Component {
     constructor(props) {
         super(props);
@@ -12,7 +13,7 @@ class Websocket extends React.Component {
             
         };
 
-        this.socket = io(herokuURL, { 
+        this.socket = io(renderURL, { 
             reconnection: true, 
             reconnectionDelay: 500, 
             reconnectionAttempts: Infinity
@@ -88,5 +89,4 @@ class Websocket extends React.Component {
         }
     }
 }
-
 export default Radium(Websocket);
